@@ -25,71 +25,61 @@ public partial class SignIn : System.Web.UI.Page
 
     protected void Button1_Click(object sender, EventArgs e)
     {
-        Boolean success = false;
-        int id = 0;
-        String usertype = "";
-
-        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = @"Data Source=aay09edjn65sf6.cpcbbo8ggvx6.us-east-1.rds.amazonaws.com;Initial Catalog=RoomMagnet;Persist Security Info=True;User ID=fahrenheit;Password=cis484fall";
-        sc.Open();
-        System.Data.SqlClient.SqlCommand match = new System.Data.SqlClient.SqlCommand();
-        match.Connection = sc;
-
-        match.CommandText = "select passwordhash from[db_owner].[AdminPassword] where Email = @Email " +
-            "union select passwordhash from[dbo].[HostPassword] where Email = @Email " +
-            "union select passwordhash from[dbo].[TenantPassword] where Email = @Email";
-
-        match.Parameters.Add(new System.Data.SqlClient.SqlParameter("@Email", tbEmail.Text));
-        System.Data.SqlClient.SqlDataReader reader = match.ExecuteReader(); // create a reader
-
-        if (reader.HasRows)
+        String CS = ConfigurationManager.ConnectionStrings["RoomMagnet"].ConnectionString;
+        using (SqlConnection con = new SqlConnection(CS))
         {
-            while (reader.Read()) // this will read the single record that matches the entered usename
+            SqlCommand cmd = new SqlCommand("select * from [dbo].[RMUser] where Email='" + tbEmail.Text + "' or LastName='" + Password.Text + "'", con);
+            con.Open();
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+
+            if (dt.Rows.Count != 0)
             {
-                string storedHash = reader["PasswordHash"].ToString(); // store the database password into this varable
-                if (PasswordHash.ValidatePassword(Password.Text, storedHash)) // if the entered password matches what is stored, it will show success
+                Session["USERID"] = dt.Rows[0]["UserID"].ToString();
+                Session["USEREMAIL"] = dt.Rows[0]["Email"].ToString();
+
+                if (CheckBox1.Checked)
                 {
-                    Label1.Text = "Success!";
-                    success = true;
+                    Response.Cookies["UNAME"].Value = tbEmail.Text;
+                    Response.Cookies["PWD"].Value = Password.Text;
+
+                    Response.Cookies["UNAME"].Expires = DateTime.Now.AddDays(15);
+                    Response.Cookies["PWD"].Expires = DateTime.Now.AddDays(15);
                 }
                 else
-                    Label1.Text = "Password is wrong.";
+                {
+                    Response.Cookies["UNAME"].Expires = DateTime.Now.AddDays(-1);
+                    Response.Cookies["PWD"].Expires = DateTime.Now.AddDays(-1);
+                }
+                string Utype;
+                Utype = dt.Rows[0]["UserType"].ToString().Trim();
+
+                Session["USERTYPE"] = Utype.ToString();
+
+                if (Utype == "t")
+                {
+                    Session["USERNAME"] = tbEmail.Text;
+                    Response.Redirect("~/TenantDashboard.aspx");
+                    
+
+                }
+                if (Utype == "a")
+                {
+                    Session["USERNAME"] = tbEmail.Text;
+                    Response.Redirect("~/AdminDashBoard.aspx");
+                }
+                if (Utype == "h")
+                {
+                    Session["USERNAME"] = tbEmail.Text;
+                    Response.Redirect("~/HostDashBoard.aspx");
+                }
+
+
             }
-        }
-        else // if the username does not exist, it will show failure.
-            Label1.Text = "Login failed";
-        sc.Close();
-        if (success == true)
-        {
-            sc.Open();
-            System.Data.SqlClient.SqlCommand matchID = new System.Data.SqlClient.SqlCommand();
-            matchID.Connection = sc;
-            //matchID.CommandText = "Select AdminID from [db_owner].[AdminPassword] where Email = @Email";
-            matchID.CommandText = "select adminid from[db_owner].[AdminPassword] where Email = @Email " +
-                "union select hostid from[dbo].[HostPassword] where Email = @Email " +
-                "union select tenantid from[dbo].[TenantPassword] where Email = @Email";
-            matchID.Parameters.Add(new System.Data.SqlClient.SqlParameter("@Email", tbEmail.Text));
-            id = (Int32)matchID.ExecuteScalar();
-            Session["globalID"] = id;
-            Label1.Text = "Success! ID is: " + id;
-
-            System.Data.SqlClient.SqlCommand type = new System.Data.SqlClient.SqlCommand();
-            type.Connection = sc;
-
-            type.CommandText = "select UserType from [dbo].[RMUser] where userid = " + id;
-            usertype = type.ExecuteScalar().ToString();
-
-            switch (usertype)
+            else
             {
-                case "t":
-                    Response.Redirect("TenantDashboard.aspx");
-                    break;
-                case "h":
-                    Response.Redirect("HostDashBoard.aspx");
-                    break;
-                case "a":
-                    Response.Redirect("AdminDashboard.aspx");
-                    break;
+                lblError.Text = "Invalid Username or Password !";
             }
         }
     }

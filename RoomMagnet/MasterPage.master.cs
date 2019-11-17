@@ -10,13 +10,13 @@ public partial class MasterPage : System.Web.UI.MasterPage
     protected void Page_Load(object sender, EventArgs e)
     {
      
-        if (Session["USERNAME"] != null)
+        if (Session["tbEmail"] != null)
         {
             btnSignup.Visible = false;
             btnSignin.Visible = false;
             btnSignOut.Visible = true;
            MyAccount.Visible = true;
-            userName.InnerText="HI "+Session["USERNAME"].ToString();
+            tbEmail.InnerText="HI "+Session["tbEmail"].ToString();
             if (Session["USERTYPE"] != null)
             {
                 if (Session["USERTYPE"].ToString() == "t")
@@ -73,7 +73,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
 
     protected void btnSignOut_Click(object sender, EventArgs e)
     {
-        Session["USERNAME"] = null;
+        Session["tbEmail"] = null;
         Response.Redirect("~/home.aspx");
     }
 }

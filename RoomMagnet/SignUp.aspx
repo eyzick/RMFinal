@@ -115,9 +115,9 @@
                                      </div>
                               </div>
                                <%-- <div class="form-group">
-                                    <label for="ContentPlaceHolder1_tbUname">Username</label>
+                                    <label for="ContentPlaceHolder1_tbUname">tbEmail</label>
 
-                                    <asp:TextBox ID="tbUserName" runat="server" Class="form-control" placeholder="Usename"></asp:TextBox>--%>
+                                    <asp:TextBox ID="tbtbEmail" runat="server" Class="form-control" placeholder="Usename"></asp:TextBox>--%>
 
                                <%-- </div>--%>
                           <div class="form-row">
