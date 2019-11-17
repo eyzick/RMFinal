@@ -19,7 +19,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
             userName.InnerText="HI "+Session["USERNAME"].ToString();
             if (Session["USERTYPE"] != null)
             {
-                if (Session["USERTYPE"].ToString() == "T")
+                if (Session["USERTYPE"].ToString() == "t")
                 {
                     tenantDashboard.Visible = true;
                     houseOwnerDashboard.Visible = false;
@@ -27,26 +27,34 @@ public partial class MasterPage : System.Web.UI.MasterPage
 
                     addProperties.Visible = false;
                     myFavorites.Visible = true;
+                    myProperties.Visible = false;
+                 
 
 
                 }
-                else if (Session["USERTYPE"].ToString() == "H")
+                else if (Session["USERTYPE"].ToString() == "h")
                 {
                     houseOwnerDashboard.Visible = true;
                     tenantDashboard.Visible = false;
                     adminDashboard.Visible = false;
 
                     addProperties.Visible = true;
+                    myFavorites.Visible = true;
+                    myProfile.Visible = true;
+                    myProperties.Visible = true;
 
 
                 }
-                else if (Session["USERTYPE"].ToString() == "A")
+                else if (Session["USERTYPE"].ToString() == "a")
                 {
                     houseOwnerDashboard.Visible = false;
                     tenantDashboard.Visible = false;
                     adminDashboard.Visible = true;
 
                     addProperties.Visible = false;
+                    myProperties.Visible = false;
+                    myFavorites.Visible = false;
+                    myProfile.Visible = false;
                 }
 
             }

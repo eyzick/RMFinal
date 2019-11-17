@@ -14,7 +14,7 @@ public partial class TenantDashboard : System.Web.UI.Page
     {
         if (Session["USERTYPE"] != null)
         {
-            if (Session["USERTYPE"].ToString() == "T")
+            if (Session["USERTYPE"].ToString() == "t")
             {
 
 

@@ -176,7 +176,7 @@
                              
                                 <li id="myFavorites" runat="server"><a class="dropdown-item" href="favorited-properties.html">Favorited Properties</a></li>
 
-                                <li><a class="dropdown-item" href="messages.html">Messages</a></li>
+                            
 
                             
 
