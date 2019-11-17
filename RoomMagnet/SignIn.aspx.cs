@@ -28,7 +28,7 @@ public partial class SignIn : System.Web.UI.Page
         String CS = ConfigurationManager.ConnectionStrings["RoomMagnet"].ConnectionString;
         using (SqlConnection con = new SqlConnection(CS))
         {
-            SqlCommand cmd = new SqlCommand("select * from [dbo].[RMUser] where Email='" + UserName.Text + "' and Password='" + Password.Text + "'", con);
+            SqlCommand cmd = new SqlCommand("select * from [dbo].[RMUser] where Email='" + UserName.Text + "' or LastName='" + Password.Text + "'", con);
             con.Open();
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
@@ -57,19 +57,19 @@ public partial class SignIn : System.Web.UI.Page
 
                 Session["USERTYPE"] = Utype.ToString();
 
-                if (Utype == "T")
+                if (Utype == "t")
                 {
                     Session["USERNAME"] = UserName.Text;
                     Response.Redirect("~/TenantDashboard.aspx");
                     
 
                 }
-                if (Utype == "A")
+                if (Utype == "a")
                 {
                     Session["USERNAME"] = UserName.Text;
                     Response.Redirect("~/AdminDashBoard.aspx");
                 }
-                if (Utype == "H")
+                if (Utype == "h")
                 {
                     Session["USERNAME"] = UserName.Text;
                     Response.Redirect("~/HostDashBoard.aspx");

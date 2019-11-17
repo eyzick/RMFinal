@@ -21,7 +21,7 @@ public partial class SignUp : System.Web.UI.Page
         
             if (tbPassWord.Text == tbPassWord.Text)
             {
-                String CS = ConfigurationManager.ConnectionStrings["MyDatabaseConnectionString1"].ConnectionString;
+                String CS = ConfigurationManager.ConnectionStrings["RoomMagnet"].ConnectionString;
                 using (SqlConnection con = new SqlConnection(CS))
                 {
                   //// insert query 
