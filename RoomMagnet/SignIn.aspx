@@ -20,9 +20,9 @@
                 <h2>Login</h2>
                 <hr />
                 <div class="form-group">
-                    <asp:Label ID="Label1" runat="server" CssClass="col-md-2 control-label" Text="Username"></asp:Label>
+                    <asp:Label ID="Label1" runat="server" CssClass="col-md-2 control-label" Text="Email"></asp:Label>
                     <div class="col-md-3">
-                        <asp:TextBox ID="UserName" CssClass="form-control" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="tbEmail" CssClass="form-control" runat="server"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidatorUsername" CssClass="text-danger" runat="server" ErrorMessage="The Username field is Required !" ControlToValidate="UserName"></asp:RequiredFieldValidator>
                     </div>
                 </div>
