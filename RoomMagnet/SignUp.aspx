@@ -114,12 +114,12 @@
                                 </div>
                                      </div>
                               </div>
-                                <div class="form-group">
+                               <%-- <div class="form-group">
                                     <label for="ContentPlaceHolder1_tbUname">Username</label>
 
-                                    <asp:TextBox ID="tbUserName" runat="server" Class="form-control" placeholder="Usename"></asp:TextBox>
+                                    <asp:TextBox ID="tbUserName" runat="server" Class="form-control" placeholder="Usename"></asp:TextBox>--%>
 
-                                </div>
+                               <%-- </div>--%>
                           <div class="form-row">
                             <div class="col">
                                 <div class="form-group">
@@ -167,9 +167,9 @@
              <asp:TextBox ID="tbAddress1" runat="server" Class="form-control" placeholder="1234 Main St"></asp:TextBox>
            </div>
                           <div class="form-group">
-    <label for="inputAddress2">Address 2</label>
+    <label for="inputAddress2">Date of Birth</label>
 
-                               <asp:TextBox ID="tbAddress2" runat="server" Class="form-control" placeholder="Apartment, studio, or floor"></asp:TextBox>
+                               <asp:TextBox ID="tbAddress2" runat="server" Class="form-control" type="date"></asp:TextBox>
   </div>
                           <div class="form-row">
     <div class="form-group col-md-6">
@@ -243,13 +243,13 @@
     </div>
   </div>
                         
-                         <asp:button ID="btnSingupHouseOwner"  runat="server" class="btn btn-primary" Text="Sing Up" OnClick="btnSingupHouseOwner_Click"></asp:button>
+                         <asp:button ID="btnSingupHouseOwner"  runat="server" class="btn btn-primary" Text="Sign Up" OnClick="btnSingupHouseOwner_Click"></asp:button>
                            
                         </div>
 
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                            
-                                <asp:Button ID="btnSingupTenant" runat="server" Class="btn btn-success" Text="Sign Up" OnClick="btnSingupTenant_Click" />
+                                <asp:Button ID="btnSingupTenant" runat="server" Class="btn btn-primary" Text="Sign Up" OnClick="btnSingupTenant_Click" />
                                 <asp:Label ID="lblMsg" runat="server"></asp:Label>
                         </div>
                       
