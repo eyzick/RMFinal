@@ -33,7 +33,7 @@
                                   <div class="col-md-6 col-sm-12">
                                 <div class="text-center">
                             <h3>Are you a</h3>
-                            <h3>Houseowner?</h3>
+                            <h3>Home owner?</h3>
                          <asp:Button ID="btnOwner" CssClass="btn btn-primary custom-btn" runat="server" Text="List your property" />
                                 </div>
                               </div>
