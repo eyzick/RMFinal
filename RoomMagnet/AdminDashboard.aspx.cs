@@ -20,10 +20,10 @@ public partial class AdminDashboard : System.Web.UI.Page
     }
     private void BindBrandsRptr()
     {
-        String CS = ConfigurationManager.ConnectionStrings["MyDatabaseConnectionString1"].ConnectionString;
+        String CS = ConfigurationManager.ConnectionStrings["RoomMagnet"].ConnectionString;
         using (SqlConnection con = new SqlConnection(CS))
         {
-            using (SqlCommand cmd = new SqlCommand("select * from tblProducts", con))
+            using (SqlCommand cmd = new SqlCommand("select * from Accomodation", con))
             {
                 using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
                 {

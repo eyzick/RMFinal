@@ -112,13 +112,13 @@
                                 </HeaderTemplate>
                                 <ItemTemplate>
                                     <tr>
-                                        <th><%# Eval("PID") %></th>
-                                        <td><%# Eval("PName") %></td>
-                                        <td><%# Eval("PName") %></td>
-                                        <td><%# Eval("PName") %></td>
-                                        <td><%# Eval("PName") %></td>
-                                        <td><%# Eval("PSelPrice") %></td>
-                                        <td><%# Eval("PPrice") %></td>
+                                        <th><%# Eval("AccomodationID") %></th>
+                                        <td><%# Eval("HouseNumber") %></td>
+                                        <td><%# Eval("Street") %></td>
+                                        <td><%# Eval("City") %></td>
+                                        <td><%# Eval("Zip") %></td>
+                                        <td><%# Eval("Price") %></td>
+                                        <td><%# Eval("Capacity") %></td>
                                         <td>
                                         Pending</td>
 
@@ -133,7 +133,7 @@
                                                     </asp:DropDownList>
                                                 </div>
                                                 <div class="col">
-                                                    <asp:Button ID="BtnStatusChange" OnClientClick="BtnStatusChange_Click" CommandName='<%#Eval("PID").ToString() %>' CssClass="btn btn-success" OnClick="BtnStatusChange_Click" runat="server" Text="Update" />
+                                                    <asp:Button ID="BtnStatusChange" OnClientClick="BtnStatusChange_Click" CommandName='<%#Eval("AccomodationID").ToString() %>' CssClass="btn btn-success" OnClick="BtnStatusChange_Click" runat="server" Text="Update" />
                                                 </div>
                                             </div>
                                         </td>
