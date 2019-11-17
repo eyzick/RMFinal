@@ -16,7 +16,7 @@ public partial class SignIn : System.Web.UI.Page
         {
             if (Request.Cookies["UNAME"] != null && Request.Cookies["PWD"] != null)
             {
-                tbEmail.Text = Request.Cookies["UNAME"].Value;
+                UserName.Text = Request.Cookies["UNAME"].Value;
                 Password.Attributes["value"] = Request.Cookies["PWD"].Value;
                 CheckBox1.Checked = true;
             }
@@ -28,10 +28,7 @@ public partial class SignIn : System.Web.UI.Page
         String CS = ConfigurationManager.ConnectionStrings["RoomMagnet"].ConnectionString;
         using (SqlConnection con = new SqlConnection(CS))
         {
-            SqlCommand cmd = new SqlCommand("select passwordhash from[db_owner].[AdminPassword] where Email = @Email " +
-            "union select passwordhash from[dbo].[HostPassword] where Email = @Email " +
-            "union select passwordhash from[dbo].[TenantPassword] where Email = @Email", con);
-            cmd.Parameters.Add(new System.Data.SqlClient.SqlParameter("@Email", tbEmail.Text));
+            SqlCommand cmd = new SqlCommand("select * from [dbo].[RMUser] where Email='" + UserName.Text + "' or LastName='" + Password.Text + "'", con);
             con.Open();
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
@@ -44,7 +41,7 @@ public partial class SignIn : System.Web.UI.Page
 
                 if (CheckBox1.Checked)
                 {
-                    Response.Cookies["UNAME"].Value = tbEmail.Text;
+                    Response.Cookies["UNAME"].Value = UserName.Text;
                     Response.Cookies["PWD"].Value = Password.Text;
 
                     Response.Cookies["UNAME"].Expires = DateTime.Now.AddDays(15);
@@ -60,21 +57,21 @@ public partial class SignIn : System.Web.UI.Page
 
                 Session["USERTYPE"] = Utype.ToString();
 
-                if (Utype == "T")
+                if (Utype == "t")
                 {
-                    Session["USERNAME"] = tbEmail.Text;
+                    Session["USERNAME"] = UserName.Text;
                     Response.Redirect("~/TenantDashboard.aspx");
                     
 
                 }
-                if (Utype == "A")
+                if (Utype == "a")
                 {
-                    Session["USERNAME"] = tbEmail.Text;
+                    Session["USERNAME"] = UserName.Text;
                     Response.Redirect("~/AdminDashBoard.aspx");
                 }
-                if (Utype == "H")
+                if (Utype == "h")
                 {
-                    Session["USERNAME"] = tbEmail.Text;
+                    Session["USERNAME"] = UserName.Text;
                     Response.Redirect("~/HostDashBoard.aspx");
                 }
 
