@@ -28,7 +28,7 @@ public partial class SignIn : System.Web.UI.Page
         String CS = ConfigurationManager.ConnectionStrings["RoomMagnet"].ConnectionString;
         using (SqlConnection con = new SqlConnection(CS))
         {
-            SqlCommand cmd = new SqlCommand("select * from Users where UserName='" + UserName.Text + "' and Password='" + Password.Text + "'", con);
+            SqlCommand cmd = new SqlCommand("select * from [dbo].[RMUser] where Email='" + UserName.Text + "' and Password='" + Password.Text + "'", con);
             con.Open();
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
