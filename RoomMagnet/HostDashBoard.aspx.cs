@@ -37,58 +37,60 @@ public partial class HostDashBoard : System.Web.UI.Page
 
     protected void btnAddProperty_Click(object sender, EventArgs e)
     {
-        System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand();
-        insert.Connection = dbConnection;
+        Property tempProperty = new Property();
 
-        System.Data.SqlClient.SqlCommand submit = new System.Data.SqlClient.SqlCommand();
-        submit.Connection = dbConnection;
+        //splitting up address
+        //string address = HttpUtility.HtmlEncode(tbAddress.Text);
+        //string[] addressArray = new string[2];
+        //int count = 2;
+        //string[] seperator = { " " };
+        //string[] strList = address.Split(seperator, count, StringSplitOptions.RemoveEmptyEntries);
+        //for (int i = 0; i < 2; i++)
+        //{
+        //    addressArray[i] = strList[i];
 
-        System.Data.SqlClient.SqlCommand accid = new System.Data.SqlClient.SqlCommand();
-        accid.Connection = dbConnection;
+        //}
 
-        String housenumber = tbPropertyAddress1.Text;
-        String street = tbPropertyAddress2.Text;
-        String city = tbPropertyCity.Text;
-        String zip = tbPropertyZip.Text;
-        String state = ddlPropertyState.SelectedValue;
-        String price = tbPropertyPrice.Text;
-        String capacity = tbPropertyCapacity.Text;
-        String availability = tbPropertyAvailability.Text;
-        String roomtype = tbPropertyRoomType.Text;
-        String description = tbPropertyDescription.Text;
-        int hostid = 1;
-        DateTime date = DateTime.Today;
-        
+        //tempProperty.setHouseNumber(addressArray[0]);
+        //tempProperty.setStreet(addressArray[1]);
+        //tempProperty.setCityCounty(HttpUtility.HtmlEncode(tbCity.Text));
+        //tempProperty.setHomeState(ddState.SelectedValue);
+        //tempProperty.setZip(HttpUtility.HtmlEncode(tbZip.Text));
+        //tempProperty.setMonthlyPrice(Double.Parse(tbPrice.Text));
+        //tempProperty.setRoomType(tbPropertyRoomType.Text);
+        //tempProperty.setDescription("CHANGE ME LATER");
 
-        byte[] i = null;
+        // need to change property class to better fit what we need here - description, availability
+
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+        sc.ConnectionString = @"Data Source=aay09edjn65sf6.cpcbbo8ggvx6.us-east-1.rds.amazonaws.com;Initial Catalog=RoomMagnet;Persist Security Info=True;User ID=fahrenheit;Password=cis484fall";
+        sc.Open();
+
+        byte[] picture = null;
         if (firstUploader.HasFile)
         {
             MemoryStream ms = new MemoryStream();
             Bitmap bitmap2 = new Bitmap(firstUploader.PostedFile.InputStream);
             bitmap2.Save(ms, bitmap2.RawFormat);
-            i = ms.GetBuffer();
+            picture = ms.GetBuffer();
             ms.Close();
         }
 
-
-
-        insert.CommandText = "insert into [dbo].[Accomodation] values (@HouseNumber, @Street, @City, @State, @Zip, @Price, @Capacity, @Availability" +
-            ", @RoomType, @Description, @HostID, @ModifiedDate,@Image)";
-        insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@HouseNumber", housenumber));
-        insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@Street", street));
-        insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@City", city));
-        insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@State", state));
-        insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@Zip", zip));
-        insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@Price", price));
-        insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@Capacity", capacity));
-        insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@Availability", availability));
-        insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@RoomType", roomtype));
-        insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@Description", description));
-        insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@HostID", hostid));
-        insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ModifiedDate", date));
-        insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@Image", i));
-
-        insert.ExecuteNonQuery();
+        System.Data.SqlClient.SqlCommand insertProperty = new System.Data.SqlClient.SqlCommand();
+        insertProperty.Connection = sc;
+        insertProperty.CommandText = "Insert into [dbo].[Accomodation] values (@HouseNumber, @Street, @City, @State, @Zip, @Price, 1, 1, @RoomType, @Description, @HostID, @ModifiedDate, @Image);";
+        insertProperty.Parameters.Add(new SqlParameter("@HouseNumber", tempProperty.getHouseNumber()));
+        insertProperty.Parameters.Add(new SqlParameter("@Street", tempProperty.getStreet()));
+        insertProperty.Parameters.Add(new SqlParameter("@City", tempProperty.getCityCounty()));
+        insertProperty.Parameters.Add(new SqlParameter("@State", tempProperty.getHomeState()));
+        insertProperty.Parameters.Add(new SqlParameter("@Zip", tempProperty.getZip()));
+        insertProperty.Parameters.Add(new SqlParameter("@Price", tempProperty.getMonthlyPrice()));
+        insertProperty.Parameters.Add(new SqlParameter("@RoomType", tempProperty.getRoomType()));
+        insertProperty.Parameters.Add(new SqlParameter("@Description", tempProperty.getDescription()));
+        insertProperty.Parameters.Add(new SqlParameter("@HostID", Session["globalID"]));
+        insertProperty.Parameters.Add(new SqlParameter("@ModifiedDate", DateTime.Now));
+        insertProperty.Parameters.Add(new SqlParameter("@Image", picture));
+        insertProperty.ExecuteNonQuery();
 
         int id = 0;
         DataTable dt = new DataTable();
@@ -119,18 +121,18 @@ public partial class HostDashBoard : System.Web.UI.Page
         {
             if (cblAmenities.Items[j].Selected)
             {
-                submit.CommandText = "insert into [dbo].[Amenity] values (@AmenityName, @AccomodationID, @ModifiedDate)";
-                submit.Parameters.Add(new System.Data.SqlClient.SqlParameter("@AmenityName", cblAmenities.Items[j].Text));
-                submit.Parameters.Add(new System.Data.SqlClient.SqlParameter("@AccomodationID", accomodationid));
-                submit.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ModifiedDate", date));
+                //        submit.CommandText = "insert into [dbo].[Amenity] values (@AmenityName, @AccomodationID, @ModifiedDate)";
+                //        submit.Parameters.Add(new System.Data.SqlClient.SqlParameter("@AmenityName", cblAmenities.Items[j].Text));
+                //        submit.Parameters.Add(new System.Data.SqlClient.SqlParameter("@AccomodationID", accomodationid));
+                //        submit.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ModifiedDate", date));
 
-                submit.ExecuteNonQuery();
+                //        submit.ExecuteNonQuery();
             }
 
-            submit.Parameters.Clear();
+            //    submit.Parameters.Clear();
         }
 
-        dbConnection.Close();
+            dbConnection.Close();
 
-    }
-}
+            }
+        }

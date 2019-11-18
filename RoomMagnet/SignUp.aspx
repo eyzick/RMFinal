@@ -164,12 +164,12 @@
                           <div class="form-group">
                  <label for="inputAddress">Address</label>
        
-             <asp:TextBox ID="tbAddress1" runat="server" Class="form-control" placeholder="1234 Main St"></asp:TextBox>
+             <asp:TextBox ID="tbAddress" runat="server" Class="form-control" placeholder="1234 Main St"></asp:TextBox>
            </div>
                           <div class="form-group">
     <label for="inputAddress2">Date of Birth</label>
 
-                               <asp:TextBox ID="tbAddress2" runat="server" Class="form-control" type="date"></asp:TextBox>
+                               <asp:TextBox ID="tbDOB" runat="server" Class="form-control" type="date"></asp:TextBox>
   </div>
                           <div class="form-row">
     <div class="form-group col-md-6">
@@ -180,7 +180,7 @@
       <label for="inputState">State</label>
     
     
-   <asp:DropDownList ID="ddlState" runat="server" CssClass="form-control" style="height:auto">
+   <asp:DropDownList ID="ddState" runat="server" CssClass="form-control" style="height:auto">
               
 	<asp:ListItem Value="AL">AL</asp:ListItem>
 	<asp:ListItem Value="AK">AK</asp:ListItem>

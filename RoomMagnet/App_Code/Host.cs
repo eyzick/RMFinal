@@ -21,14 +21,14 @@ public class Host
     private String HomeState;
     private String Country;
     private String Zip;
-    private String DateOfBirth;
+    private DateTime DateOfBirth;
     private String userType;
 
     public Host()
     {
 
     }
-    public Host(int HostID, String FirstName, String LastName, String EmailAddress, String HouseNumber, String Street, String CityCounty, String HomeState, String Country, String Zip, String DateOfBirth, String userType)
+    public Host(int HostID, String FirstName, String LastName, String EmailAddress, String HouseNumber, String Street, String CityCounty, String HomeState, String Country, String Zip, DateTime DateOfBirth, String userType)
     {
         this.FirstName = FirstName;
         this.LastName = LastName;
@@ -145,11 +145,11 @@ public class Host
         this.Zip = Zip;
 
     }
-    public String GetDateOfBirth()
+    public DateTime GetDateOfBirth()
     {
-        return Zip;
+        return DateOfBirth;
     }
-    public void SetDateOfBirth(String DateOfBirth)
+    public void SetDateOfBirth(DateTime DateOfBirth)
     {
         this.DateOfBirth = DateOfBirth;
 

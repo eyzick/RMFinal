@@ -152,7 +152,7 @@
 
                                     <div class="form-group">
                                         <label for="inputAddress">Address</label>
-                                        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                                        <input type="text" class="form-control" id="tbAddress" placeholder="1234 Main St">
                                     </div>
                                     <div class="form-group">
                                         <label for="inputAddress2">Address 2</label>
@@ -266,7 +266,7 @@
                                             <label for="inputState">State</label>
 
 
-                                            <asp:DropDownList ID="ddlPropertyState" runat="server" CssClass="form-control" Style="height: auto">
+                                            <asp:DropDownList ID="ddState" runat="server" CssClass="form-control" Style="height: auto">
 
                                                 <asp:ListItem Value="AL">AL</asp:ListItem>
                                                 <asp:ListItem Value="AK">AK</asp:ListItem>

@@ -16,7 +16,7 @@ public partial class SignIn : System.Web.UI.Page
         {
             if (Request.Cookies["UNAME"] != null && Request.Cookies["PWD"] != null)
             {
-                UserName.Text = Request.Cookies["UNAME"].Value;
+                tbEmail.Text = Request.Cookies["UNAME"].Value;
              //  Password.Attributes["value"] = Request.Cookies["PWD"].Value;
                 CheckBox1.Checked = true;
             }
@@ -39,7 +39,7 @@ public partial class SignIn : System.Web.UI.Page
             "union select passwordhash from[dbo].[HostPassword] where Email = @Email " +
             "union select passwordhash from[dbo].[TenantPassword] where Email = @Email";
 
-        match.Parameters.Add(new System.Data.SqlClient.SqlParameter("@Email", UserName.Text));
+        match.Parameters.Add(new System.Data.SqlClient.SqlParameter("@Email", tbEmail.Text));
         System.Data.SqlClient.SqlDataReader reader = match.ExecuteReader(); // create a reader
 
         if (reader.HasRows)
@@ -70,7 +70,7 @@ public partial class SignIn : System.Web.UI.Page
             matchID.CommandText = "select adminid from[db_owner].[AdminPassword] where Email = @Email " +
                 "union select hostid from[dbo].[HostPassword] where Email = @Email " +
                 "union select tenantid from[dbo].[TenantPassword] where Email = @Email";
-            matchID.Parameters.Add(new System.Data.SqlClient.SqlParameter("@Email", UserName.Text));
+            matchID.Parameters.Add(new System.Data.SqlClient.SqlParameter("@Email", tbEmail.Text));
             id = (Int32)matchID.ExecuteScalar();
             Session["globalID"] = id;
 
@@ -93,7 +93,7 @@ public partial class SignIn : System.Web.UI.Page
 
                 if (CheckBox1.Checked)
                 {
-                    Response.Cookies["UNAME"].Value = UserName.Text;
+                    Response.Cookies["UNAME"].Value = tbEmail.Text;
 
 
                     Response.Cookies["UNAME"].Expires = DateTime.Now.AddDays(15);
@@ -111,19 +111,19 @@ public partial class SignIn : System.Web.UI.Page
 
                 if (Utype == "t")
                 {
-                    Session["USERNAME"] = UserName.Text;
+                    Session["USERNAME"] = tbEmail.Text;
                     Response.Redirect("~/TenantDashboard.aspx");
 
 
                 }
                 if (Utype == "a")
                 {
-                    Session["USERNAME"] = UserName.Text;
+                    Session["USERNAME"] = tbEmail.Text;
                     Response.Redirect("~/AdminDashBoard.aspx");
                 }
                 if (Utype == "h")
                 {
-                    Session["USERNAME"] = UserName.Text;
+                    Session["USERNAME"] = tbEmail.Text;
                     Response.Redirect("~/HostDashBoard.aspx");
                 }
 
@@ -152,62 +152,62 @@ public partial class SignIn : System.Web.UI.Page
 
 
 
-        String CS = ConfigurationManager.ConnectionStrings["RoomMagnet"].ConnectionString;
-        using (SqlConnection con = new SqlConnection(CS))
-        {
-            SqlCommand cmd = new SqlCommand("select * from [dbo].[RMUser] where Email='" + UserName.Text + "' or LastName='" + Password.Text + "'", con);
-            con.Open();
-            SqlDataAdapter sda = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-            sda.Fill(dt);
+        //String CS = ConfigurationManager.ConnectionStrings["RoomMagnet"].ConnectionString;
+        //using (SqlConnection con = new SqlConnection(CS))
+        //{
+        //    SqlCommand cmd = new SqlCommand("select * from [dbo].[RMUser] where Email='" + tbEmail.Text + "' or LastName='" + Password.Text + "'", con);
+        //    con.Open();
+        //    SqlDataAdapter sda = new SqlDataAdapter(cmd);
+        //    DataTable dt = new DataTable();
+        //    sda.Fill(dt);
 
-            if (dt.Rows.Count != 0)
-            {
-                Session["USERID"] = dt.Rows[0]["UserID"].ToString();
-                Session["USEREMAIL"] = dt.Rows[0]["Email"].ToString();
+        //    if (dt.Rows.Count != 0)
+        //    {
+        //        Session["USERID"] = dt.Rows[0]["UserID"].ToString();
+        //        Session["USEREMAIL"] = dt.Rows[0]["Email"].ToString();
 
-                if (CheckBox1.Checked)
-                {
-                    Response.Cookies["UNAME"].Value = UserName.Text;
+        //        if (CheckBox1.Checked)
+        //        {
+        //            Response.Cookies["UNAME"].Value = tbEmail.Text;
                
 
-                    Response.Cookies["UNAME"].Expires = DateTime.Now.AddDays(15);
+        //            Response.Cookies["UNAME"].Expires = DateTime.Now.AddDays(15);
                  
-                }
-                else
-                {
-                    Response.Cookies["UNAME"].Expires = DateTime.Now.AddDays(-1);
+        //        }
+        //        else
+        //        {
+        //            Response.Cookies["UNAME"].Expires = DateTime.Now.AddDays(-1);
                    
-                }
-                string Utype;
-                Utype = dt.Rows[0]["UserType"].ToString().Trim();
+        //        }
+        //        string Utype;
+        //        Utype = dt.Rows[0]["UserType"].ToString().Trim();
 
-                Session["USERTYPE"] = Utype.ToString();
+        //        Session["USERTYPE"] = Utype.ToString();
 
-                if (Utype == "t")
-                {
-                    Session["USERNAME"] = UserName.Text;
-                    Response.Redirect("~/TenantDashboard.aspx");
+        //        if (Utype == "t")
+        //        {
+        //            Session["USERNAME"] = tbEmail.Text;
+        //            Response.Redirect("~/TenantDashboard.aspx");
                     
 
-                }
-                if (Utype == "a")
-                {
-                    Session["USERNAME"] = UserName.Text;
-                    Response.Redirect("~/AdminDashBoard.aspx");
-                }
-                if (Utype == "h")
-                {
-                    Session["USERNAME"] = UserName.Text;
-                    Response.Redirect("~/HostDashBoard.aspx");
-                }
+        //        }
+        //        if (Utype == "a")
+        //        {
+        //            Session["USERNAME"] = tbEmail.Text;
+        //            Response.Redirect("~/AdminDashBoard.aspx");
+        //        }
+        //        if (Utype == "h")
+        //        {
+        //            Session["USERNAME"] = tbEmail.Text;
+        //            Response.Redirect("~/HostDashBoard.aspx");
+        //        }
 
 
-            }
-            else
-            {
-                lblError.Text = "Invalid Username or Password !";
-            }
-        }
+        //    }
+        //    else
+        //    {
+        //        lblError.Text = "Invalid Username or Password !";
+        //    }
+        //}
     }
 }
