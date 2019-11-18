@@ -60,9 +60,10 @@ public partial class SignIn : System.Web.UI.Page
         else
         {// if the username does not exist, it will show failure.
 
-           
         }
+
         sc.Close();
+
         if (success == true)
         {
             sc.Open();
@@ -116,81 +117,6 @@ public partial class SignIn : System.Web.UI.Page
                     Session["USERNAME"] = tbEmail.Text;
                     Response.Redirect("~/TenantDashboard.aspx");
 
-
-                }
-                if (Utype == "a")
-                {
-                    Session["USERNAME"] = tbEmail.Text;
-                    Response.Redirect("~/AdminDashBoard.aspx");
-                }
-                if (Utype == "h")
-                {
-                    Session["USERNAME"] = tbEmail.Text;
-                    Response.Redirect("~/HostDashBoard.aspx");
-                }
-
-
-            }
-            else
-            {
-                lblError.Text = "Invalid Username or Password !";
-            }
-
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        String CS = ConfigurationManager.ConnectionStrings["RoomMagnet"].ConnectionString;
-        using (SqlConnection con = new SqlConnection(CS))
-        {
-            SqlCommand cmd = new SqlCommand("select * from [dbo].[RMUser] where Email='" + tbEmail.Text + "' or LastName='" + Password.Text + "'", con);
-            con.Open();
-            SqlDataAdapter sda = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-            sda.Fill(dt);
-
-            if (dt.Rows.Count != 0)
-            {
-                Session["USERID"] = dt.Rows[0]["UserID"].ToString();
-                Session["USEREMAIL"] = dt.Rows[0]["Email"].ToString();
-
-                if (CheckBox1.Checked)
-                {
-                    Response.Cookies["UNAME"].Value = tbEmail.Text;
-               
-
-                    Response.Cookies["UNAME"].Expires = DateTime.Now.AddDays(15);
-                 
-                }
-                else
-                {
-                    Response.Cookies["UNAME"].Expires = DateTime.Now.AddDays(-1);
-                   
-                }
-                string Utype;
-                Utype = dt.Rows[0]["UserType"].ToString().Trim();
-
-                Session["USERTYPE"] = Utype.ToString();
-
-                if (Utype == "t")
-                {
-                    Session["USERNAME"] = tbEmail.Text;
-                    Response.Redirect("~/TenantDashboard.aspx");
-                    
 
                 }
                 if (Utype == "a")
