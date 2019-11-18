@@ -28,7 +28,7 @@
     }
 
         .propertybox .btn {
-            width: 100px;
+            width: 110px;
             font-size: 12px;
             text-align: center;
             background-color: palevioletred;
@@ -49,6 +49,19 @@
         .propertybox {
             flex: 0 0 50%;
             max-width: 60%;
+        }
+       .propertybox .btnsetting
+    {
+        display: inline-table;
+    
+        }
+    }
+     @media (max-width: 1200px) {
+       
+       .propertybox .btnsetting
+    {
+        display: inline-table;
+    
         }
     }
 
@@ -174,7 +187,9 @@
     <ItemTemplate>
              <div class="col-sm-6 col-md-5 propertybox">
                 <div class="thumbnail">
+                  
                     <img src='<%#    "data:Image.jpg;base64," + Convert.ToBase64String( (byte[])Eval("image")  ) %>' alt="" />
+                   
                     <div class="caption" style="padding: 15px;">
 
                         <div class="row">
@@ -186,9 +201,9 @@
 
                           </div>
                           
-                          <div class="col-md-5" style="padding-top:10px">
-                              <p><a href="#" class="btn btn-primary ">Description</a></p>
-                              <p><a href="#" class="btn btn-primary ">Add to Favorites</a></p>
+                          <div class="col-md-5 btnsetting" style="padding-top:10px">
+                              <p><a href="propertydescription.aspx?id=<%# Eval("AccomodationID")%>" class="btn btn-primary ">Description</a></p>
+                               <p><asp:Button ID="BtnAddFav" OnClick="BtnAddFav_Click" OnClientClick="BtnStatusChange_Click" CommandName='<%#Eval("AccomodationID").ToString() %>' CssClass="btn btn-primary" runat="server" Text="Add to Favorites" /> </p>
                           </div>
                           
                         </div>
