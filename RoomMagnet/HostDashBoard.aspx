@@ -248,10 +248,10 @@
 
                                     <div class="form-group">
                                         <label for="inputAddress">Address</label>
-                             
+
                                         <asp:TextBox ID="tbPropertyAddress" CssClass="form-control" runat="server" placeholder="1234 Main St"></asp:TextBox>
                                     </div>
-                                  <%--  <div class="form-group">
+                                    <%--  <div class="form-group">
                                         <label for="inputAddress2">Address 2</label>
                      
                                           <asp:TextBox ID="tbPropertyAddress2" CssClass="form-control" runat="server" placeholder="Apartment, studio, or floor"></asp:TextBox>
@@ -259,8 +259,8 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label for="inputCity">City</label>
-                                          
-                                             <asp:TextBox ID="tbPropertyCity" CssClass="form-control" runat="server" placeholder="City"></asp:TextBox>
+
+                                            <asp:TextBox ID="tbPropertyCity" CssClass="form-control" runat="server" placeholder="City"></asp:TextBox>
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="inputState">State</label>
@@ -326,7 +326,7 @@
                                         <div class="form-group col-md-3">
                                             <label for="inputZip">Zip</label>
                                             <asp:TextBox ID="tbPropertyZip" CssClass="form-control" runat="server" placeholder="Zip"></asp:TextBox>
-                                           
+
                                         </div>
                                     </div>
 
@@ -344,23 +344,23 @@
                                             </div>
                                         </div>
                                     </div>
-                                     <div class="form-row">
+                                    <div class="form-row">
                                         <div class="col">
-                                    <div class="form-group">
-                                        <label for="ContentPlaceHolder1_tbPrice">Price</label>
+                                            <div class="form-group">
+                                                <label for="ContentPlaceHolder1_tbPrice">Price</label>
 
-                                        <asp:TextBox ID="tbPropertyPrice" runat="server" Class="form-control" placeholder="Price"></asp:TextBox>
+                                                <asp:TextBox ID="tbPropertyPrice" runat="server" Class="form-control" placeholder="Price"></asp:TextBox>
 
-                                    </div>
                                             </div>
-                                          <div class="col">
-                                      <div class="form-group">
-                                        <label for="ContentPlaceHolder1_tbPrice">Room Type</label>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="ContentPlaceHolder1_tbPrice">Room Type</label>
 
-                                        <asp:TextBox ID="tbPropertyRoomType" runat="server" Class="form-control" placeholder="Room Type"></asp:TextBox>
-                                          </div>
+                                                <asp:TextBox ID="tbPropertyRoomType" runat="server" Class="form-control" placeholder="Room Type"></asp:TextBox>
+                                            </div>
+                                        </div>
                                     </div>
-                                         </div>
 
                                     <div class="form-group">
                                         <label for="ContentPlaceHolder1_tbDecription">Decription</label>
@@ -395,7 +395,36 @@
                         </div>
 
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                            my properties
+                            <%--<asp:Repeater ID="Repeater1" runat="server">
+
+                                <ItemTemplate>
+                                    <div class="col-sm-6 col-md-5 propertybox">
+                                        <div class="thumbnail">
+
+                                            <img src='<%#    "data:Image.jpg;base64," + Convert.ToBase64String( (byte[])Eval("image")  ) %>' alt="" />
+
+                                            <div class="caption" style="padding: 15px;">
+
+                                                <div class="row">
+
+                                                    <div class="col-7" style="text-align: center">
+                                                        <h5><%#Eval("Capacity") %> "1 bedroom 1 bath"</h5>
+                                                        <h5><%#Eval("Zip") %>Northen Va,2280</h5>
+                                                        <h5><strong><%#Eval("Price", "{0:C}").ToString() %> per month</strong></h5>
+
+                                                    </div>
+
+                                                    <div class="col-md-5 btnsetting" style="padding-top: 10px">
+                                                        <p><a href="propertydescription.aspx?id=<%# Eval("AccomodationID")%>" class="btn btn-primary ">Description</a></p>
+                                                        
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ItemTemplate>
+                            </asp:Repeater>--%>
 
                         </div>
 
