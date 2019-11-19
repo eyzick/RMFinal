@@ -38,8 +38,8 @@ public partial class ForgotPassword : System.Web.UI.Page
 
                 //send email
                 String ToEmailAddress = dt.Rows[0]["Email"].ToString();
-                String Username = dt.Rows[0][1].ToString();
-                String EmailBody = "Hi "+Username+ ",<br/><br/> Click the link below to reset your password <br/><br/> http://localhost:48599/RecoverPassword.aspx?Uid="+myGUID;
+                String tbEmail = dt.Rows[0][1].ToString();
+                String EmailBody = "Hi "+tbEmail+ ",<br/><br/> Click the link below to reset your password <br/><br/> http://localhost:48599/RecoverPassword.aspx?Uid="+myGUID;
                 MailMessage PassRecMail = new MailMessage("zexhan.shani@gmail.com", ToEmailAddress);
                 PassRecMail.Body = EmailBody;
                 PassRecMail.IsBodyHtml = true;

@@ -42,7 +42,7 @@ public partial class TenantDashboard : System.Web.UI.Page
         String CS = ConfigurationManager.ConnectionStrings["RoomMagnet"].ConnectionString;
         using (SqlConnection con = new SqlConnection(CS))
         {
-            SqlCommand cmd = new SqlCommand("select * from Users where UserID="+userID, con);
+            SqlCommand cmd = new SqlCommand("select * from RMUser where UserID="+userID, con);
             con.Open();
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();

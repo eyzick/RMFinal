@@ -156,7 +156,7 @@
                             </li>
                         <li id="MyAccount" class="nav-item dropdown" runat="server">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink7" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <div id="userName" runat="server">
+                            <div id="tbEmail" runat="server">
                               </div>
                         </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">

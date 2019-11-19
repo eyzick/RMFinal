@@ -16,7 +16,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
             btnSignin.Visible = false;
             btnSignOut.Visible = true;
            MyAccount.Visible = true;
-            userName.InnerText="HI "+Session["USERNAME"].ToString();
+            tbEmail.InnerText="HI "+Session["USERNAME"].ToString();
             if (Session["USERTYPE"] != null)
             {
                 if (Session["USERTYPE"].ToString() == "t")

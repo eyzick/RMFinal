@@ -16,6 +16,7 @@ public partial class SignIn : System.Web.UI.Page
         {
             if (Request.Cookies["UNAME"] != null && Request.Cookies["PWD"] != null)
             {
+
                 tbEmail.Text = Request.Cookies["UNAME"].Value;
              //  Password.Attributes["value"] = Request.Cookies["PWD"].Value;
                 CheckBox1.Checked = true;
@@ -27,10 +28,11 @@ public partial class SignIn : System.Web.UI.Page
     {
         Boolean success = false;
         int id = 0;
-        String usertype = "";
+       
 
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = @"Data Source=aay09edjn65sf6.cpcbbo8ggvx6.us-east-1.rds.amazonaws.com;Initial Catalog=RoomMagnet;Persist Security Info=True;User ID=fahrenheit;Password=cis484fall";
+        sc.ConnectionString = ConfigurationManager.ConnectionStrings["RoomMagnet"].ConnectionString;
+
         sc.Open();
         System.Data.SqlClient.SqlCommand match = new System.Data.SqlClient.SqlCommand();
         match.Connection = sc;
@@ -58,9 +60,10 @@ public partial class SignIn : System.Web.UI.Page
         else
         {// if the username does not exist, it will show failure.
 
-           
         }
+
         sc.Close();
+
         if (success == true)
         {
             sc.Open();
@@ -133,81 +136,6 @@ public partial class SignIn : System.Web.UI.Page
             {
                 lblError.Text = "Invalid Username or Password !";
             }
-
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //String CS = ConfigurationManager.ConnectionStrings["RoomMagnet"].ConnectionString;
-        //using (SqlConnection con = new SqlConnection(CS))
-        //{
-        //    SqlCommand cmd = new SqlCommand("select * from [dbo].[RMUser] where Email='" + tbEmail.Text + "' or LastName='" + Password.Text + "'", con);
-        //    con.Open();
-        //    SqlDataAdapter sda = new SqlDataAdapter(cmd);
-        //    DataTable dt = new DataTable();
-        //    sda.Fill(dt);
-
-        //    if (dt.Rows.Count != 0)
-        //    {
-        //        Session["USERID"] = dt.Rows[0]["UserID"].ToString();
-        //        Session["USEREMAIL"] = dt.Rows[0]["Email"].ToString();
-
-        //        if (CheckBox1.Checked)
-        //        {
-        //            Response.Cookies["UNAME"].Value = tbEmail.Text;
-               
-
-        //            Response.Cookies["UNAME"].Expires = DateTime.Now.AddDays(15);
-                 
-        //        }
-        //        else
-        //        {
-        //            Response.Cookies["UNAME"].Expires = DateTime.Now.AddDays(-1);
-                   
-        //        }
-        //        string Utype;
-        //        Utype = dt.Rows[0]["UserType"].ToString().Trim();
-
-        //        Session["USERTYPE"] = Utype.ToString();
-
-        //        if (Utype == "t")
-        //        {
-        //            Session["USERNAME"] = tbEmail.Text;
-        //            Response.Redirect("~/TenantDashboard.aspx");
-                    
-
-        //        }
-        //        if (Utype == "a")
-        //        {
-        //            Session["USERNAME"] = tbEmail.Text;
-        //            Response.Redirect("~/AdminDashBoard.aspx");
-        //        }
-        //        if (Utype == "h")
-        //        {
-        //            Session["USERNAME"] = tbEmail.Text;
-        //            Response.Redirect("~/HostDashBoard.aspx");
-        //        }
-
-
-        //    }
-        //    else
-        //    {
-        //        lblError.Text = "Invalid Username or Password !";
-        //    }
-        //}
     }
 }

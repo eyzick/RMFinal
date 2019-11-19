@@ -74,6 +74,60 @@ public partial class PropertySearch : System.Web.UI.Page
             dbConnection.Close(); // closing the db connection
         }
 
+      
+
+
+    }
+    private void dosomething()
+    {
+
+    }
+
+    protected void BtnAddFav_Click(object sender, EventArgs e)
+    {
+       
+
+
+        if (Session["USERID"] != null)
+        {
+            int tenantid =Convert.ToInt32(Session["USERID"]);
+            Button btn = (Button)sender;
+
+            int accomudationid = Convert.ToInt32(btn.CommandName);
+
+
+            DateTime date = DateTime.Today;
+            if (tenantid != -1)
+            {
+                try
+                {
+                    String insertQuery = "insert into TenantFavorites values(@TenantID, @AccomodationID, @ModifiedDate)";
+                    SqlCommand command = new SqlCommand(insertQuery, dbConnection); // sqlcommand that takes query and connection
+                    SqlDataAdapter data_adapter = new SqlDataAdapter(command); // data adapter 
+                    command.Parameters.Add(new System.Data.SqlClient.SqlParameter("@TenantID", tenantid));
+                    command.Parameters.Add(new System.Data.SqlClient.SqlParameter("@AccomodationID", Convert.ToInt32(accomudationid)));
+                    command.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ModifiedDate", date));
+                    command.ExecuteNonQuery();
+
+                    ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Favroit added" + "');", true);
+
+                }
+                catch (Exception ex)
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Some error" + "');", true);
+
+                }
+                finally
+                {
+
+
+                    dbConnection.Close(); // closing the db connection
+                }
+
+
+            }
+        }
+
 
     }
 }
