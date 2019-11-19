@@ -32,9 +32,9 @@ public partial class HostDashBoard : System.Web.UI.Page
     }
     protected void Page_Load(object sender, EventArgs e)
     {
-        
-        
- 
+
+        Session["USERID"] = "226";
+
         if (Session["USERID"] != null)
         {
             int hostID = Convert.ToInt32(Session["USERID"]);
@@ -75,26 +75,26 @@ public partial class HostDashBoard : System.Web.UI.Page
     {
         Property tempProperty = new Property();
 
-        //splitting up address
-        //string address = HttpUtility.HtmlEncode(tbAddress.Text);
-        //string[] addressArray = new string[2];
-        //int count = 2;
-        //string[] seperator = { " " };
-        //string[] strList = address.Split(seperator, count, StringSplitOptions.RemoveEmptyEntries);
-        //for (int i = 0; i < 2; i++)
-        //{
-        //    addressArray[i] = strList[i];
+       // splitting up address
+        string address = HttpUtility.HtmlEncode(tbPropertyAddress1.Text);
+        string[] addressArray = new string[2];
+        int count = 2;
+        string[] seperator = { " " };
+        string[] strList = address.Split(seperator, count, StringSplitOptions.RemoveEmptyEntries);
+        for (int i = 0; i < 2; i++)
+        {
+            addressArray[i] = strList[i];
 
-        //}
+        }
 
-        //tempProperty.setHouseNumber(addressArray[0]);
-        //tempProperty.setStreet(addressArray[1]);
-        //tempProperty.setCityCounty(HttpUtility.HtmlEncode(tbCity.Text));
-        //tempProperty.setHomeState(ddState.SelectedValue);
-        //tempProperty.setZip(HttpUtility.HtmlEncode(tbZip.Text));
-        //tempProperty.setMonthlyPrice(Double.Parse(tbPrice.Text));
-        //tempProperty.setRoomType(tbPropertyRoomType.Text);
-        //tempProperty.setDescription("CHANGE ME LATER");
+        tempProperty.setHouseNumber(addressArray[0]);
+        tempProperty.setStreet(addressArray[1]);
+        tempProperty.setCityCounty(HttpUtility.HtmlEncode(tbPropertyCity.Text));
+        tempProperty.setHomeState(ddState.SelectedValue);
+        tempProperty.setZip(HttpUtility.HtmlEncode(tbPropertyZip.Text));
+        tempProperty.setMonthlyPrice(Double.Parse(tbPropertyPrice.Text));
+        tempProperty.setRoomType(tbPropertyRoomType.Text);
+        tempProperty.setDescription("CHANGE ME LATER");
 
         // need to change property class to better fit what we need here - description, availability
 
