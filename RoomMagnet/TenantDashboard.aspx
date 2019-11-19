@@ -117,7 +117,7 @@
                                      </div>
                               </div>
                                 <div class="form-group">
-                                    <label for="ContentPlaceHolder1_tbUname">tbEmail</label>
+                                    <label for="ContentPlaceHolder1_tbUname">Email</label>
 
                                     <asp:TextBox ID="tbtbEmail" runat="server" Class="form-control" placeholder="Usename"></asp:TextBox>
 
