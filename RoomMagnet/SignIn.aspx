@@ -37,13 +37,13 @@
 				<div class="login100-form validate-form p-b-33 p-t-5">
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">
                          <asp:TextBox ID="tbEmail" class="input100" runat="server" placeholder="User name"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidatorUsername" CssClass="text-danger" runat="server" ErrorMessage="The Username field is Required !" ControlToValidate="tbEmail"></asp:RequiredFieldValidator>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidatorUsername" CssClass="text-danger" runat="server" ErrorMessage="The Username field is Required !" ControlToValidate="tbEmail" Display="Dynamic"></asp:RequiredFieldValidator>
 						<span class="focus-input100" data-placeholder="&#xe82a;"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Enter password">
                         <asp:TextBox ID="Password" class="input100" runat="server" TextMode="Password" placeholder="Password"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidatorPass" CssClass="text-danger" runat="server" ErrorMessage="The Password field is Required !" ControlToValidate="Password"></asp:RequiredFieldValidator>						<span class="focus-input100" data-placeholder="&#xe80f;"></span>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidatorPass" CssClass="text-danger" runat="server" ErrorMessage="The Password field is Required !" ControlToValidate="Password" Display="Dynamic"></asp:RequiredFieldValidator>						<span class="focus-input100" data-placeholder="&#xe80f;"></span>
 					</div>
 
 					<div class="container-login100-form-btn m-t-32">
