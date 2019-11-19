@@ -30,12 +30,15 @@ public partial class TenantDashboard : System.Web.UI.Page
             Response.Redirect("~/Home.aspx");
         }
 
+        //if (Session["USERNAME"] == null)
+        //{
+        //    Response.Redirect("Home.aspx");
+        //}
 
-      
 
 
 
-        }
+    }
 
     private void loadProfile(string userID) {
 

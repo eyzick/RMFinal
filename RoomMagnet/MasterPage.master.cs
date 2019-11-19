@@ -44,8 +44,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
                     addProperties.Visible = false;
                     myFavorites.Visible = true;
                     myProperties.Visible = false;
-                 
-
+                    myProfile.Visible = true;
 
                 }
                 else if (Session["USERTYPE"].ToString() == "h")
@@ -58,7 +57,6 @@ public partial class MasterPage : System.Web.UI.MasterPage
                     myFavorites.Visible = true;
                     myProfile.Visible = true;
                     myProperties.Visible = true;
-
 
                 }
                 else if (Session["USERTYPE"].ToString() == "a")

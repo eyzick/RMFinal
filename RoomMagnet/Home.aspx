@@ -34,14 +34,14 @@
                                 <div class="text-center">
                             <h3>Are you a</h3>
                             <h3>Home Owner?</h3>
-                         <asp:Button ID="btnOwner" CssClass="btn btn-primary custom-btn" runat="server" Text="List your property" />
+                         <asp:Button ID="btnOwner" CssClass="btn btn-primary custom-btn" runat="server" Text="List your property" OnClick="btnOwner_Click" />
                                 </div>
                               </div>
                                   <div class="col-md-6 col-sm-12">
                                 <div class="text-center">
                             <h3>Are you a</h3>
                             <h3>Renter?</h3>
-                                     <asp:Button ID="btnRenter" CssClass="btn btn-primary custom-btn" runat="server" Text="Explore properties" />
+                                     <asp:Button ID="btnRenter" CssClass="btn btn-primary custom-btn" runat="server" Text="Explore properties" OnClick="btnRenter_Click" />
                                 </div>
                         </div>
                         </div>
