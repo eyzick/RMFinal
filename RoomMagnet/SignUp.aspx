@@ -167,7 +167,10 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="ContentPlaceHolder1_tbEmail">Email address</label>
-                                            <asp:TextBox ID="tbEmail" runat="server" Class="form-control" aria-describedby="emailHelp" placeholder="Enter email" TextMode="Email"></asp:TextBox>
+                                            <asp:TextBox ID="tbEmail" runat="server" Class="form-control" aria-describedby="emailHelp" placeholder="Enter email"></asp:TextBox>
+
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator17" runat="server" ControlToValidate="tbEmail" Display="Dynamic" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ValidationGroup="HouseOwner">Please enter your email address</asp:RequiredFieldValidator>
+                                            <asp:RegularExpressionValidator ID="RegularExpressionValidator11" runat="server" ControlToValidate="tbEmail" Display="Dynamic" ErrorMessage="RegularExpressionValidator" ForeColor="Red" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ValidationGroup="HouseOwner">Invalid Email</asp:RegularExpressionValidator>
                                             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                                         </div>
                                     </div>
@@ -276,7 +279,6 @@
                                 </div>
 
                                 <asp:Button ID="btnSingupHouseOwner" runat="server" class="btn btn-primary" Text="Sign Up" OnClick="btnSingupHouseOwner_Click" ValidationGroup="HouseOwner"></asp:Button>
-                                    <asp:Label ID="lblMsg" runat="server"></asp:Label>
 
                             </div>
 
@@ -330,7 +332,9 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="ContentPlaceHolder1_tbEmail">Email address</label>
-                                            <asp:TextBox ID="tbTenantEmailAddress" runat="server" Class="form-control" aria-describedby="tenantemailHelp" placeholder="Enter email" TextMode="Email"></asp:TextBox>
+                                            <asp:TextBox ID="tbTenantEmailAddress" runat="server" Class="form-control" aria-describedby="tenantemailHelp" placeholder="Enter email"></asp:TextBox>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator18" runat="server" ControlToValidate="tbTenantEmailAddress" Display="Dynamic" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ValidationGroup="Tenant">Please enter your email address</asp:RequiredFieldValidator>
+                                            <asp:RegularExpressionValidator ID="RegularExpressionValidator12" runat="server" ControlToValidate="tbTenantEmailAddress" Display="Dynamic" ErrorMessage="RegularExpressionValidator" ForeColor="Red" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ValidationGroup="Tenant">Invalid Email</asp:RegularExpressionValidator>
                                             <small id="tenantemailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                                         </div>
                                     </div>
@@ -440,6 +444,7 @@
                                     </div>
 
                                     <asp:Button ID="btnSingupTenant" runat="server" Class="btn btn-primary" Text="Sign Up" OnClick="btnSingupTenant_Click" ValidationGroup="Tenant" />
+
                                 </div>
 
                             </div>
