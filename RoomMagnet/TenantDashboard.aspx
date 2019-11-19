@@ -269,11 +269,14 @@
   var text = document.getElementById("text");
 
   // If the checkbox is checked, display the output text
-           if (checkBox.checked == true) {
+           if (checkBox.checked == true)
+           {
                $(".hostProfile :input").attr("disabled", false);
-  } else {
-    $(".hostProfile :input").attr("disabled", true);
-  }
+           }
+           else
+           {
+                $(".hostProfile :input").attr("disabled", true);
+           }
        }
 
          document.getElementById("myCheck").checked = true;

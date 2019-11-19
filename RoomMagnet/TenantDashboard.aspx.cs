@@ -31,11 +31,7 @@ public partial class TenantDashboard : System.Web.UI.Page
         }
 
 
-      
-
-
-
-        }
+    }
 
     private void loadProfile(string userID) {
 
@@ -51,12 +47,6 @@ public partial class TenantDashboard : System.Web.UI.Page
             tbName1.Text = dt.Rows[0]["LastName"].ToString();
             // continue
         }
-
-         
-
-
-
-
 
     }
 
