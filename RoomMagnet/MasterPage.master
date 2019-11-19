@@ -143,9 +143,9 @@
                            <a class="nav-link" href="PropertySearch.aspx">Properties</a>
                         </li>
 
-                        <li class="nav-item dropdown">
+<%--                        <li class="nav-item dropdown">
                             <a class="nav-link" href="#">Agents</a>         
-                        </li>
+                        </li>--%>
                               
                             <li id="btnSignup" class="nav-item dropdown" runat="server">
                                 <a class="nav-link" href="SignUp.aspx">Sign Up</a></li>
