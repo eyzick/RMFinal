@@ -28,7 +28,7 @@ public partial class SignUp : System.Web.UI.Page
             Tenant tempTenant = new Tenant();
 
                 //splitting up address
-                string address = HttpUtility.HtmlEncode(tbAddress.Text);
+                string address = HttpUtility.HtmlEncode(tbTenantAddress.Text);
                 string[] addressArray = new string[2];
                 int count = 2;
                 string[] seperator = { " " };
@@ -39,17 +39,17 @@ public partial class SignUp : System.Web.UI.Page
 
                 }
 
-                tempTenant.SetFirstName(HttpUtility.HtmlEncode(tbFirstName.Text));
-                tempTenant.SetLastName(HttpUtility.HtmlEncode(tbLastName.Text));
-                DateTime test2 = Convert.ToDateTime(tbDOB.Text);
+                tempTenant.SetFirstName(HttpUtility.HtmlEncode(tbTenantFirstName.Text));
+                tempTenant.SetLastName(HttpUtility.HtmlEncode(tbTenantLastName.Text));
+                DateTime test2 = Convert.ToDateTime(tbTenantDOB.Text);
                 tempTenant.SetDateOfBirth(test2);
                 tempTenant.SetHouseNumber(HttpUtility.HtmlEncode(addressArray[0]));
                 tempTenant.SetStreet(HttpUtility.HtmlEncode(addressArray[1]));
-                tempTenant.SetCityCounty(HttpUtility.HtmlEncode(tbCity.Text));
-                tempTenant.SetHomeState(ddState.SelectedValue);
-                tempTenant.SetZip(HttpUtility.HtmlEncode(tbZip.Text));
-                tempTenant.setPhoneNumber(HttpUtility.HtmlEncode(tbPhoneNumber.Text));
-                tempTenant.SetEmailAddress(HttpUtility.HtmlEncode(tbEmail.Text));
+                tempTenant.SetCityCounty(HttpUtility.HtmlEncode(tbTenantCity.Text));
+                tempTenant.SetHomeState(ddTenantStates.SelectedValue);
+                tempTenant.SetZip(HttpUtility.HtmlEncode(tbTenantZip.Text));
+                tempTenant.setPhoneNumber(HttpUtility.HtmlEncode(tbTenantPhoneNumber.Text));
+                tempTenant.SetEmailAddress(HttpUtility.HtmlEncode(tbTenantEmailAddress.Text));
 
                 // Insert into database 
                 DateTime now = DateTime.Now;
