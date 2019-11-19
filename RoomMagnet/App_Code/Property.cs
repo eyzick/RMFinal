@@ -22,6 +22,7 @@ public class Property
     private String description;
     private DateTime Effectivedate;
     private DateTime TerminationDate;
+   
 
 
 
@@ -43,6 +44,16 @@ public class Property
         setTerminationDate(TerminationDate);
         setEffectivedate(Effectivedate);
 
+    }
+
+    public void setCapacity(int capacity)
+    {
+        this.capacity = capacity;
+    }
+
+    public int getCapacity()
+    {
+        return capacity;
     }
 
     public void setDescription(string description)
