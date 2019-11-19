@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -15,8 +16,23 @@ public partial class MasterPage : System.Web.UI.MasterPage
             btnSignup.Visible = false;
             btnSignin.Visible = false;
             btnSignOut.Visible = true;
-           MyAccount.Visible = true;
-            tbEmail.InnerText="HI "+Session["USERNAME"].ToString();
+            MyAccount.Visible = true;
+
+            string ConnectionString = WebConfigurationManager.ConnectionStrings["RoomMagnet"].ConnectionString; // connection string
+            System.Data.SqlClient.SqlConnection dbConnection;
+            dbConnection = new System.Data.SqlClient.SqlConnection(); // creaeting connection to the database
+            dbConnection.ConnectionString = ConnectionString; // giving connection string to dbconnection
+            dbConnection.Open(); // opening the connection for intraction
+            System.Data.SqlClient.SqlCommand update = new System.Data.SqlClient.SqlCommand();
+            update.Connection = dbConnection;
+
+            update.CommandText = "select firstname from rmuser where email = '" + Session["USERNAME"].ToString() + "'";
+            String email = update.ExecuteScalar().ToString();
+
+            tbEmail.InnerText="HI "+ email;
+
+            dbConnection.Close();
+
             if (Session["USERTYPE"] != null)
             {
                 if (Session["USERTYPE"].ToString() == "t")
