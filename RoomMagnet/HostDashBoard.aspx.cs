@@ -40,25 +40,27 @@ public partial class HostDashBoard : System.Web.UI.Page
         Property tempProperty = new Property();
 
         //splitting up address
-        //string address = HttpUtility.HtmlEncode(tbAddress.Text);
-        //string[] addressArray = new string[2];
-        //int count = 2;
-        //string[] seperator = { " " };
-        //string[] strList = address.Split(seperator, count, StringSplitOptions.RemoveEmptyEntries);
-        //for (int i = 0; i < 2; i++)
-        //{
-        //    addressArray[i] = strList[i];
+        string address = HttpUtility.HtmlEncode(tbPropertyAddress.Text);
+        string[] addressArray = new string[2];
+        int count = 2;
+        string[] seperator = { " " };
+        string[] strList = address.Split(seperator, count, StringSplitOptions.RemoveEmptyEntries);
+        for (int i = 0; i < 2; i++)
+        {
+            addressArray[i] = strList[i];
 
-        //}
+        }
 
-        //tempProperty.setHouseNumber(addressArray[0]);
-        //tempProperty.setStreet(addressArray[1]);
-        //tempProperty.setCityCounty(HttpUtility.HtmlEncode(tbCity.Text));
-        //tempProperty.setHomeState(ddState.SelectedValue);
-        //tempProperty.setZip(HttpUtility.HtmlEncode(tbZip.Text));
-        //tempProperty.setMonthlyPrice(Double.Parse(tbPrice.Text));
-        //tempProperty.setRoomType(tbPropertyRoomType.Text);
-        //tempProperty.setDescription("CHANGE ME LATER");
+        tempProperty.setHouseNumber(addressArray[0]);
+        tempProperty.setStreet(addressArray[1]);
+        tempProperty.setCityCounty(HttpUtility.HtmlEncode(tbPropertyCity.Text));
+        tempProperty.setHomeState(ddState.SelectedValue);
+        tempProperty.setZip(HttpUtility.HtmlEncode(tbPropertyZip.Text));
+        tempProperty.setMonthlyPrice(Double.Parse(tbPropertyPrice.Text));
+        tempProperty.setRoomType(tbPropertyRoomType.Text);
+        tempProperty.setDescription(tbPropertyDescription.Text);
+        
+
 
         // need to change property class to better fit what we need here - description, availability
 
@@ -87,9 +89,10 @@ public partial class HostDashBoard : System.Web.UI.Page
         insertProperty.Parameters.Add(new SqlParameter("@Price", tempProperty.getMonthlyPrice()));
         insertProperty.Parameters.Add(new SqlParameter("@RoomType", tempProperty.getRoomType()));
         insertProperty.Parameters.Add(new SqlParameter("@Description", tempProperty.getDescription()));
-        insertProperty.Parameters.Add(new SqlParameter("@HostID", Session["globalID"]));
+        insertProperty.Parameters.Add(new SqlParameter("@HostID", Session["UserID"]));
         insertProperty.Parameters.Add(new SqlParameter("@ModifiedDate", DateTime.Now));
         insertProperty.Parameters.Add(new SqlParameter("@Image", picture));
+        
         insertProperty.ExecuteNonQuery();
 
         int id = 0;

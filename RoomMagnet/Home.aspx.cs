@@ -15,4 +15,12 @@ public partial class Default2 : System.Web.UI.Page
 
         }
     }
+    protected void btnOwner_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("SignUp.aspx");
+    }
+    protected void btnRenter_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("PropertySearch.aspx");
+    }
 }

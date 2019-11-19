@@ -249,13 +249,13 @@
                                     <div class="form-group">
                                         <label for="inputAddress">Address</label>
                              
-                                        <asp:TextBox ID="tbPropertyAddress1" CssClass="form-control" runat="server" placeholder="1234 Main St"></asp:TextBox>
+                                        <asp:TextBox ID="tbPropertyAddress" CssClass="form-control" runat="server" placeholder="1234 Main St"></asp:TextBox>
                                     </div>
-                                    <div class="form-group">
+                                  <%--  <div class="form-group">
                                         <label for="inputAddress2">Address 2</label>
                      
                                           <asp:TextBox ID="tbPropertyAddress2" CssClass="form-control" runat="server" placeholder="Apartment, studio, or floor"></asp:TextBox>
-                                    </div>
+                                    </div>--%>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label for="inputCity">City</label>
