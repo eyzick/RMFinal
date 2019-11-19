@@ -123,6 +123,7 @@
                                                     </asp:DropDownList>
                                                 </div>
                                                 <div class="col">
+
                                                     <asp:Button ID="BtnStatusChange" CssClass="btn btn-success" OnClick="BtnStatusChange_Click" runat="server" Text="Update" />
                                                 </div>
                                             </div>

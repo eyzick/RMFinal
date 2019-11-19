@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
@@ -31,7 +32,42 @@ public partial class HostDashBoard : System.Web.UI.Page
     }
     protected void Page_Load(object sender, EventArgs e)
     {
+        
+        
+ 
+        if (Session["USERID"] != null)
+        {
+            int hostID = Convert.ToInt32(Session["USERID"]);
+            DataTable dt = new DataTable();
 
+            string SearchQuery = "Select * from Accomodation where HostID=@hostID";
+
+            try
+            {
+
+                SqlCommand command = new SqlCommand(SearchQuery, dbConnection); // sqlcommand that takes query and connection
+                SqlDataAdapter data_adapter = new SqlDataAdapter(command); // data adapter 
+                command.Parameters.Add(new System.Data.SqlClient.SqlParameter("@hostID", hostID));
+
+                data_adapter.Fill(dt); // getting rows to dt(datatable) variabble
+
+            }
+            catch
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Could not fetch Property rows from Database" + "');", true);
+
+            }
+            finally
+            {
+
+                //GridView1.DataSource = dt;
+                //GridView1.DataBind();
+                Repeater1.DataSource = dt;
+                Repeater1.DataBind();
+                dbConnection.Close(); // closing the db connection
+            }
+
+        }
     }
 
 
@@ -63,7 +99,7 @@ public partial class HostDashBoard : System.Web.UI.Page
         // need to change property class to better fit what we need here - description, availability
 
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = @"Data Source=aay09edjn65sf6.cpcbbo8ggvx6.us-east-1.rds.amazonaws.com;Initial Catalog=RoomMagnet;Persist Security Info=True;User ID=fahrenheit;Password=cis484fall";
+        sc.ConnectionString = ConfigurationManager.ConnectionStrings["RoomMagnet"].ConnectionString;
         sc.Open();
 
         byte[] picture = null;
@@ -96,8 +132,8 @@ public partial class HostDashBoard : System.Web.UI.Page
         DataTable dt = new DataTable();
         try
         {
-            SqlCommand command = new SqlCommand("SELECT TOP 1AccomodationID FROM Accomodation ORDER BY AccomodationID DESC", dbConnection); // sqlcommand that takes query and connection
-        SqlDataAdapter data_adapter = new SqlDataAdapter(command); // data adapter 
+           SqlCommand command = new SqlCommand("SELECT TOP 1AccomodationID FROM Accomodation ORDER BY AccomodationID DESC", dbConnection); // sqlcommand that takes query and connection
+          SqlDataAdapter data_adapter = new SqlDataAdapter(command); // data adapter 
         data_adapter.Fill(dt); 
 
         foreach (DataRow row in dt.Rows)// iterating the whole datatable
@@ -134,5 +170,54 @@ public partial class HostDashBoard : System.Web.UI.Page
 
             dbConnection.Close();
 
-            }
+    }
+    protected void HostPropertyDisplay(object sender, EventArgs e)
+    {
+
+
+
+
+
+    }
+    protected void btnDelete_Click(object sender, EventArgs e)
+    {
+       
+
+    }
+
+
+
+    protected void btnPropertyDelete_Click(object sender, EventArgs e)
+    {
+       var  b = (LinkButton)sender;
+
+        int propertyId = Convert.ToInt32(b.CommandName.ToString());
+        string SearchQuery = "Delete from Accomodation where AccomodationID=@propertyID";
+        DataTable dt = new DataTable();
+        try
+        {
+
+            SqlCommand command = new SqlCommand(SearchQuery, dbConnection); // sqlcommand that takes query and connection
+            SqlDataAdapter data_adapter = new SqlDataAdapter(command); // data adapter 
+            command.Parameters.Add(new System.Data.SqlClient.SqlParameter("@propertyID", propertyId));
+
+            data_adapter.Fill(dt); // getting rows to dt(datatable) variabble
+
         }
+        catch
+        {
+            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Could not fetch Property rows from Database" + "');", true);
+
+        }
+        finally
+        {
+
+            //GridView1.DataSource = dt;
+            //GridView1.DataBind();
+            Repeater1.DataSource = dt;
+            Repeater1.DataBind();
+            dbConnection.Close(); // closing the db connection
+        }
+
+    }
+}
