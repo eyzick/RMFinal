@@ -93,6 +93,7 @@ public partial class SignIn : System.Web.UI.Page
             {
                 Session["USERID"] = dt.Rows[0]["UserID"].ToString();
                 Session["USEREMAIL"] = dt.Rows[0]["Email"].ToString();
+               
 
                 if (CheckBox1.Checked)
                 {
@@ -134,8 +135,10 @@ public partial class SignIn : System.Web.UI.Page
             }
             else
             {
-                lblError.Text = "Invalid Username or Password !";
+          
             }
         }
     }
+
+    
 }

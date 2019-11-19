@@ -26,10 +26,10 @@ public partial class MasterPage : System.Web.UI.MasterPage
             System.Data.SqlClient.SqlCommand update = new System.Data.SqlClient.SqlCommand();
             update.Connection = dbConnection;
 
-            update.CommandText = "select firstname from rmuser where email = '" + Session["USERNAME"].ToString() + "'";
-            String email = update.ExecuteScalar().ToString();
+         //   update.CommandText = "select firstname from rmuser where email = '" + Session["USERNAME"].ToString() + "'";
+          //  String email = update.ExecuteScalar().ToString();
 
-            tbEmail.InnerText="HI "+ email;
+            tbEmail.InnerText="HI "+ Session["USERNAME"].ToString();
 
             dbConnection.Close();
 

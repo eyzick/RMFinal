@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="HostDashBoard.aspx.cs" Inherits="HostDashBoard" %>
+﻿<%@ Page validateRequest="false" EnableEventValidation="false" Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="HostDashBoard.aspx.cs" Inherits="HostDashBoard" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 
@@ -57,6 +57,27 @@
         .tabbing-box .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link:hover {
             background-color: #17a2b8;
         }
+
+          .propertybox {
+        width: 80%;
+        padding-top: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+        box-shadow: 2px 2px 2px 2px grey;
+        margin: 12px;
+        margin-bottom: 12px;
+        text-align: justify;
+        border-radius: 5px;
+    }
+
+        .propertybox .btn {
+            width: 110px;
+            font-size: 12px;
+            text-align: center;
+            background-color: palevioletred;
+            border-radius: 7px;
+            
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
@@ -82,7 +103,8 @@
 
                             <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Profile</a>
                             <a class="nav-item nav-link " id="nav-addproperty-tab" data-toggle="tab" href="#nav-addproperty" role="tab" aria-controls="nav-addproperty" aria-selected="false">Add Property</a>
-                            <a class="nav-item nav-link " id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">My Properties</a>
+                            <a class="nav-item nav-link " id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">My Properties
+                            </a>
                             <a class="nav-item nav-link " id="nav-fav-tab" data-toggle="tab" href="#nav-fav" role="tab" aria-controls="nav-fav" aria-selected="false">My Favorities</a>
                         </div>
                     </nav>
@@ -249,13 +271,13 @@
                                     <div class="form-group">
                                         <label for="inputAddress">Address</label>
 
-                                        <asp:TextBox ID="tbPropertyAddress" CssClass="form-control" runat="server" placeholder="1234 Main St"></asp:TextBox>
+                                        <asp:TextBox ID="tbPropertyAddress1" CssClass="form-control" runat="server" placeholder="1234 Main St"></asp:TextBox>
                                     </div>
-                                    <%--  <div class="form-group">
+                                    <div class="form-group">
                                         <label for="inputAddress2">Address 2</label>
-                     
-                                          <asp:TextBox ID="tbPropertyAddress2" CssClass="form-control" runat="server" placeholder="Apartment, studio, or floor"></asp:TextBox>
-                                    </div>--%>
+
+                                        <asp:TextBox ID="tbPropertyAddress2" CssClass="form-control" runat="server" placeholder="Apartment, studio, or floor"></asp:TextBox>
+                                    </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label for="inputCity">City</label>
@@ -395,36 +417,61 @@
                         </div>
 
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                            <%--<asp:Repeater ID="Repeater1" runat="server">
+
+
+                            <h2>Properties</h2>
+
+                            <asp:Repeater ID="Repeater1" runat="server">
 
                                 <ItemTemplate>
-                                    <div class="col-sm-6 col-md-5 propertybox">
+                                    <div class="container propertybox">
+
                                         <div class="thumbnail">
 
-                                            <img src='<%#    "data:Image.jpg;base64," + Convert.ToBase64String( (byte[])Eval("image")  ) %>' alt="" />
+                                               
+                                            <div class="row">
+                                                <div class="col-5">
+                                                       <img src='<%#    "data:Image.jpg;base64," + Convert.ToBase64String( (byte[])Eval("image")  ) %>' alt="" style="width:90%" />
+                                                </div>
 
-                                            <div class="caption" style="padding: 15px;">
-
-                                                <div class="row">
-
-                                                    <div class="col-7" style="text-align: center">
+                                         <div class="col-4">
+                                              <div class="caption" style="padding: 15px;">
+                                                  
                                                         <h5><%#Eval("Capacity") %> "1 bedroom 1 bath"</h5>
                                                         <h5><%#Eval("Zip") %>Northen Va,2280</h5>
                                                         <h5><strong><%#Eval("Price", "{0:C}").ToString() %> per month</strong></h5>
+                                             
+                                                   </div>
+                                             </div>
+                                                 
 
+                                                    <div class="col-md-3 btnsetting" style="padding-top: 10px">
+                                                      
+                                                        <p>
+                                                            <a href="propertydescription.aspx?id=<%# Eval("AccomodationID")%>" class="glyphicon glyphicon-list-alt">View </a></p>
+                                                        <p>
+                                                          <p>
+                                                              <a href="EditProperty.aspx?id=<%# Eval("AccomodationID")%>" class="glyphicon glyphicon-edit">Edit</a></p>
+                                                        <p>
+                                                          <p>
+                                                              <asp:LinkButton ID="LinkButton1" CommandName='<%# Eval("AccomodationID")%>' CssClass="glyphicon glyphicon-remove" OnClick="btnPropertyDelete_Click" runat="server">Delete</asp:LinkButton>
+                                                             
+                                                            
+                                                        <p>
+                                                          
+                                                        </p>
                                                     </div>
-
-                                                    <div class="col-md-5 btnsetting" style="padding-top: 10px">
-                                                        <p><a href="propertydescription.aspx?id=<%# Eval("AccomodationID")%>" class="btn btn-primary ">Description</a></p>
-                                                        
-                                                    </div>
-
+                                             
+                                               
+                                           
+                                            
+                                             
+                                           
                                                 </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </ItemTemplate>
-                            </asp:Repeater>--%>
+                            </asp:Repeater>
 
                         </div>
 
