@@ -62,6 +62,7 @@ public partial class HostDashBoard : System.Web.UI.Page
         tempProperty.setMonthlyPrice(Double.Parse(tbPropertyPrice.Text));
         tempProperty.setRoomType(tbPropertyRoomType.Text);
         tempProperty.setDescription(tbPropertyDescription.Text);
+        tempProperty.setCapacity(int.Parse(tbPropertyCapacity.Text));
         
 
 
@@ -83,11 +84,12 @@ public partial class HostDashBoard : System.Web.UI.Page
 
         System.Data.SqlClient.SqlCommand insertProperty = new System.Data.SqlClient.SqlCommand();
         insertProperty.Connection = sc;
-        insertProperty.CommandText = "Insert into [dbo].[Accomodation] values (@HouseNumber, @Street, @City, @State, @Zip, @Price, 1, 1, @RoomType, @Description, @HostID, @ModifiedDate, @Image);";
+        insertProperty.CommandText = "Insert into [dbo].[Accomodation] values (@HouseNumber, @Street, @City, @State, @Zip, @Price, @Capacity, @RoomType, @Description, @HostID, @ModifiedDate, @Image);";
         insertProperty.Parameters.Add(new SqlParameter("@HouseNumber", tempProperty.getHouseNumber()));
         insertProperty.Parameters.Add(new SqlParameter("@Street", tempProperty.getStreet()));
         insertProperty.Parameters.Add(new SqlParameter("@City", tempProperty.getCityCounty()));
         insertProperty.Parameters.Add(new SqlParameter("@State", tempProperty.getHomeState()));
+        insertProperty.Parameters.Add(new SqlParameter("@Capacity", tempProperty.getCapacity()));
         insertProperty.Parameters.Add(new SqlParameter("@Zip", tempProperty.getZip()));
         insertProperty.Parameters.Add(new SqlParameter("@Price", tempProperty.getMonthlyPrice()));
         insertProperty.Parameters.Add(new SqlParameter("@RoomType", tempProperty.getRoomType()));
