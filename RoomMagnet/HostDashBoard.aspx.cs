@@ -76,25 +76,26 @@ public partial class HostDashBoard : System.Web.UI.Page
         Property tempProperty = new Property();
 
         //splitting up address
-        //string address = HttpUtility.HtmlEncode(tbAddress.Text);
-        //string[] addressArray = new string[2];
-        //int count = 2;
-        //string[] seperator = { " " };
-        //string[] strList = address.Split(seperator, count, StringSplitOptions.RemoveEmptyEntries);
-        //for (int i = 0; i < 2; i++)
-        //{
-        //    addressArray[i] = strList[i];
+        string address = HttpUtility.HtmlEncode(tbPropertyAddress.Text);
+        string[] addressArray = new string[2];
+        int count = 2;
+        string[] seperator = { " " };
+        string[] strList = address.Split(seperator, count, StringSplitOptions.RemoveEmptyEntries);
+        for (int i = 0; i < 2; i++)
+        {
+            addressArray[i] = strList[i];
 
-        //}
+        }
 
-        //tempProperty.setHouseNumber(addressArray[0]);
-        //tempProperty.setStreet(addressArray[1]);
-        //tempProperty.setCityCounty(HttpUtility.HtmlEncode(tbCity.Text));
-        //tempProperty.setHomeState(ddState.SelectedValue);
-        //tempProperty.setZip(HttpUtility.HtmlEncode(tbZip.Text));
-        //tempProperty.setMonthlyPrice(Double.Parse(tbPrice.Text));
-        //tempProperty.setRoomType(tbPropertyRoomType.Text);
-        //tempProperty.setDescription("CHANGE ME LATER");
+        tempProperty.setHouseNumber(addressArray[0]);
+        tempProperty.setStreet(addressArray[1]);
+        tempProperty.setCityCounty(HttpUtility.HtmlEncode(tbPropertyCity.Text));
+        tempProperty.setHomeState(ddState.SelectedValue);
+        tempProperty.setZip(HttpUtility.HtmlEncode(tbPropertyZip.Text));
+        tempProperty.setMonthlyPrice(Double.Parse(tbPropertyPrice.Text));
+        tempProperty.setRoomType(tbPropertyRoomType.Text);
+        tempProperty.setDescription(tbPropertyDescription.Text);
+        tempProperty.setCapacity(int.Parse(tbPropertyCapacity.Text));
 
         // need to change property class to better fit what we need here - description, availability
 
@@ -114,13 +115,14 @@ public partial class HostDashBoard : System.Web.UI.Page
 
         System.Data.SqlClient.SqlCommand insertProperty = new System.Data.SqlClient.SqlCommand();
         insertProperty.Connection = sc;
-        insertProperty.CommandText = "Insert into [dbo].[Accomodation] values (@HouseNumber, @Street, @City, @State, @Zip, @Price, 1, 1, @RoomType, @Description, @HostID, @ModifiedDate, @Image);";
+        insertProperty.CommandText = "Insert into [dbo].[Accomodation] values (@HouseNumber, @Street, @City, @State, @Zip, @Price, @Capacity, @RoomType, @Description, @HostID, @ModifiedDate, @Image);";
         insertProperty.Parameters.Add(new SqlParameter("@HouseNumber", tempProperty.getHouseNumber()));
         insertProperty.Parameters.Add(new SqlParameter("@Street", tempProperty.getStreet()));
         insertProperty.Parameters.Add(new SqlParameter("@City", tempProperty.getCityCounty()));
         insertProperty.Parameters.Add(new SqlParameter("@State", tempProperty.getHomeState()));
         insertProperty.Parameters.Add(new SqlParameter("@Zip", tempProperty.getZip()));
         insertProperty.Parameters.Add(new SqlParameter("@Price", tempProperty.getMonthlyPrice()));
+        insertProperty.Parameters.Add(new SqlParameter("@Capacity", tempProperty.getCapacity()));
         insertProperty.Parameters.Add(new SqlParameter("@RoomType", tempProperty.getRoomType()));
         insertProperty.Parameters.Add(new SqlParameter("@Description", tempProperty.getDescription()));
         insertProperty.Parameters.Add(new SqlParameter("@HostID", Session["globalID"]));
