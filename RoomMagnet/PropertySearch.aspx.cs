@@ -30,7 +30,17 @@ public partial class PropertySearch : System.Web.UI.Page
     }
     protected void Page_Load(object sender, EventArgs e)
     {
+        if(Session["USERNAME"] == null)
+        {
+            Response.Redirect("TableauMap.aspx");
+        }
 
+        string str = Session["HomePageFlag"].ToString();
+        if (int.Parse(str) == 1)
+        {
+            txt_search.Text = Session["SearchPass"].ToString();
+            btnSearch_Click(sender, e);
+        }
     }
 
     protected void btnSearch_Click(object sender, EventArgs e)

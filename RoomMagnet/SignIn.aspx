@@ -28,7 +28,8 @@
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <div class="limiter">
+    <div class="form-group">
+  <div class="limiter">
 		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
 			<div class="wrap-login100 p-t-30 p-b-50">
 				<span class="login100-form-title p-b-41">
@@ -43,8 +44,7 @@
 
 					<div class="wrap-input100 validate-input" data-validate="Enter password">
                         <asp:TextBox ID="Password" class="input100" runat="server" TextMode="Password" placeholder="Password"></asp:TextBox>
-                        <asp:Label ID="Label1" runat="server"  CssClass="text-danger"></asp:Label>
-                        <span class="focus-input100" data-placeholder="&#xe80f;"></span>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidatorPass" CssClass="text-danger" runat="server" ErrorMessage="The Password field is Required !" ControlToValidate="Password" Display="Dynamic"></asp:RequiredFieldValidator>						<span class="focus-input100" data-placeholder="&#xe80f;"></span>
 					</div>
 
 					<div class="container-login100-form-btn m-t-32">
@@ -55,11 +55,13 @@
                     <div>
                                 <asp:CheckBox ID="CheckBox1" runat="server" />
                         <asp:Label ID="Label3" runat="server" CssClass="control-label" Text="Remember me ?"></asp:Label>
+                       <a href="SignUp.aspx"><h4>Create an Account</h4></a> 
                         </div>
 				</div>
 			</div>
 		</div>
 	</div>
+        </div>
 	
 
 	<div id="dropDownSelect1"></div>

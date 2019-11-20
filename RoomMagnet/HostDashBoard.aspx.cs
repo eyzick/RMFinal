@@ -32,8 +32,12 @@ public partial class HostDashBoard : System.Web.UI.Page
     }
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["USERNAME"] == null)
+        {
+            Response.Redirect("Home.aspx");
+        }
 
-        Session["USERID"] = "226";
+        //Session["USERID"] = "226";
 
         if (Session["USERID"] != null)
         {
@@ -81,6 +85,7 @@ public partial class HostDashBoard : System.Web.UI.Page
         int count = 2;
         string[] seperator = { " " };
         string[] strList = address.Split(seperator, count, StringSplitOptions.RemoveEmptyEntries);
+
         for (int i = 0; i < 2; i++)
         {
             addressArray[i] = strList[i];
@@ -157,17 +162,20 @@ public partial class HostDashBoard : System.Web.UI.Page
 
         for (int j = 0; j < cblAmenities.Items.Count; j++)
         {
+            System.Data.SqlClient.SqlCommand submit = new System.Data.SqlClient.SqlCommand();
+            submit.Connection = sc;
+
             if (cblAmenities.Items[j].Selected)
             {
-                //        submit.CommandText = "insert into [dbo].[Amenity] values (@AmenityName, @AccomodationID, @ModifiedDate)";
-                //        submit.Parameters.Add(new System.Data.SqlClient.SqlParameter("@AmenityName", cblAmenities.Items[j].Text));
-                //        submit.Parameters.Add(new System.Data.SqlClient.SqlParameter("@AccomodationID", accomodationid));
-                //        submit.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ModifiedDate", date));
+                submit.CommandText = "insert into [dbo].[Amenity] values (@AmenityName, @AccomodationID, @ModifiedDate)";
+                submit.Parameters.Add(new System.Data.SqlClient.SqlParameter("@AmenityName", cblAmenities.Items[j].Text));
+                submit.Parameters.Add(new System.Data.SqlClient.SqlParameter("@AccomodationID", accomodationid));
+                submit.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ModifiedDate", DateTime.Today));
 
-                //        submit.ExecuteNonQuery();
+                submit.ExecuteNonQuery();
             }
 
-            //    submit.Parameters.Clear();
+                submit.Parameters.Clear();
         }
 
             dbConnection.Close();

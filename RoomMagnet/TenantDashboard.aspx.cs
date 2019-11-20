@@ -12,6 +12,12 @@ public partial class TenantDashboard : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+
+        if (Session["USERNAME"] == null)
+        {
+            Response.Redirect("Home.aspx");
+        }
+
         if (Session["USERTYPE"] != null)
         {
             if (Session["USERTYPE"].ToString() == "t")

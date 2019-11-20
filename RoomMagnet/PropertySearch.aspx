@@ -87,7 +87,7 @@
                 height: 500px; /* The height is 400 pixels */
                 width: 500px; /* The width is the width of the web page */
                 border: 1px;
-                background-color: red;
+                background-color: white;
                 border-color: rebeccapurple;
             }
         }
@@ -195,9 +195,10 @@
                         <div class="row">
 
                           <div class="col-7" style="text-align:center">
-                            <h5><%#Eval("Capacity") %> "1 bedroom 1 bath"</h5>
-                             <h5><%#Eval("Zip") %>Northen Va,2280</h5>
-                              <h5><strong><%#Eval("Price", "{0:C}").ToString() %> per month</strong></h5>
+<%--                            <h5><%#Eval("Capacity") %> "1 bedroom 1 bath"</h5>--%>
+                             <h5><%# String.Concat(Eval("HouseNumber"), " ", Eval("Street"))%></h5>
+                             <h5><%# String.Concat(Eval("City"), ", ", Eval("State"), " ", Eval("Zip")) %></h5>
+                             <h5><strong><%#Eval("Price", "{0:C0}").ToString() %> per month</strong></h5>
 
                           </div>
                           
@@ -223,6 +224,7 @@
         <div class="col-md-4">
 
              <div  id="map">
+                 <div class='tableauPlaceholder' id='viz1574219697280' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;X3&#47;X3MJRNH2B&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='path' value='shared&#47;X3MJRNH2B' /> <param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;X3&#47;X3MJRNH2B&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1574219697280');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
           
               </div>
 

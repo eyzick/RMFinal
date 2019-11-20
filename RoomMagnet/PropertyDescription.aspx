@@ -28,11 +28,11 @@
                 <div class="col-md-12">
                     <!-- Heading properties 3 start -->
                     <div class="heading-properties-3">
-                        <h1 id="PropertyName" runat="server">Relaxing Apartment</h1>
+                        <h1 id="PropertyLocation" runat="server"></h1>
                         <div class="mb-30">
-                            <span class="pprice" id="PropertyPrice"  runat="server" >$35,0000</span> 
+                            <h4><span class="pprice" id="PropertyPrice"  runat="server"> per month</span></h4>
                             <span class="rent" id="PropertySaleRent" runat="server">For Rent</span>
-                            <span class="location" id="PropertyLocation" runat="server"><i class="flaticon-pin"></i>123 Kathal St. Tampa City,</span></div>
+<%--                            <span class="location" id="PropertyLocation" runat="server"><i class="flaticon-pin"></i>123 Kathal St. Tampa City,</span></div>--%>
                           
                     </div>
                 </div>
@@ -121,7 +121,7 @@
                           
                         <tbody><tr>
                           <td>Capacity</td>
-                          <td id="PropertyCapacity" runat="server">3</td>
+                          <td id="PropertyCapacity" runat="server"></td>
                         </tr>
                         <tr>
                           <td id="PropertyAvailablity" runat="server">Availability</td>
@@ -129,7 +129,7 @@
                         </tr>
                         <tr>
                           <td>Room Type</td>
-                          <td id="PropertyArea" runat="server">4590 sqft</td>
+                          <td id="PropertyType" runat="server"></td>
                         </tr>
                        
                       </tbody></table>
@@ -165,7 +165,9 @@
                                                 <h6 id="HostLocation" runat="server">7332,Street 3 AL london</h6>
                                                 <h4 id="HostPhone" runat="server">+1 204 777 0187</h4>
                                             </div>
-                                        </div></div>
+                                        </div>
+
+                        </div>
                     </div>
                 </div>
             </div>
