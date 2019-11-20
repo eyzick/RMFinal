@@ -28,6 +28,9 @@
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+
+    <div class="limiter">
+
     <div class="form-group">
   <div class="limiter">
 		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
@@ -44,7 +47,8 @@
 
 					<div class="wrap-input100 validate-input" data-validate="Enter password">
                         <asp:TextBox ID="Password" class="input100" runat="server" TextMode="Password" placeholder="Password"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidatorPass" CssClass="text-danger" runat="server" ErrorMessage="The Password field is Required !" ControlToValidate="Password" Display="Dynamic"></asp:RequiredFieldValidator>						<span class="focus-input100" data-placeholder="&#xe80f;"></span>
+                        <asp:Label ID="Label1" runat="server"  CssClass="text-danger"></asp:Label>
+                        <span class="focus-input100" data-placeholder="&#xe80f;"></span>
 					</div>
 
 					<div class="container-login100-form-btn m-t-32">
