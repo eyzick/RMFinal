@@ -29,7 +29,7 @@ public partial class SignIn : System.Web.UI.Page
         Boolean success = false;
         int id = 0;
 
-        Password.Text = "";
+       
 
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
         sc.ConnectionString = ConfigurationManager.ConnectionStrings["RoomMagnet"].ConnectionString;
@@ -59,12 +59,12 @@ public partial class SignIn : System.Web.UI.Page
                 }
                 else if (Password.Text == "")
                 {
-                    Label1.Text = "Please enter your password!";
+                   // Label1.Text = "Please enter your password!";
 
                 }
                 else
                 {// if the username does not exist, it will show failure.
-                    Label1.Text = "User name and password do not match!";
+                  //  Label1.Text = "User name and password do not match!";
 
                 }
                 
