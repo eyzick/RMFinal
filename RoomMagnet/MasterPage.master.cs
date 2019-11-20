@@ -90,4 +90,13 @@ public partial class MasterPage : System.Web.UI.MasterPage
         Session["USERNAME"] = null;
         Response.Redirect("~/home.aspx");
     }
+
+    protected void btnSearch_Click(object sender, EventArgs e)
+    {
+        Session["SearchPass"] = tbSearch.Text;
+        Session["HomePageFlag"] = "1";
+        Response.Redirect("PropertySearch.aspx");
+       
+
+    }
 }

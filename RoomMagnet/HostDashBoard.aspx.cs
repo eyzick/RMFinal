@@ -33,7 +33,7 @@ public partial class HostDashBoard : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
 
-        Session["USERID"] = "226";
+        //Session["USERID"] = "226";
 
         if (Session["USERID"] != null)
         {

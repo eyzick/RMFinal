@@ -118,10 +118,11 @@
                       <h1>Room Magnet</h1>
                    </div>
                  <div class="input-group" style="margin-top:0px">
-               <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" style="border-top-left-radius: 10px; border-bottom-left-radius: 10px; margin-top:1px" placeholder="Richard VA"></asp:TextBox>
+               <asp:TextBox ID="tbSearch" runat="server" CssClass="form-control" style="border-top-left-radius: 10px; border-bottom-left-radius: 10px; margin-top:1px" placeholder="Richard VA"></asp:TextBox>
      
       <span class="input-group-btn">
-        <button class="btn btn-default glyphicon glyphicon-search" style="border-top-right-radius: 10px; border-bottom-right-radius: 10px;" type="button"></button>
+        <%--<button class="btn btn-default glyphicon glyphicon-search" style="border-top-right-radius: 10px; border-bottom-right-radius: 10px;" type="button" onclick="btnSearch_Click"></button>--%>
+          <asp:Button ID="Button1" runat="server" Text="Search" CssClass="btn btn-default glyphicon glyphicon-search" OnClick="btnSearch_Click"  />
       </span>
     </div><!-- /input-group -->
                 
@@ -143,9 +144,10 @@
                            <a class="nav-link" href="PropertySearch.aspx">Properties</a>
                         </li>
 
-<%--                        <li class="nav-item dropdown">
-                            <a class="nav-link" href="#">Agents</a>         
-                        </li>--%>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="#">Administration</a>
+                            
+                        </li>
                               
                             <li id="btnSignup" class="nav-item dropdown" runat="server">
                                 <a class="nav-link" href="SignUp.aspx">Sign Up</a></li>
