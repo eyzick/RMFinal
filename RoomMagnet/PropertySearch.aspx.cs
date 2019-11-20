@@ -32,7 +32,7 @@ public partial class PropertySearch : System.Web.UI.Page
     {
         if(Session["USERNAME"] == null)
         {
-            Response.Redirect("TableauMap.aspx");
+            Response.Redirect("TableauPage.aspx");
         }
 
         string str = Session["HomePageFlag"].ToString();
