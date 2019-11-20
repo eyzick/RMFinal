@@ -35,18 +35,22 @@ public partial class PropertyDescription : System.Web.UI.Page
                             return;
                         }
 
-                        PropertyName.InnerText = "Property 1";
+                       // PropertyName.InnerText = "Property 1";
                         PropertySaleRent.InnerText = "For Rent";
-                        PropertyPrice.InnerText = properydata.Rows[0]["Price"].ToString();
-                        PropertyLocation.InnerText = properydata.Rows[0]["Zip"].ToString()+
-                                                   " "+ properydata.Rows[0]["HouseNumber"].ToString()+
+                        String number = Convert.ToDecimal(properydata.Rows[0]["Price"]).ToString("C0");
+                        PropertyPrice.InnerText = number;
+                        PropertyLocation.InnerText = properydata.Rows[0]["HouseNumber"].ToString()+
                                                    " " + properydata.Rows[0]["Street"].ToString()+
-                                                     " " + properydata.Rows[0]["State"].ToString() +
-                                                       " " + properydata.Rows[0]["Street"].ToString() +
-                                                    ". " + properydata.Rows[0]["City"].ToString();
+                                                     " " + properydata.Rows[0]["City"].ToString() +
+                                                       ", " + properydata.Rows[0]["State"].ToString() +
+                                                    " " + properydata.Rows[0]["Zip"].ToString();
 
                         PropertyDes.InnerText = properydata.Rows[0]["Description"].ToString();
-                      
+
+                        PropertyType.InnerText = properydata.Rows[0]["RoomType"].ToString();
+
+                        PropertyCapacity.InnerText = properydata.Rows[0]["Capacity"].ToString();
+
                         byte[] bytes = (byte[])(properydata.Rows[0]["Image"]);
                         string strBase64 = Convert.ToBase64String(bytes);
                         string imagestring = "data:image/jpg;base64," + strBase64;

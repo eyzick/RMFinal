@@ -195,9 +195,10 @@
                         <div class="row">
 
                           <div class="col-7" style="text-align:center">
-                            <h5><%#Eval("Capacity") %> "1 bedroom 1 bath"</h5>
-                             <h5><%#Eval("Zip") %>Northen Va,2280</h5>
-                              <h5><strong><%#Eval("Price", "{0:C}").ToString() %> per month</strong></h5>
+<%--                            <h5><%#Eval("Capacity") %> "1 bedroom 1 bath"</h5>--%>
+                             <h5><%# String.Concat(Eval("HouseNumber"), " ", Eval("Street"))%></h5>
+                             <h5><%# String.Concat(Eval("City"), ", ", Eval("State"), " ", Eval("Zip")) %></h5>
+                             <h5><strong><%#Eval("Price", "{0:C0}").ToString() %> per month</strong></h5>
 
                           </div>
                           
