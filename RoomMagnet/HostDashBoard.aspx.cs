@@ -32,6 +32,10 @@ public partial class HostDashBoard : System.Web.UI.Page
     }
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["USERNAME"] == null)
+        {
+            Response.Redirect("Home.aspx");
+        }
 
         //Session["USERID"] = "226";
 
