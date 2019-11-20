@@ -11,7 +11,7 @@ using System.Drawing;
 
 public partial class RecoverPassword : System.Web.UI.Page
 {
-    String CS = ConfigurationManager.ConnectionStrings["MyDatabaseConnectionString1"].ConnectionString;
+    String CS = ConfigurationManager.ConnectionStrings["RoomMagnet"].ConnectionString;
     String GUIDvalue;
     DataTable dt = new DataTable();
     int Uid;
