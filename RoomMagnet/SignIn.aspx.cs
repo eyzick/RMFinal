@@ -28,7 +28,8 @@ public partial class SignIn : System.Web.UI.Page
     {
         Boolean success = false;
         int id = 0;
-       
+
+        Password.Text = "";
 
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
         sc.ConnectionString = ConfigurationManager.ConnectionStrings["RoomMagnet"].ConnectionString;
@@ -40,6 +41,8 @@ public partial class SignIn : System.Web.UI.Page
         match.CommandText = "select passwordhash from[db_owner].[AdminPassword] where Email = @Email " +
             "union select passwordhash from[dbo].[HostPassword] where Email = @Email " +
             "union select passwordhash from[dbo].[TenantPassword] where Email = @Email";
+
+
 
         match.Parameters.Add(new System.Data.SqlClient.SqlParameter("@Email", tbEmail.Text));
         System.Data.SqlClient.SqlDataReader reader = match.ExecuteReader(); // create a reader
@@ -54,13 +57,21 @@ public partial class SignIn : System.Web.UI.Page
 
                     success = true;
                 }
+                else if (Password.Text == "")
+                {
+                    Label1.Text = "Please enter your password!";
 
+                }
+                else
+                {// if the username does not exist, it will show failure.
+                    Label1.Text = "User name and password do not match!";
+
+                }
+                
+                
             }
         }
-        else
-        {// if the username does not exist, it will show failure.
 
-        }
 
         sc.Close();
 

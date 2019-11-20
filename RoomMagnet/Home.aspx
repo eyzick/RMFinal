@@ -70,9 +70,7 @@
    
      <!--- Carousel -->
 
-       
-        <br />
-        <br />
+    
 
 
 </asp:Content>
