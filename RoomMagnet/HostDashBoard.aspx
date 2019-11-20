@@ -436,10 +436,10 @@
 
                                          <div class="col-4">
                                               <div class="caption" style="padding: 15px;">
-                                                  
-                                                        <h5><%#Eval("Capacity") %> "1 bedroom 1 bath"</h5>
-                                                        <h5><%#Eval("Zip") %>Northen Va,2280</h5>
-                                                        <h5><strong><%#Eval("Price", "{0:C}").ToString() %> per month</strong></h5>
+                                                 
+                                                        <h5><%# String.Concat(Eval("HouseNumber"), " ", Eval("Street"))%></h5>
+                                                        <h5><%# String.Concat(Eval("City"), ", ", Eval("State"), " ", Eval("Zip")) %></h5>
+                                                        <h5><strong><%#Eval("Price", "{0:C0}").ToString() %> per month</strong></h5>
                                              
                                                    </div>
                                              </div>
@@ -461,12 +461,7 @@
                                                           
                                                         </p>
                                                     </div>
-                                             
-                                               
-                                           
-                                            
-                                             
-                                           
+              
                                                 </div>
                                         </div>
                                     </div>
