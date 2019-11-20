@@ -257,7 +257,11 @@
                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ControlToValidate="tbZip" Display="Dynamic" ErrorMessage="RegularExpressionValidator" ForeColor="Red" ValidationExpression="\d{5}(-\d{4})?" ValidationGroup="HouseOwner">Invalid ZIP</asp:RegularExpressionValidator>
                                     </div>
                                 </div>
-
+                                <div class="form-group">
+                                    <label for="inputCode">Administration Code</label>
+                                    <asp:TextBox ID="AdminCode" runat="server" Class="form-control"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ControlToValidate="AdminCode" Display="Dynamic" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ValidationGroup="HouseOwner">Please enter admin code</asp:RequiredFieldValidator>
+                                </div>
                                 <asp:Button ID="btnSingupAdmin" runat="server" class="btn btn-primary" Text="Sign Up" OnClick="btnSingupAdmin_Click" ValidationGroup="HouseOwner"></asp:Button>
 
                             </div>

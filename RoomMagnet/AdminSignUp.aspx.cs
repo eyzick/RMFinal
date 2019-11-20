@@ -15,7 +15,7 @@ public partial class AdminSignUp : System.Web.UI.Page
 
     protected void btnSingupAdmin_Click(object sender, EventArgs e)
     {
-        int validated = validateInformation(tbFirstName.Text, tbLastName.Text, tbPhoneNumber.Text, tbDOB.Text);
+        int validated = validateInformation(tbFirstName.Text, tbLastName.Text, tbPhoneNumber.Text, tbDOB.Text, AdminCode.Text);
 
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
         sc.ConnectionString = @"Data Source=aay09edjn65sf6.cpcbbo8ggvx6.us-east-1.rds.amazonaws.com;Initial Catalog=RoomMagnet;Persist Security Info=True;User ID=fahrenheit;Password=cis484fall";
@@ -122,9 +122,32 @@ public partial class AdminSignUp : System.Web.UI.Page
                     insertPass.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ModifiedDate", DateTime.Now));
                     insertPass.ExecuteNonQuery();
 
-                    Response.Redirect("~/Signin.aspx");
+                    string adminCode = HttpUtility.HtmlEncode(AdminCode.Text);
+                    Boolean adminTrue = false;
+                    System.Data.SqlClient.SqlCommand match = new System.Data.SqlClient.SqlCommand();
+                    match.Connection = sc;
+                    match.CommandText = "select AccessCode from [db_owner].[AdminCode] where AccessCode = @AdminCode";
+                    match.Parameters.Add(new System.Data.SqlClient.SqlParameter("@AdminCode", adminCode));
+                    System.Data.SqlClient.SqlDataReader reader = match.ExecuteReader(); // create a reader
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read()) // this will read the single recoed that matches the entered usename
+                        {
 
+                            string adminTest = reader["AccessCode"].ToString();
+                            adminTrue = codeConfirm(adminTest, adminCode);
 
+                        }
+                    }
+                    sc.Close();
+                    if (adminTrue == false)
+                    {
+                        //lblDebug.Text = "Invalid Access Code";
+                    }
+                    else
+                    {
+                        Response.Redirect("~/Signin.aspx");
+                    }
                 }
 
                 else if (validated == 1)
@@ -149,11 +172,15 @@ public partial class AdminSignUp : System.Web.UI.Page
                     ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Sorry, your age does not meet the requirements');", true);
 
                 }
+                else if (validated == 5)
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('please enter a valid administration code');", true);
+                }
             }
         }
     }
 
-    public int validateInformation(string firstName, string lastName, string phoneNumber, string birthday)
+    public int validateInformation(string firstName, string lastName, string phoneNumber, string birthday, string code)
     {
         int error = 0;
         if (firstName.Any(char.IsWhiteSpace))
@@ -192,6 +219,39 @@ public partial class AdminSignUp : System.Web.UI.Page
 
         }
 
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+        sc.ConnectionString = @"Data Source=aay09edjn65sf6.cpcbbo8ggvx6.us-east-1.rds.amazonaws.com;Initial Catalog=RoomMagnet;Persist Security Info=True;User ID=fahrenheit;Password=cis484fall";
+        sc.Open();
+        System.Data.SqlClient.SqlCommand match = new System.Data.SqlClient.SqlCommand();
+        match.Connection = sc;
+
+        match.CommandText = "select * from [db_owner].[AdminCode]";
+        string thing = match.ExecuteScalar().ToString();
+
+        if (code != thing)
+        {
+            error = 5;
+        }
+
+
         return error;
+    }
+
+    Boolean codeConfirm(string one, string two)
+    {
+        Boolean bo;
+
+        int compareString = string.Compare(one, two);
+
+        if (compareString != 0)
+        {
+            bo = false;
+        }
+        else
+        {
+            bo = true;
+        }
+
+        return bo;
     }
 }

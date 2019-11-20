@@ -108,12 +108,10 @@
                                 </HeaderTemplate>
                                 <ItemTemplate>
                                     <tr>
-                                        <th>
-                                            <asp:Label ID="lbltenantid" runat="server" Text='<%# Eval("tenantid") %>' /></th>
+                                        <th><asp:Label ID="lbltenantid" runat="server" Text='<%# Eval("tenantid") %>' /></th>
                                         <td><%# Eval("FirstName") %></td>
-                                        <td><%# Eval("BackgroundCheckStatus") %></td>
-                                        <td>
-                                            <asp:Label ID="lblstatus" runat="server"></asp:Label></td>
+                                        <td><%# Eval("LastName") %></td>
+                                        <td><asp:Label ID="lblstatus" runat="server"></asp:Label></td>
                                         <td>
                                             <div class="form-row">
                                                 <div class="col">
@@ -161,9 +159,8 @@
                                         <th>
                                             <asp:Label ID="lblhostid" runat="server" Text='<%# Eval("hostid") %>' /></th>
                                         <td><%# Eval("FirstName") %></td>
-                                        <td><%# Eval("BackgroundCheckStatus") %></td>
-                                        <td>
-                                            <asp:Label ID="lblstatus" runat="server"></asp:Label></td>
+                                        <td><%# Eval("LastName") %></td>
+                                        <td><asp:Label ID="lblstatus" runat="server"></asp:Label></td>
                                         <td>
                                             <div class="form-row">
                                                 <div class="col">
