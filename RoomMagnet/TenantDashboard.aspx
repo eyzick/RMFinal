@@ -57,6 +57,26 @@
         .tabbing-box .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link:hover {
             background-color: #17a2b8;
         }
+           .propertybox {
+        width: 80%;
+        padding-top: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+        box-shadow: 2px 2px 2px 2px grey;
+        margin: 12px;
+        margin-bottom: 12px;
+        text-align: justify;
+        border-radius: 5px;
+    }
+
+        .propertybox .btn {
+            width: 110px;
+            font-size: 12px;
+            text-align: center;
+            background-color: palevioletred;
+            border-radius: 7px;
+            
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
@@ -245,7 +265,57 @@
                         </div>
 
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                            owowo
+                           <h2>Properties</h2>
+
+                            <asp:Repeater ID="Repeater1" runat="server">
+
+                                <ItemTemplate>
+                                    <div class="container propertybox">
+
+                                        <div class="thumbnail">
+
+                                               
+                                            <div class="row">
+                                                <div class="col-5">
+                                                       <img src='<%#    "data:Image.jpg;base64," + Convert.ToBase64String( (byte[])Eval("image")  ) %>' alt="" style="width:90%" />
+                                                </div>
+
+                                         <div class="col-4">
+                                              <div class="caption" style="padding: 15px;">
+                                                  
+                                                        <h5><%#Eval("Capacity") %> "1 bedroom 1 bath"</h5>
+                                                        <h5><%#Eval("Zip") %>Northen Va,2280</h5>
+                                                        <h5><strong><%#Eval("Price", "{0:C}").ToString() %> per month</strong></h5>
+                                             
+                                                   </div>
+                                             </div>
+                                                 
+
+                                                    <div class="col-md-3 btnsetting" style="padding-top: 10px">
+                                                      
+                                                        <p>
+                                                            <a href="propertydescription.aspx?id=<%# Eval("AccomodationID")%>" class="glyphicon glyphicon-list-alt">View </a></p>
+                                                        <p>
+                                                       
+                                                          <p>
+                                                              <asp:LinkButton ID="LinkButton1" CommandName='<%# Eval("AccomodationID")%>' CssClass="glyphicon glyphicon-remove" OnClick="btnPropertyDelete_Click" runat="server">Delete</asp:LinkButton>
+                                                             
+                                                            
+                                                        <p>
+                                                          
+                                                        </p>
+                                                    </div>
+                                             
+                                               
+                                           
+                                            
+                                             
+                                           
+                                                </div>
+                                        </div>
+                                    </div>
+                                </ItemTemplate>
+                            </asp:Repeater>
 
                         </div>
 

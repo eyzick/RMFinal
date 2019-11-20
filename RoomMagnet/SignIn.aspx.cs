@@ -104,7 +104,7 @@ public partial class SignIn : System.Web.UI.Page
             {
                 Session["USERID"] = dt.Rows[0]["UserID"].ToString();
                 Session["USEREMAIL"] = dt.Rows[0]["Email"].ToString();
-               
+                Session["FRISTNAME"]= dt.Rows[0]["FirstName"].ToString();
 
                 if (CheckBox1.Checked)
                 {

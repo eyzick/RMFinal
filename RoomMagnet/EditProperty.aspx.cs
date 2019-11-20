@@ -40,7 +40,7 @@ public partial class EditProperty : System.Web.UI.Page
 
                         tbPropertyCapacity.Text = properydata.Rows[0]["Capacity"].ToString();
                         tbPropertyDescription.Text = properydata.Rows[0]["Description"].ToString();
-                        tbPropertyAvailability.Text = properydata.Rows[0]["Availability"].ToString();
+                    //    tbPropertyAvailability.Text = properydata.Rows[0]["Availability"].ToString();
                         tbPropertyRoomType.Text = properydata.Rows[0]["RoomType"].ToString();
                         ddState.Text = properydata.Rows[0]["State"].ToString();
 

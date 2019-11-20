@@ -19,11 +19,11 @@ public partial class SignUp : System.Web.UI.Page
         int validated = validateInformation(tbFirstName.Text, tbLastName.Text, tbPhoneNumber.Text, tbDOB.Text);
 
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-            sc.ConnectionString = @"Data Source=aay09edjn65sf6.cpcbbo8ggvx6.us-east-1.rds.amazonaws.com;Initial Catalog=RoomMagnet;Persist Security Info=True;User ID=fahrenheit;Password=cis484fall";
+            sc.ConnectionString = @"Data Source=xiezx0034.cpcbbo8ggvx6.us-east-1.rds.amazonaws.com,1433;Initial Catalog=RoomMagnet;Persist Security Info=True;User ID=fahrenheit;Password=cis484fall";
             sc.Open();
 
 
-        using (SqlConnection con = new SqlConnection("Data Source=aay09edjn65sf6.cpcbbo8ggvx6.us-east-1.rds.amazonaws.com;Initial Catalog=RoomMagnet;Persist Security Info=True;User ID=fahrenheit;Password=cis484fall"))
+        using (SqlConnection con = new SqlConnection("Data Source=xiezx0034.cpcbbo8ggvx6.us-east-1.rds.amazonaws.com,1433;Initial Catalog=RoomMagnet;Persist Security Info=True;User ID=fahrenheit;Password=cis484fall"))
         {
             con.Open();
 

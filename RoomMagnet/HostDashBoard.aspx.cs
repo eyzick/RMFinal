@@ -37,8 +37,24 @@ public partial class HostDashBoard : System.Web.UI.Page
             Response.Redirect("Home.aspx");
         }
 
-        //Session["USERID"] = "226";
+        if (!IsPostBack)
+        {
+            propetybind();
 
+            BindBrandsRptr();
+
+            backgroundStatus();
+
+
+        }
+        if (Session["tabState"] != null)
+        {
+            ClientScript.RegisterStartupScript(this.GetType(), "script", "document.querySelector('#" + Session["tabState"].ToString()+"').click()", true);
+        }
+    }
+
+    protected void propetybind()
+    {
         if (Session["USERID"] != null)
         {
             int hostID = Convert.ToInt32(Session["USERID"]);
@@ -72,11 +88,11 @@ public partial class HostDashBoard : System.Web.UI.Page
             }
 
         }
+
     }
-
-
     protected void btnAddProperty_Click(object sender, EventArgs e)
     {
+        Session["tabState"] = "nav-addproperty-tab";
         Property tempProperty = new Property();
 
        // splitting up address
@@ -179,6 +195,11 @@ public partial class HostDashBoard : System.Web.UI.Page
         }
 
             dbConnection.Close();
+        if (Session["tabState"] != null)
+        {
+            ClientScript.RegisterStartupScript(this.GetType(), "script", "document.querySelector('#" + Session["tabState"].ToString() + "').click()", true);
+        }
+        propetybind();
 
     }
     protected void HostPropertyDisplay(object sender, EventArgs e)
@@ -199,22 +220,42 @@ public partial class HostDashBoard : System.Web.UI.Page
 
     protected void btnPropertyDelete_Click(object sender, EventArgs e)
     {
-       var  b = (LinkButton)sender;
+        Session["tabState"] = "nav-profile-tab";
+        var b = (LinkButton)sender;
 
         int propertyId = Convert.ToInt32(b.CommandName.ToString());
-        string SearchQuery = "Delete from Accomodation where AccomodationID=@propertyID";
-        DataTable dt = new DataTable();
+
+
         try
         {
+            String queryDeleteFav = "Delete from TenantFavorites where AccomodationID=@propertyID";
 
-            SqlCommand command = new SqlCommand(SearchQuery, dbConnection); // sqlcommand that takes query and connection
+            SqlCommand command = new SqlCommand(queryDeleteFav, dbConnection); // sqlcommand that takes query and connection
             SqlDataAdapter data_adapter = new SqlDataAdapter(command); // data adapter 
             command.Parameters.Add(new System.Data.SqlClient.SqlParameter("@propertyID", propertyId));
 
-            data_adapter.Fill(dt); // getting rows to dt(datatable) variabble
+            command.ExecuteNonQuery(); // getting rows to dt(datatable) variabble
+
+
+            string SearchQuery = "Delete from Accomodation where AccomodationID=@propertyID; " + queryDeleteFav;
+            SqlCommand command1 = new SqlCommand(SearchQuery, dbConnection); // sqlcommand that takes query and connection
+            SqlDataAdapter data_adapter1 = new SqlDataAdapter(command1); // data adapter 
+            command1.Parameters.Add(new System.Data.SqlClient.SqlParameter("@propertyID", propertyId));
+
+            command1.ExecuteNonQuery(); // getting rows to dt(datatable) variabble
+
+
+
+
+
+
+            propetybind();
+
+
+
 
         }
-        catch
+        catch (Exception ex)
         {
             ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Could not fetch Property rows from Database" + "');", true);
 
@@ -222,12 +263,135 @@ public partial class HostDashBoard : System.Web.UI.Page
         finally
         {
 
-            //GridView1.DataSource = dt;
-            //GridView1.DataBind();
-            Repeater1.DataSource = dt;
-            Repeater1.DataBind();
-            dbConnection.Close(); // closing the db connection
-        }
 
+        }
+    }
+    private void BindBrandsRptr()
+    {
+        String CS = ConfigurationManager.ConnectionStrings["RoomMagnet"].ConnectionString;
+        using (SqlConnection con = new SqlConnection(CS))
+        {
+            using (SqlCommand cmd = new SqlCommand("select dbo.Tenant.TenantID, dbo.RMUser.FirstName, dbo.RMUser.LastName,dbo.RMUser.City, dbo.Tenant.BackgroundCheckStatus " +
+                "from dbo.RMUser inner join dbo.Tenant on dbo.RMUser.UserID = dbo.Tenant.TenantID", con))
+            {
+                using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+                {
+                    DataTable dtBrands = new DataTable();
+                    sda.Fill(dtBrands);
+                    rptrTenant.DataSource = dtBrands;
+                    rptrTenant.DataBind();
+                }
+            }
+        }
+    }
+    protected void BtnStatusChange_Click(object sender, EventArgs e)
+        {
+        Session["tabState"] = "nav-fav-tab";
+        System.Data.SqlClient.SqlCommand update = new System.Data.SqlClient.SqlCommand();
+            update.Connection = dbConnection;
+
+        try { dbConnection.Open(); }
+        catch { }
+                  
+        try
+        {
+            foreach (RepeaterItem item in rptrTenant.Items)
+            {
+                DropDownList dropDown = (DropDownList)item.FindControl("ddlStatus");
+                int status = Int32.Parse(dropDown.SelectedValue);
+
+                if (status == 1)
+                {
+                    var test = ((Label)item.FindControl("lbltenantid")).Text;
+                    int number = int.Parse(test);
+
+                    update.CommandText = "update tenant set backgroundcheckstatus=1 where tenantid = " + number;
+                    update.ExecuteNonQuery();
+
+                    Label lblstat = (Label)item.FindControl("lblstatus");
+                    lblstat.Text = "Accepted";
+                }
+                else if (status == 0)
+                {
+                    var test = ((Label)item.FindControl("lbltenantid")).Text;
+                    int number = int.Parse(test);
+
+                    update.CommandText = "update tenant set backgroundcheckstatus=0 where tenantid = " + number;
+                    update.ExecuteNonQuery();
+
+                    Label lblstat = (Label)item.FindControl("lblstatus");
+                    lblstat.Text = "Rejected";
+                }
+            }
+        }
+        catch { }
+        finally
+        {
+
+            dbConnection.Close();
+        }
+    }
+    protected void backgroundStatus()
+    {
+        System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand();
+        insert.Connection = dbConnection;
+        try { dbConnection.Open(); }
+        catch { }
+        try
+        {
+
+            foreach (RepeaterItem item in rptrTenant.Items)
+            {
+
+
+
+                var test = ((Label)item.FindControl("lbltenantid")).Text;
+                int number = int.Parse(test);
+
+                insert.CommandText = "select usertype from rmuser where userid = " + number;
+                string type = insert.ExecuteScalar().ToString();
+
+                if (type == "t")
+                {
+                    insert.CommandText = "select backgroundcheckstatus from tenant where tenantid = " + number;
+                    bool status = (bool)insert.ExecuteScalar();
+
+                    if (status)
+                    {
+                        Label lblstat = (Label)item.FindControl("lblstatus");
+                        lblstat.Text = "Accepted";
+
+                        DropDownList ddl = (DropDownList)item.FindControl("ddlStatus");
+                        ddl.SelectedValue = "1";
+                    }
+                    else
+                    {
+                        Label lblstat = (Label)item.FindControl("lblstatus");
+                        lblstat.Text = "Rejected";
+
+                        DropDownList ddl = (DropDownList)item.FindControl("ddlStatus");
+                        ddl.SelectedValue = "0";
+                    }
+                }
+            }
+        }
+        catch { }
+        finally {
+
+            dbConnection.Close();
+        }
+       
+    }
+
+
+
+    protected void Unnamed_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void UpdateProfile_Click(object sender, EventArgs e)
+    {
+        Session["tabState"] = "nav-home-tab";
     }
 }

@@ -1,4 +1,4 @@
-﻿<%@ Page validateRequest="false" EnableEventValidation="false" Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="HostDashBoard.aspx.cs" Inherits="HostDashBoard" %>
+﻿<%@ Page  Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="HostDashBoard.aspx.cs" Inherits="HostDashBoard" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 
@@ -101,11 +101,11 @@
                     <nav>
                         <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
 
-                            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Profile</a>
+                            <a class="nav-item nav-link active " id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Profile</a>
                             <a class="nav-item nav-link " id="nav-addproperty-tab" data-toggle="tab" href="#nav-addproperty" role="tab" aria-controls="nav-addproperty" aria-selected="false">Add Property</a>
                             <a class="nav-item nav-link " id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">My Properties
                             </a>
-                            <a class="nav-item nav-link " id="nav-fav-tab" data-toggle="tab" href="#nav-fav" role="tab" aria-controls="nav-fav" aria-selected="false">My Favorities</a>
+                            <a class="nav-item nav-link " id="nav-fav-tab" data-toggle="tab" href="#nav-fav" role="tab" aria-controls="nav-fav" aria-selected="false">Applicants</a>
                         </div>
                     </nav>
                     <br>
@@ -252,7 +252,7 @@
                                         </div>
                                     </div>
 
-                                    <button type="submit" class="btn btn-primary">Update </button>
+                                    <asp:Button runat="server" ID="UpdateProfile"  OnClick="UpdateProfile_Click" CssClass="btn btn-primary"   Text="Update"></asp:Button>
 
                                 </div>
                             </div>
@@ -477,7 +477,52 @@
 
 
                         <div class="tab-pane fade" id="nav-fav" role="tabpanel" aria-labelledby="nav-fav-tab">
-                            favorites
+                            <h1>Applicants</h1>
+                            <hr/>
+                            <asp:Repeater ID="rptrTenant" runat="server">
+                                <HeaderTemplate>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>User ID</th>
+                                                <th>First Name</th>
+                                                <th>Last Name</th>
+                                                 <th>City</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                </HeaderTemplate>
+                                <ItemTemplate>
+                                    <tr>
+                                        <th><asp:Label ID="lbltenantid" runat="server" Text='<%# Eval("tenantid") %>' /></th>
+                                        <td><%# Eval("FirstName") %></td>
+                                        <td><%# Eval("LastName") %></td>
+                                         <td><%# Eval("City") %></td>
+                                        <td><asp:Label ID="lblstatus" runat="server"></asp:Label></td>
+                                        <td>
+                                            <div class="form-row">
+                                                <div class="col">
+                                                    <asp:DropDownList ID="ddlStatus" runat="server" CssClass="form-control" Style="height: auto">
+                                                        <asp:ListItem Value="0">Reject</asp:ListItem>
+                                                        <asp:ListItem Value="1">Accept</asp:ListItem>
+                                                    </asp:DropDownList>
+                                                </div>
+                                                <div class="col">
+
+                                                    <asp:Button ID="BtnStatusChange" CssClass="btn btn-success" OnClick="BtnStatusChange_Click" runat="server" Text="Update" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </ItemTemplate>
+                                <FooterTemplate>
+                                    </tbody>
+            </table>
+               
+                                </FooterTemplate>
+                            </asp:Repeater>
 
                         </div>
 
