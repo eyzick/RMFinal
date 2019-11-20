@@ -151,14 +151,9 @@ public partial class SignUp : System.Web.UI.Page
 
                 }
             }
-        }
-
-
-
-        
-
-        
+        } 
     }
+
     protected void btnSingupTenant_Click(object sender, EventArgs e)
     {
 
