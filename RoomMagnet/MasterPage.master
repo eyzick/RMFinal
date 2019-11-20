@@ -122,7 +122,7 @@
      
       <span class="input-group-btn">
         <%--<button class="btn btn-default glyphicon glyphicon-search" style="border-top-right-radius: 10px; border-bottom-right-radius: 10px;" type="button" onclick="btnSearch_Click"></button>--%>
-          <asp:Button ID="Button1" runat="server" Text="Search" CssClass="btn btn-default glyphicon glyphicon-search" OnClick="btnSearch_Click"  />
+          <asp:Button ID="Button1" runat="server" Text="Search" CssClass="btn btn-default glyphicon glyphicon-search" OnClick="btnSearch_Click" UseSubmitBehavior="false"  />
       </span>
     </div><!-- /input-group -->
                 
