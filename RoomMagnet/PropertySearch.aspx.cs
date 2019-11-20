@@ -30,6 +30,10 @@ public partial class PropertySearch : System.Web.UI.Page
     }
     protected void Page_Load(object sender, EventArgs e)
     {
+        if(Session["USERNAME"] == null)
+        {
+            Response.Redirect("TableauMap.aspx");
+        }
 
         string str = Session["HomePageFlag"].ToString();
         if (int.Parse(str) == 1)

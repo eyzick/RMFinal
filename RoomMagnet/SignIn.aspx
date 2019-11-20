@@ -55,6 +55,7 @@
                     <div>
                                 <asp:CheckBox ID="CheckBox1" runat="server" />
                         <asp:Label ID="Label3" runat="server" CssClass="control-label" Text="Remember me ?"></asp:Label>
+                       <a href="SignUp.aspx"><h4>Create an Account</h4></a> 
                         </div>
 				</div>
 			</div>
