@@ -42,7 +42,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
                     houseOwnerDashboard.Visible = false;
                     adminDashboard.Visible = false;
 
-                    addProperties.Visible = false;
+                    //addProperties.Visible = false;
                     //myFavorites.Visible = true;
                     //myProperties.Visible = false;
                     //myProfile.Visible = true;
@@ -54,7 +54,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
                     tenantDashboard.Visible = false;
                     adminDashboard.Visible = false;
 
-                    addProperties.Visible = true;
+                    //addProperties.Visible = true;
                     //myFavorites.Visible = true;
                     //myProfile.Visible = true;
                     //myProperties.Visible = true;
@@ -66,7 +66,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
                     tenantDashboard.Visible = false;
                     adminDashboard.Visible = true;
 
-                    addProperties.Visible = false;
+                    //addProperties.Visible = false;
                     //myProperties.Visible = false;
                     //myFavorites.Visible = false;
                     //myProfile.Visible = false;

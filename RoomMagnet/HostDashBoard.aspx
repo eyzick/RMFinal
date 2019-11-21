@@ -272,7 +272,7 @@
 
                                         <asp:TextBox ID="tbPropertyAddress" CssClass="form-control" runat="server" placeholder="1234 Main St"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="tbPropertyAddress" Display="Dynamic" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ValidationGroup="addProperty">Please enter your address</asp:RequiredFieldValidator>
-                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ValidationGroup="addProperty" Display="Dynamic" ControlToValidate="tbPropertyAddress" ForeColor="Red" Text="Invalid address" ValidationExpression="^\w+\s\w+$"></asp:RegularExpressionValidator>
+                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ValidationGroup="addProperty" Display="Dynamic" ControlToValidate="tbPropertyAddress" ForeColor="Red" Text="Invalid address" ValidationExpression="^\w+\s\w+\s\w+$"></asp:RegularExpressionValidator>
                                     </div>
                                     <%--<div class="form-group">
                                         <label for="inputAddress2">Address 2</label>

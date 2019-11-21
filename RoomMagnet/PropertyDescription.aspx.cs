@@ -143,11 +143,12 @@ public partial class PropertyDescription : System.Web.UI.Page
         SqlCommand apply = new SqlCommand();
         apply.Connection = dbConnection;
 
-        apply.CommandText = "insert into [dbo].[Application] values (@AppDate, @TenantID, @AccID, @ModifiedDate)";
+        apply.CommandText = "insert into [dbo].[Application] values (@AppDate, @TenantID, @AccID, @ModifiedDate, @Status)";
         apply.Parameters.Add(new SqlParameter("@AppDate", DateTime.Today));
         apply.Parameters.Add(new SqlParameter("@TenantID", Session["USERID"]));
         apply.Parameters.Add(new SqlParameter("@AccID", Request.QueryString["id"]));
         apply.Parameters.Add(new SqlParameter("@ModifiedDate", DateTime.Today));
+        apply.Parameters.Add(new SqlParameter("@Status", 1));
 
         apply.ExecuteNonQuery();
 
