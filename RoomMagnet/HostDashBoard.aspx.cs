@@ -92,6 +92,8 @@ public partial class HostDashBoard : System.Web.UI.Page
     }
     protected void btnAddProperty_Click(object sender, EventArgs e)
     {
+        
+        
         Session["tabState"] = "nav-addproperty-tab";
         Property tempProperty = new Property();
 
