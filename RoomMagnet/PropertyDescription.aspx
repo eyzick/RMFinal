@@ -31,7 +31,7 @@
                         <h1 id="PropertyLocation" runat="server"></h1>
                         <div class="mb-30">
                             <h4><span class="pprice" id="PropertyPrice"  runat="server"> per month</span></h4>
-                            <asp:button runat="server" text="Apply" OnClick="Unnamed1_Click" />
+                            <asp:button runat="server" text="Apply" class="btn btn-info" OnClick="Unnamed1_Click" />
                             <span class="rent" id="PropertySaleRent" runat="server">For Rent</span>
 <%--                            <span class="location" id="PropertyLocation" runat="server"><i class="flaticon-pin"></i>123 Kathal St. Tampa City,</span></div>--%>
                           
