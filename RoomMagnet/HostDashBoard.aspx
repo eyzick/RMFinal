@@ -271,6 +271,8 @@
                                         <label for="inputAddress">Address</label>
 
                                         <asp:TextBox ID="tbPropertyAddress" CssClass="form-control" runat="server" placeholder="1234 Main St"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="tbPropertyAddress" Display="Dynamic" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ValidationGroup="addProperty">Please enter your address</asp:RequiredFieldValidator>
+                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ValidationGroup="addProperty" Display="Dynamic" ControlToValidate="tbPropertyAddress" ForeColor="Red" Text="Invalid address" ValidationExpression="^\w+\s\w+$"></asp:RegularExpressionValidator>
                                     </div>
                                     <%--<div class="form-group">
                                         <label for="inputAddress2">Address 2</label>
@@ -282,6 +284,9 @@
                                             <label for="inputCity">City</label>
 
                                             <asp:TextBox ID="tbPropertyCity" CssClass="form-control" runat="server" placeholder="City"></asp:TextBox>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="tbPropertyCity" Display="Dynamic" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ValidationGroup="addProperty">Please enter your city name</asp:RequiredFieldValidator>
+                                            <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ControlToValidate="tbPropertyCity" Display="Dynamic" ErrorMessage="RegularExpressionValidator" ForeColor="Red" ValidationExpression="^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$" ValidationGroup="addProperty">Invalid city name</asp:RegularExpressionValidator>
+
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="inputState">State</label>
@@ -347,7 +352,8 @@
                                         <div class="form-group col-md-3">
                                             <label for="inputZip">Zip</label>
                                             <asp:TextBox ID="tbPropertyZip" CssClass="form-control" runat="server" placeholder="Zip"></asp:TextBox>
-
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ControlToValidate="tbPropertyZip" Display="Dynamic" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ValidationGroup="addProperty">Please enter your Zip code</asp:RequiredFieldValidator>
+                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ControlToValidate="tbPropertyZip" Display="Dynamic" ErrorMessage="RegularExpressionValidator" ForeColor="Red" ValidationExpression="\d{5}(-\d{4})?" ValidationGroup="addProperty">Invalid ZIP</asp:RegularExpressionValidator>
                                         </div>
                                     </div>
 
@@ -355,22 +361,20 @@
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="ContentPlaceHolder1_tbCapacity">Capacity</label>
-                                                <asp:TextBox ID="tbPropertyCapacity" runat="server" Class="form-control" placeholder="Capacity"></asp:TextBox>
+                                                <asp:TextBox ID="tbPropertyCapacity" runat="server" Class="form-control" placeholder="Capacity" TextMode="Number"></asp:TextBox>
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="tbPropertyCapacity" Display="Dynamic" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ValidationGroup="addProperty">Please enter capacity</asp:RequiredFieldValidator>
+
                                             </div>
                                         </div>
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="ContentPlaceHolder1_tbAvailability">Availability</label>
-                                                <asp:TextBox ID="tbPropertyAvailability" runat="server" Class="form-control" placeholder="Availablility"></asp:TextBox>
-                                            </div>
-                                        </div>
+                                       
                                     </div>
                                     <div class="form-row">
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="ContentPlaceHolder1_tbPrice">Price</label>
 
-                                                <asp:TextBox ID="tbPropertyPrice" runat="server" Class="form-control" placeholder="Price"></asp:TextBox>
+                                                <asp:TextBox ID="tbPropertyPrice" runat="server" Class="form-control" placeholder="Price" TextMode="Number"></asp:TextBox>
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="tbPropertyPrice" Display="Dynamic" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ValidationGroup="addProperty">Please enter price</asp:RequiredFieldValidator>
 
                                             </div>
                                         </div>
@@ -379,14 +383,17 @@
                                                 <label for="ContentPlaceHolder1_tbPrice">Room Type</label>
 
                                                 <asp:TextBox ID="tbPropertyRoomType" runat="server" Class="form-control" placeholder="Room Type"></asp:TextBox>
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="tbPropertyRoomType" Display="Dynamic" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ValidationGroup="addProperty">Please enter room type</asp:RequiredFieldValidator>
+
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="ContentPlaceHolder1_tbDecription">Decription</label>
+                                        <label for="ContentPlaceHolder1_tbDecription">Description</label>
 
                                         <asp:TextBox ID="tbPropertyDescription" runat="server" Class="form-control" placeholder="Decription" Rows="3" TextMode="MultiLine"></asp:TextBox>
+                                       <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="tbPropertyDescription" Display="Dynamic" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ValidationGroup="addProperty">Please enter property description</asp:RequiredFieldValidator>
 
                                     </div>
                                     <div class="form-group">
@@ -406,10 +413,12 @@
                                     <div class="form-group">
                                         <label for="ContentPlaceHolder1_tbDecription">Image Upload</label>
                                         <asp:FileUpload runat="server" CssClass="btn btn-default btn-file" Style="display: block" accept=".png,.jpg,.jpeg" ID="firstUploader"></asp:FileUpload>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ControlToValidate="firstUploader" Display="Dynamic" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ValidationGroup="addProperty">Please upload a picture of property</asp:RequiredFieldValidator>
+
 
                                     </div>
 
-                                    <asp:Button ID="btnAddProperty" type="submit" OnClick="btnAddProperty_Click" class="btn btn-primary" runat="server" Text="Add Property"></asp:Button>
+                                    <asp:Button ID="btnAddProperty" type="submit" OnClick="btnAddProperty_Click" class="btn btn-primary" runat="server" ValidationGroup="addProperty" Text="Add Property"></asp:Button>
 
                                 </div>
                             </div>

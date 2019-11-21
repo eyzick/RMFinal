@@ -15,7 +15,7 @@ public partial class PropertyDescription : System.Web.UI.Page
     {
         if (Session["USERNAME"] == null)
         {
-            Response.Redirect("Home.aspx");
+            Response.Redirect("index.aspx");
         }
 
         if (Request.QueryString["id"] != null)
