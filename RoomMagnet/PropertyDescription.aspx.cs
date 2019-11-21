@@ -12,6 +12,11 @@ public partial class PropertyDescription : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["USERNAME"] == null)
+        {
+            Response.Redirect("Home.aspx");
+        }
+
         if (Request.QueryString["id"] != null)
         {
             int propertyID =Convert.ToInt32(Request.QueryString["id"].ToString());
@@ -125,6 +130,11 @@ public partial class PropertyDescription : System.Web.UI.Page
           
 
         }
+
+    }
+
+    protected void Unnamed1_Click(object sender, EventArgs e)
+    {
 
     }
 }

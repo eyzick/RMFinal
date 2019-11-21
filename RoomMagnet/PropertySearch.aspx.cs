@@ -119,7 +119,7 @@ public partial class PropertySearch : System.Web.UI.Page
                     command.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ModifiedDate", date));
                     command.ExecuteNonQuery();
 
-                    ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Favroit added" + "');", true);
+                    ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Favroite added" + "');", true);
 
                 }
                 catch (Exception ex)
