@@ -43,7 +43,7 @@ public partial class HostDashBoard : System.Web.UI.Page
 
             BindBrandsRptr();
 
-            backgroundStatus();
+            appStatus();
 
 
         }
@@ -270,9 +270,9 @@ public partial class HostDashBoard : System.Web.UI.Page
     {
         String CS = ConfigurationManager.ConnectionStrings["RoomMagnet"].ConnectionString;
         using (SqlConnection con = new SqlConnection(CS))
-        {
-            using (SqlCommand cmd = new SqlCommand("select dbo.Tenant.TenantID, dbo.RMUser.FirstName, dbo.RMUser.LastName,dbo.RMUser.City, dbo.Tenant.BackgroundCheckStatus " +
-                "from dbo.RMUser inner join dbo.Tenant on dbo.RMUser.UserID = dbo.Tenant.TenantID", con))
+        { 
+            using (SqlCommand cmd = new SqlCommand("SELECT dbo.RMUser.UserID, dbo.Accomodation.HouseNumber, dbo.Accomodation.Street, dbo.RMUser.FirstName, dbo.RMUser.LastName FROM dbo.Application INNER JOIN " +
+                "dbo.Accomodation ON dbo.Application.AccomodationID = dbo.Accomodation.AccomodationID INNER JOIN dbo.RMUser ON dbo.Application.TenantID = dbo.RMUser.UserID where dbo.Accomodation.HostID = " + Session["USERID"] , con))
             {
                 using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
                 {
@@ -288,7 +288,10 @@ public partial class HostDashBoard : System.Web.UI.Page
         {
         Session["tabState"] = "nav-fav-tab";
         System.Data.SqlClient.SqlCommand update = new System.Data.SqlClient.SqlCommand();
-            update.Connection = dbConnection;
+        update.Connection = dbConnection;
+
+        System.Data.SqlClient.SqlCommand getaddress = new System.Data.SqlClient.SqlCommand();
+        getaddress.Connection = dbConnection;
 
         try { dbConnection.Open(); }
         catch { }
@@ -297,26 +300,44 @@ public partial class HostDashBoard : System.Web.UI.Page
         {
             foreach (RepeaterItem item in rptrTenant.Items)
             {
+               
+
                 DropDownList dropDown = (DropDownList)item.FindControl("ddlStatus");
                 int status = Int32.Parse(dropDown.SelectedValue);
 
                 if (status == 1)
                 {
-                    var test = ((Label)item.FindControl("lbltenantid")).Text;
-                    int number = int.Parse(test);
+                    var tenid = ((Label)item.FindControl("userid")).Text;
+                    int number = int.Parse(tenid);
 
-                    update.CommandText = "update tenant set backgroundcheckstatus=1 where tenantid = " + number;
+                    getaddress.CommandText = "select accomodationid from application where tenantid = " + tenid;
+                    int address = Int32.Parse(getaddress.ExecuteScalar().ToString());
+
+                    update.CommandText = "insert into [dbo].[Confirmation] values (@ConfirmDate, @TenantID, @HostID, @AccomID, @ModifiedDate)";
+                    update.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ConfirmDate", DateTime.Today));
+                    update.Parameters.Add(new System.Data.SqlClient.SqlParameter("@TenantID", tenid));
+                    update.Parameters.Add(new System.Data.SqlClient.SqlParameter("@HostID", Session["USERID"]));
+                    update.Parameters.Add(new System.Data.SqlClient.SqlParameter("@AccomID", address));
+                    update.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ModifiedDate", DateTime.Today));
+                    update.ExecuteNonQuery();
+
+                    update.CommandText = "update Application set status = 1 where tenantid = " + tenid + " and accomodationid = " + address;
                     update.ExecuteNonQuery();
 
                     Label lblstat = (Label)item.FindControl("lblstatus");
                     lblstat.Text = "Accepted";
+
+                    update.Parameters.Clear();
                 }
                 else if (status == 0)
                 {
-                    var test = ((Label)item.FindControl("lbltenantid")).Text;
-                    int number = int.Parse(test);
+                    var tenid = ((Label)item.FindControl("userid")).Text;
+                    int number = int.Parse(tenid);
 
-                    update.CommandText = "update tenant set backgroundcheckstatus=0 where tenantid = " + number;
+                    getaddress.CommandText = "select accomodationid from application where tenantid = " + number;
+                    int address = Int32.Parse(getaddress.ExecuteScalar().ToString());
+
+                    update.CommandText = "update Application set status = 0 where tenantid = " + number + " and accomodationid = " + address;
                     update.ExecuteNonQuery();
 
                     Label lblstat = (Label)item.FindControl("lblstatus");
@@ -324,38 +345,43 @@ public partial class HostDashBoard : System.Web.UI.Page
                 }
             }
         }
-        catch { }
+        //catch { }
         finally
         {
 
             dbConnection.Close();
         }
     }
-    protected void backgroundStatus()
+
+    protected void appStatus()
     {
         System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand();
         insert.Connection = dbConnection;
+
+        System.Data.SqlClient.SqlCommand getstatus = new System.Data.SqlClient.SqlCommand();
+        getstatus.Connection = dbConnection;
+
+        System.Data.SqlClient.SqlCommand getaddress = new System.Data.SqlClient.SqlCommand();
+        getaddress.Connection = dbConnection;
+
         try { dbConnection.Open(); }
         catch { }
         try
         {
-
             foreach (RepeaterItem item in rptrTenant.Items)
             {
+                var tenid = ((Label)item.FindControl("userid")).Text;
+                int number = int.Parse(tenid);
 
+                getaddress.CommandText = "select accomodationid from application where tenantid = " + number;
+                int address = Int32.Parse(getaddress.ExecuteScalar().ToString());
 
+                getstatus.CommandText = "select status from application where tenantid = " + number + " and accomodationid = " + address; 
+                int id = Int32.Parse(getaddress.ExecuteScalar().ToString());
 
-                var test = ((Label)item.FindControl("lbltenantid")).Text;
-                int number = int.Parse(test);
-
-                insert.CommandText = "select usertype from rmuser where userid = " + number;
-                string type = insert.ExecuteScalar().ToString();
-
-                if (type == "t")
-                {
-                    insert.CommandText = "select backgroundcheckstatus from tenant where tenantid = " + number;
-                    bool status = (bool)insert.ExecuteScalar();
-
+                bool status = (bool)getstatus.ExecuteScalar();
+                    
+                    
                     if (status)
                     {
                         Label lblstat = (Label)item.FindControl("lblstatus");
@@ -372,15 +398,16 @@ public partial class HostDashBoard : System.Web.UI.Page
                         DropDownList ddl = (DropDownList)item.FindControl("ddlStatus");
                         ddl.SelectedValue = "0";
                     }
-                }
+                
             }
         }
         catch { }
-        finally {
+        finally
+        {
 
             dbConnection.Close();
         }
-       
+
     }
 
 

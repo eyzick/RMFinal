@@ -1,4 +1,4 @@
-﻿<%@ Page  Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="HostDashBoard.aspx.cs" Inherits="HostDashBoard" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="HostDashBoard.aspx.cs" Inherits="HostDashBoard" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 
@@ -58,26 +58,25 @@
             background-color: #17a2b8;
         }
 
-          .propertybox {
-        width: 80%;
-        padding-top: 0px;
-        padding-left: 0px;
-        padding-right: 0px;
-        box-shadow: 2px 2px 2px 2px grey;
-        margin: 12px;
-        margin-bottom: 12px;
-        text-align: justify;
-        border-radius: 5px;
-    }
-
-        .propertybox .btn {
-            width: 110px;
-            font-size: 12px;
-            text-align: center;
-            background-color: palevioletred;
-            border-radius: 7px;
-            
+        .propertybox {
+            width: 80%;
+            padding-top: 0px;
+            padding-left: 0px;
+            padding-right: 0px;
+            box-shadow: 2px 2px 2px 2px grey;
+            margin: 12px;
+            margin-bottom: 12px;
+            text-align: justify;
+            border-radius: 5px;
         }
+
+            .propertybox .btn {
+                width: 110px;
+                font-size: 12px;
+                text-align: center;
+                background-color: palevioletred;
+                border-radius: 7px;
+            }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
@@ -176,7 +175,7 @@
                                         <label for="inputAddress">Address</label>
                                         <input type="text" class="form-control" id="tbAddress" placeholder="1234 Main St">
                                     </div>
-                                   <%-- <div class="form-group">
+                                    <%-- <div class="form-group">
                                         <label for="inputAddress2">Address 2</label>
                                         <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
                                     </div>--%>
@@ -252,7 +251,7 @@
                                         </div>
                                     </div>
 
-                                    <asp:Button runat="server" ID="UpdateProfile"  OnClick="UpdateProfile_Click" CssClass="btn btn-primary"   Text="Update"></asp:Button>
+                                    <asp:Button runat="server" ID="UpdateProfile" OnClick="UpdateProfile_Click" CssClass="btn btn-primary" Text="Update"></asp:Button>
 
                                 </div>
                             </div>
@@ -428,41 +427,42 @@
 
                                         <div class="thumbnail">
 
-                                               
+
                                             <div class="row">
                                                 <div class="col-5">
-                                                       <img src='<%#    "data:Image.jpg;base64," + Convert.ToBase64String( (byte[])Eval("image")  ) %>' alt="" style="width:90%" />
+                                                    <img src='<%#    "data:Image.jpg;base64," + Convert.ToBase64String( (byte[])Eval("image")  ) %>' alt="" style="width: 90%" />
                                                 </div>
 
-                                         <div class="col-4">
-                                              <div class="caption" style="padding: 15px;">
-                                                 
+                                                <div class="col-4">
+                                                    <div class="caption" style="padding: 15px;">
+
                                                         <h5><%# String.Concat(Eval("HouseNumber"), " ", Eval("Street"))%></h5>
                                                         <h5><%# String.Concat(Eval("City"), ", ", Eval("State"), " ", Eval("Zip")) %></h5>
                                                         <h5><strong><%#Eval("Price", "{0:C0}").ToString() %> per month</strong></h5>
-                                             
-                                                   </div>
-                                             </div>
-                                                 
 
-                                                    <div class="col-md-3 btnsetting" style="padding-top: 10px">
-                                                      
-                                                        <p>
-                                                            <a href="propertydescription.aspx?id=<%# Eval("AccomodationID")%>" class="glyphicon glyphicon-list-alt">View </a></p>
-                                                        <p>
-                                                          <p>
-                                                              <a href="EditProperty.aspx?id=<%# Eval("AccomodationID")%>" class="glyphicon glyphicon-edit">Edit</a></p>
-                                                        <p>
-                                                          <p>
-                                                              <asp:LinkButton ID="LinkButton1" CommandName='<%# Eval("AccomodationID")%>' CssClass="glyphicon glyphicon-remove" OnClick="btnPropertyDelete_Click" runat="server">Delete</asp:LinkButton>
-                                                             
-                                                            
-                                                        <p>
-                                                          
-                                                        </p>
                                                     </div>
-              
                                                 </div>
+
+
+                                                <div class="col-md-3 btnsetting" style="padding-top: 10px">
+
+                                                    <p>
+                                                        <a href="propertydescription.aspx?id=<%# Eval("AccomodationID")%>" class="glyphicon glyphicon-list-alt">View </a>
+                                                    </p>
+                                                    <p>
+                                                    <p>
+                                                        <a href="EditProperty.aspx?id=<%# Eval("AccomodationID")%>" class="glyphicon glyphicon-edit">Edit</a>
+                                                    </p>
+                                                    <p>
+                                                    <p>
+                                                        <asp:LinkButton ID="LinkButton1" CommandName='<%# Eval("AccomodationID")%>' CssClass="glyphicon glyphicon-remove" OnClick="btnPropertyDelete_Click" runat="server">Delete</asp:LinkButton>
+
+
+                                                    <p>
+                                                    </p>
+                                                </div>
+
+                                            </div>
                                         </div>
                                     </div>
                                 </ItemTemplate>
@@ -473,29 +473,32 @@
 
                         <div class="tab-pane fade" id="nav-fav" role="tabpanel" aria-labelledby="nav-fav-tab">
                             <h1>Applicants</h1>
-                            <hr/>
+                            <hr />
                             <asp:Repeater ID="rptrTenant" runat="server">
                                 <HeaderTemplate>
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>User ID</th>
+                                                <th>Address</th>
                                                 <th>First Name</th>
                                                 <th>Last Name</th>
-                                                 <th>City</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
+                                                <th>id</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                 </HeaderTemplate>
                                 <ItemTemplate>
                                     <tr>
-                                        <th><asp:Label ID="lbltenantid" runat="server" Text='<%# Eval("tenantid") %>' /></th>
-                                        <td><%# Eval("FirstName") %></td>
-                                        <td><%# Eval("LastName") %></td>
-                                         <td><%# Eval("City") %></td>
-                                        <td><asp:Label ID="lblstatus" runat="server"></asp:Label></td>
+                                      <%-- <td> <asp:Label ID="lbladdress" runat="server" Text='<%# String.Concat(Eval("HouseNumber"), " ", Eval("Street")) %>' /> <td>--%>
+                                        <td><%# String.Concat(Eval("HouseNumber"), " ", Eval("Street")) %></td>
+                                        <td>
+                                            <asp:Label ID="lblfirstname" runat="server" Text='<%# Eval("firstname") %>' /></td>
+                                        <td>
+                                            <asp:Label ID="lbllastname" runat="server" Text='<%# Eval("lastname") %>' /></td>
+                                        <td>
+                                            <asp:Label ID="lblstatus" runat="server">Pending</asp:Label></td>
                                         <td>
                                             <div class="form-row">
                                                 <div class="col">
@@ -505,17 +508,17 @@
                                                     </asp:DropDownList>
                                                 </div>
                                                 <div class="col">
-
                                                     <asp:Button ID="BtnStatusChange" CssClass="btn btn-success" OnClick="BtnStatusChange_Click" runat="server" Text="Update" />
                                                 </div>
                                             </div>
                                         </td>
+                                        <td><asp:Label ID="userid" runat="server" Text='<%# Eval("userid") %>'/></td>
                                     </tr>
                                 </ItemTemplate>
                                 <FooterTemplate>
                                     </tbody>
             </table>
-               
+<%--               <asp:Label ID="Label1" runat="server" Text='<%# Eval("userid") %>' Visible="False"/>--%>
                                 </FooterTemplate>
                             </asp:Repeater>
 

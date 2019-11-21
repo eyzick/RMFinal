@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -20,9 +21,6 @@ public partial class PropertyDescription : System.Web.UI.Page
         if (Request.QueryString["id"] != null)
         {
             int propertyID =Convert.ToInt32(Request.QueryString["id"].ToString());
-
-           
-
 
             String CS = ConfigurationManager.ConnectionStrings["RoomMagnet"].ConnectionString;
             using (SqlConnection con = new SqlConnection(CS))
@@ -135,6 +133,25 @@ public partial class PropertyDescription : System.Web.UI.Page
 
     protected void Unnamed1_Click(object sender, EventArgs e)
     {
+        string ConnectionString = WebConfigurationManager.ConnectionStrings["RoomMagnet"].ConnectionString; // connection string
+        System.Data.SqlClient.SqlConnection dbConnection;
+
+        dbConnection = new System.Data.SqlClient.SqlConnection(); // creaeting connection to the database
+        dbConnection.ConnectionString = ConnectionString; // giving connection string to dbconnection
+        dbConnection.Open();
+        
+        SqlCommand apply = new SqlCommand();
+        apply.Connection = dbConnection;
+
+        apply.CommandText = "insert into [dbo].[Application] values (@AppDate, @TenantID, @AccID, @ModifiedDate)";
+        apply.Parameters.Add(new SqlParameter("@AppDate", DateTime.Today));
+        apply.Parameters.Add(new SqlParameter("@TenantID", Session["USERID"]));
+        apply.Parameters.Add(new SqlParameter("@AccID", Request.QueryString["id"]));
+        apply.Parameters.Add(new SqlParameter("@ModifiedDate", DateTime.Today));
+
+        apply.ExecuteNonQuery();
+
+        dbConnection.Close();
 
     }
 }
