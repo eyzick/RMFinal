@@ -20,7 +20,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
             MyAccount.Visible = true;
 
             //string ConnectionString = WebConfigurationManager.ConnectionStrings["RoomMagnet"].ConnectionString; // connection string
-            //System.Data.SqlClient.SqlConnection dbConnection;
+            //System.Data.SqlClient.SqlConnection dbConnection;http://localhost:50503/PropertyDescription.aspx
             //dbConnection = new System.Data.SqlClient.SqlConnection(); // creaeting connection to the database
             //dbConnection.ConnectionString = ConnectionString; // giving connection string to dbconnection
             //dbConnection.Open(); // opening the connection for intraction
@@ -43,9 +43,9 @@ public partial class MasterPage : System.Web.UI.MasterPage
                     adminDashboard.Visible = false;
 
                     addProperties.Visible = false;
-                    myFavorites.Visible = true;
-                    myProperties.Visible = false;
-                    myProfile.Visible = true;
+                    //myFavorites.Visible = true;
+                    //myProperties.Visible = false;
+                    //myProfile.Visible = true;
 
                 }
                 else if (Session["USERTYPE"].ToString() == "h")
@@ -55,9 +55,9 @@ public partial class MasterPage : System.Web.UI.MasterPage
                     adminDashboard.Visible = false;
 
                     addProperties.Visible = true;
-                    myFavorites.Visible = true;
-                    myProfile.Visible = true;
-                    myProperties.Visible = true;
+                    //myFavorites.Visible = true;
+                    //myProfile.Visible = true;
+                    //myProperties.Visible = true;
 
                 }
                 else if (Session["USERTYPE"].ToString() == "a")
@@ -67,9 +67,9 @@ public partial class MasterPage : System.Web.UI.MasterPage
                     adminDashboard.Visible = true;
 
                     addProperties.Visible = false;
-                    myProperties.Visible = false;
-                    myFavorites.Visible = false;
-                    myProfile.Visible = false;
+                    //myProperties.Visible = false;
+                    //myFavorites.Visible = false;
+                    //myProfile.Visible = false;
                 }
 
             }

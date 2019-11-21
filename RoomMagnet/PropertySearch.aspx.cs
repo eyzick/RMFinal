@@ -54,7 +54,7 @@ public partial class PropertySearch : System.Web.UI.Page
         }
         else
         {
-            SearchQuery = "Select * from Accomodation";
+            //SearchQuery = "Select * from Accomodation";
         }
 
         try
