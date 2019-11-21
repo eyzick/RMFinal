@@ -182,7 +182,7 @@
 
                             
 
-                                <li id="addProperties" runat="server"><a class="dropdown-item" href="submit-property.html">Submit Property</a></li>
+<%--                                <li id="addProperties" runat="server"><a class="dropdown-item" href="submit-property.html">Submit Property</a></li>--%>
                             </ul>
                         </li>
 
