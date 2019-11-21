@@ -22,7 +22,7 @@ public partial class AdminSignUp : System.Web.UI.Page
         sc.Open();
 
 
-        using (SqlConnection con = new SqlConnection("Data Source=aam1nhqjz9qqwh.cpcbbo8ggvx6.us-east-1.rds.amazonaws.com;Initial Catalog=RoomMagnet;Persist Security Info=True;User ID=fahrenheit;Password=cis484fall"))
+        using (SqlConnection con = new SqlConnection("Data Source=aam1nhqjz9qqwh.cpcbbo8ggvx6.us-east-1.rds.amazonaws.com,1433;Initial Catalog=RoomMagnet;Persist Security Info=True;User ID=fahrenheit;Password=cis484fall"))
         {
             con.Open();
 
@@ -220,7 +220,7 @@ public partial class AdminSignUp : System.Web.UI.Page
         }
 
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = @"Data Source=aam1nhqjz9qqwh.cpcbbo8ggvx6.us-east-1.rds.amazonaws.com;Initial Catalog=RoomMagnet;Persist Security Info=True;User ID=fahrenheit;Password=cis484fall";
+        sc.ConnectionString = @"Data Source=aam1nhqjz9qqwh.cpcbbo8ggvx6.us-east-1.rds.amazonaws.com,1433;Initial Catalog=RoomMagnet;Persist Security Info=True;User ID=fahrenheit;Password=cis484fall";
         sc.Open();
         System.Data.SqlClient.SqlCommand match = new System.Data.SqlClient.SqlCommand();
         match.Connection = sc;
