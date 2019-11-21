@@ -195,6 +195,8 @@
 
                                     <asp:TextBox ID="tbAddress" runat="server" Class="form-control" placeholder="1234 Main St"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="tbAddress" Display="Dynamic" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ValidationGroup="HouseOwner">Please enter your address</asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator13" runat="server" ValidationGroup="HouseOwner" Display="Dynamic" ControlToValidate="tbAddress" ForeColor="Red" Text="Invalid address" ValidationExpression="^\w+\s\w+\s\w+$"></asp:RegularExpressionValidator>
+
                                 </div>
                                 <div class="form-group">
                                     <label for="inputAddress2">Date of Birth</label>
@@ -358,7 +360,9 @@
                                     <label for="inputAddress">Address</label>
 
                                     <asp:TextBox ID="tbTenantAddress" runat="server" Class="form-control" placeholder="1234 Main St"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator16" runat="server" ControlToValidate="tbTenantAddress" Display="Dynamic" ValidationGroup="Tenant" ErrorMessage="RequiredFieldValidator" ForeColor="Red">Please choose your birthday</asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator16" runat="server" ControlToValidate="tbTenantAddress" Display="Dynamic" ValidationGroup="Tenant" ErrorMessage="RequiredFieldValidator" ForeColor="Red">Please enter your address</asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator14" runat="server" ValidationGroup="Tenant" Display="Dynamic" ControlToValidate="tbTenantAddress" ForeColor="Red" Text="Invalid address" ValidationExpression="^\w+\s\w+\s\w+$"></asp:RegularExpressionValidator>
+
 
                                 </div>
                                 <div class="form-group">
