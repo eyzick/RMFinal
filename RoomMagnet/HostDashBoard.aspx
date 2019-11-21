@@ -493,7 +493,7 @@
                                                 <th>Last Name</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
-                                                <th>id</th>
+                                                <%--<th>id</th>--%>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -521,7 +521,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td><asp:Label ID="userid" runat="server" Text='<%# Eval("userid") %>'/></td>
+                                        <td><asp:Label ID="userid" runat="server" Text='<%# Eval("userid") %>' Visible="False" /></td>
                                     </tr>
                                 </ItemTemplate>
                                 <FooterTemplate>

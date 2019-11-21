@@ -246,12 +246,12 @@
                             <li>
                                 <a href="index.aspx">Home</a>
                             </li>
-                            <li>
+                           <%-- <li>
                                 <a href="about.html">About Us</a>
                             </li>
                             <li>
                                 <a href="contact.html">Contact Us</a>
-                            </li>
+                            </li>--%>
                             <li>
                                 <a href="SignIn.aspx">Dashboard</a>
                             </li>
