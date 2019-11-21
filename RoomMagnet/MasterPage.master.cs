@@ -89,7 +89,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
     protected void btnSignOut_Click(object sender, EventArgs e)
     {
         Session["USERNAME"] = null;
-        Response.Redirect("~/home.aspx");
+        Response.Redirect("~/index.aspx");
     }
 
     protected void btnSearch_Click(object sender, EventArgs e)

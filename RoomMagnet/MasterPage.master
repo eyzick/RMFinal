@@ -244,7 +244,7 @@
                         <div class="f-border"></div>
                         <ul class="links">
                             <li>
-                                <a href="Home.aspx">Home</a>
+                                <a href="index.aspx">Home</a>
                             </li>
                             <li>
                                 <a href="about.html">About Us</a>

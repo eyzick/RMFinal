@@ -34,7 +34,7 @@ public partial class AdminDashboard : System.Web.UI.Page
     {
         if (Session["USERNAME"] == null)
         {
-            Response.Redirect("Home.aspx");
+            Response.Redirect("index.aspx");
         }
         if (!IsPostBack)
         {
