@@ -20,16 +20,16 @@ public partial class PropertyDescription : System.Web.UI.Page
 
         if (Request.QueryString["id"] != null)
         {
-            int propertyID =Convert.ToInt32(Request.QueryString["id"].ToString());
+            int propertyID = Convert.ToInt32(Request.QueryString["id"].ToString());
 
             String CS = ConfigurationManager.ConnectionStrings["RoomMagnet"].ConnectionString;
             using (SqlConnection con = new SqlConnection(CS))
             {
-                using (SqlCommand cmd = new SqlCommand("select * from Accomodation where AccomodationID="+propertyID, con))
+                using (SqlCommand cmd = new SqlCommand("select * from Accomodation where AccomodationID=" + propertyID, con))
                 {
                     using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
                     {
-                        
+
                         DataTable properydata = new DataTable();
                         sda.Fill(properydata);
 
@@ -38,12 +38,12 @@ public partial class PropertyDescription : System.Web.UI.Page
                             return;
                         }
 
-                       // PropertyName.InnerText = "Property 1";
+                        // PropertyName.InnerText = "Property 1";
                         PropertySaleRent.InnerText = "For Rent";
                         String number = Convert.ToDecimal(properydata.Rows[0]["Price"]).ToString("C0");
                         PropertyPrice.InnerText = number;
-                        PropertyLocation.InnerText = properydata.Rows[0]["HouseNumber"].ToString()+
-                                                   " " + properydata.Rows[0]["Street"].ToString()+
+                        PropertyLocation.InnerText = properydata.Rows[0]["HouseNumber"].ToString() +
+                                                   " " + properydata.Rows[0]["Street"].ToString() +
                                                      " " + properydata.Rows[0]["City"].ToString() +
                                                        ", " + properydata.Rows[0]["State"].ToString() +
                                                     " " + properydata.Rows[0]["Zip"].ToString();
@@ -60,7 +60,7 @@ public partial class PropertyDescription : System.Web.UI.Page
 
                         PropertyImage.Attributes["src"] = imagestring;
 
-                   //     int amenityID =Convert.ToInt32(properydata.Rows[0]["City"]);
+                        //     int amenityID =Convert.ToInt32(properydata.Rows[0]["City"]);
 
                         using (SqlConnection con1 = new SqlConnection(CS))
                         {
@@ -83,18 +83,18 @@ public partial class PropertyDescription : System.Web.UI.Page
                                         PropertyAmenities.InnerHtml = generatehtml;
 
                                     }
-                                  
+
                                 }
                             }
                         }
-                        
+
                         using (SqlConnection con2 = new SqlConnection(CS))
                         {
                             using (SqlCommand cmd2 = new SqlCommand("select * from RMUser where UserID=" + Convert.ToInt32(properydata.Rows[0]["HostID"]), con2))
                             {
                                 using (SqlDataAdapter sda2 = new SqlDataAdapter(cmd2))
                                 {
-                                   
+
                                     DataTable properydata2 = new DataTable();
                                     try
                                     {
@@ -107,6 +107,7 @@ public partial class PropertyDescription : System.Web.UI.Page
 
                                                         ". " + properydata2.Rows[0]["City"].ToString();
                                         HostPhone.InnerText = properydata2.Rows[0]["PhoneNumber"].ToString();
+                                        MessageHost.NavigateUrl = "Messenger.aspx?id=" + properydata2.Rows[0]["UserID"].ToString();
                                     }
                                     catch
                                     {
@@ -118,16 +119,25 @@ public partial class PropertyDescription : System.Web.UI.Page
 
 
 
-                                }
+                    }
 
                 }
             }
 
 
 
-          
+
 
         }
+
+    }
+
+    protected void MessageHost_Click(object sender, EventArgs e)
+    {
+
+
+
+
 
     }
 
@@ -139,16 +149,15 @@ public partial class PropertyDescription : System.Web.UI.Page
         dbConnection = new System.Data.SqlClient.SqlConnection(); // creaeting connection to the database
         dbConnection.ConnectionString = ConnectionString; // giving connection string to dbconnection
         dbConnection.Open();
-        
+
         SqlCommand apply = new SqlCommand();
         apply.Connection = dbConnection;
 
-        apply.CommandText = "insert into [dbo].[Application] values (@AppDate, @TenantID, @AccID, @ModifiedDate, @Status)";
+        apply.CommandText = "insert into [dbo].[Application] values (@AppDate, @TenantID, @AccID, @ModifiedDate)";
         apply.Parameters.Add(new SqlParameter("@AppDate", DateTime.Today));
         apply.Parameters.Add(new SqlParameter("@TenantID", Session["USERID"]));
         apply.Parameters.Add(new SqlParameter("@AccID", Request.QueryString["id"]));
         apply.Parameters.Add(new SqlParameter("@ModifiedDate", DateTime.Today));
-        apply.Parameters.Add(new SqlParameter("@Status", 1));
 
         apply.ExecuteNonQuery();
 

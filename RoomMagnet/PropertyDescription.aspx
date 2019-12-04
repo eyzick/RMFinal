@@ -31,7 +31,7 @@
                         <h1 id="PropertyLocation" runat="server"></h1>
                         <div class="mb-30">
                             <h4><span class="pprice" id="PropertyPrice"  runat="server"> per month</span></h4>
-                            <asp:button runat="server" text="Apply" class="btn btn-info" OnClick="Unnamed1_Click" />
+                            <asp:button runat="server" text="Apply" OnClick="Unnamed1_Click" />
                             <span class="rent" id="PropertySaleRent" runat="server">For Rent</span>
 <%--                            <span class="location" id="PropertyLocation" runat="server"><i class="flaticon-pin"></i>123 Kathal St. Tampa City,</span></div>--%>
                           
@@ -166,6 +166,8 @@
                                                 <h5 id="HostName" runat="server"><a href="#">Martin Smith</a></h5>
                                                 <h6 id="HostLocation" runat="server">7332,Street 3 AL london</h6>
                                                 <h4 id="HostPhone" runat="server">+1 204 777 0187</h4>
+                                                <asp:hyperlink id="MessageHost" cssClass="btn btn-primary" runat="server">Message Host</asp:hyperlink>
+                                              
                                             </div>
                                         </div>
 
