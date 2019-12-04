@@ -144,6 +144,10 @@
                            <a class="nav-link" href="PropertySearch.aspx">Properties</a>
                         </li>
 
+                           <li id="btnMessage" class="nav-item dropdown" runat="server">
+                                <a class="nav-link" href="Messenger.aspx">Message</a></li>
+
+
                      <%--   <li class="nav-item dropdown">
                             <a class="nav-link" href="#">Administration</a>
                             
@@ -182,7 +186,7 @@
 
                             
 
-<%--                                <li id="addProperties" runat="server"><a class="dropdown-item" href="submit-property.html">Submit Property</a></li>--%>
+                                <li id="addProperties" runat="server"><a class="dropdown-item" href="submit-property.html">Submit Property</a></li>
                             </ul>
                         </li>
 
@@ -246,12 +250,12 @@
                             <li>
                                 <a href="index.aspx">Home</a>
                             </li>
-                           <%-- <li>
+                            <li>
                                 <a href="about.html">About Us</a>
                             </li>
                             <li>
                                 <a href="contact.html">Contact Us</a>
-                            </li>--%>
+                            </li>
                             <li>
                                 <a href="SignIn.aspx">Dashboard</a>
                             </li>
