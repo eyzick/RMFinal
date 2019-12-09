@@ -108,6 +108,8 @@ public partial class PropertyDescription : System.Web.UI.Page
                                                         ". " + properydata2.Rows[0]["City"].ToString();
                                         HostPhone.InnerText = properydata2.Rows[0]["PhoneNumber"].ToString();
                                         MessageHost.NavigateUrl = "Messenger.aspx?id=" + properydata2.Rows[0]["UserID"].ToString();
+                                        skypeHost.NavigateUrl = "http://www.skype.com";
+
                                     }
                                     catch
                                     {
@@ -132,9 +134,9 @@ public partial class PropertyDescription : System.Web.UI.Page
 
     }
 
-    protected void MessageHost_Click(object sender, EventArgs e)
+    protected void skype_click(object sender, EventArgs e)
     {
-
+        Response.Redirect("skype.com");
 
 
 

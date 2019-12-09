@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Massenger" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Messenger.aspx.cs" Inherits="Massenger" %>
+﻿<%@ Page Title="Messenger" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Messenger.aspx.cs" Inherits="Massenger" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <meta name="viewport" content="width=device-width, initial-scale=1">

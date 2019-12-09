@@ -167,6 +167,7 @@
                                                 <h6 id="HostLocation" runat="server">7332,Street 3 AL london</h6>
                                                 <h4 id="HostPhone" runat="server">+1 204 777 0187</h4>
                                                 <asp:hyperlink id="MessageHost" cssClass="btn btn-primary" runat="server">Message Host</asp:hyperlink>
+                                                <asp:HyperLink ID="skypeHost" CssClass="btn btn-primary" OnClock="skype_click" runat="server">Video Chat with Host</asp:HyperLink>
                                               
                                             </div>
                                         </div>

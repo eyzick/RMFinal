@@ -112,8 +112,8 @@ public partial class PropertySearch : System.Web.UI.Page
                 try
                 {
                     String insertQuery = "insert into TenantFavorites values(@TenantID, @AccomodationID, @ModifiedDate)";
-                    SqlCommand command = new SqlCommand(insertQuery, dbConnection); // sqlcommand that takes query and connection
-                    SqlDataAdapter data_adapter = new SqlDataAdapter(command); // data adapter 
+                    SqlCommand command = new SqlCommand(insertQuery, dbConnection); 
+                    SqlDataAdapter data_adapter = new SqlDataAdapter(command); 
                     command.Parameters.Add(new System.Data.SqlClient.SqlParameter("@TenantID", tenantid));
                     command.Parameters.Add(new System.Data.SqlClient.SqlParameter("@AccomodationID", Convert.ToInt32(accomudationid)));
                     command.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ModifiedDate", date));
