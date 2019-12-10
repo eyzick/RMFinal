@@ -167,6 +167,7 @@
                                                     <asp:DropDownList ID="ddlStatus" runat="server" CssClass="form-control" Style="height: auto">
                                                         <asp:ListItem Value="0">Pending</asp:ListItem>
                                                         <asp:ListItem Value="1">Approve</asp:ListItem>
+                                                        <asp:ListItem Value="2">Deactivate User</asp:ListItem>
                                                     </asp:DropDownList>
                                                 </div>
                                                 <div class="col">

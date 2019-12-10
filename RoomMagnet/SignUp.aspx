@@ -281,7 +281,7 @@
                                 </div>
 
                                 <asp:Button ID="btnSingupHouseOwner" runat="server" class="btn btn-primary" Text="Sign Up" OnClick="btnSingupHouseOwner_Click" ValidationGroup="HouseOwner"></asp:Button>
-
+                                <asp:Button ID="btnHostPopulate" runat="server" Text="Populate Host" CssClass="btn btn-primary" CausesValidation="false" OnClick="btnHostPopulate_Click" />
                             </div>
 
                             <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
@@ -448,7 +448,7 @@
                                     </div>
 
                                     <asp:Button ID="btnSingupTenant" runat="server" Class="btn btn-primary" Text="Sign Up" OnClick="btnSingupTenant_Click" ValidationGroup="Tenant" />
-
+                                    <asp:Button ID="btnTenantPopulate" runat="server" Text="Populate Tenant" CssClass="btn btn-primary" CausesValidation="false" OnClick="btnTenantPopulate_Click" />
                                 </div>
 
                             </div>

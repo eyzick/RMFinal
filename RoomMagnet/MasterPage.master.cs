@@ -80,6 +80,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
             btnSignin.Visible = true;
             btnSignOut.Visible = false;
             MyAccount.Visible = false;
+            btnMessage.Visible = false;
 
         }
 

@@ -18,9 +18,9 @@ public partial class SignUp : System.Web.UI.Page
     {
         int validated = validateInformation(tbFirstName.Text, tbLastName.Text, tbPhoneNumber.Text, tbDOB.Text);
 
-            System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-            sc.ConnectionString = @"Data Source=aam1nhqjz9qqwh.cpcbbo8ggvx6.us-east-1.rds.amazonaws.com,1433;Initial Catalog=RoomMagnet;Persist Security Info=True;User ID=fahrenheit;Password=cis484fall";
-            sc.Open();
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+        sc.ConnectionString = ConfigurationManager.ConnectionStrings["RoomMagnet"].ConnectionString;
+        sc.Open();
 
 
         using (SqlConnection con = new SqlConnection("Data Source=aam1nhqjz9qqwh.cpcbbo8ggvx6.us-east-1.rds.amazonaws.com,1433;Initial Catalog=RoomMagnet;Persist Security Info=True;User ID=fahrenheit;Password=cis484fall"))
@@ -164,7 +164,7 @@ public partial class SignUp : System.Web.UI.Page
 
 
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = @"Data Source=aam1nhqjz9qqwh.cpcbbo8ggvx6.us-east-1.rds.amazonaws.com,1433;Initial Catalog=RoomMagnet;Persist Security Info=True;User ID=fahrenheit;Password=cis484fall";
+        sc.ConnectionString = ConfigurationManager.ConnectionStrings["RoomMagnet"].ConnectionString;
         sc.Open();
 
         using (SqlConnection con = new SqlConnection("Data Source=aam1nhqjz9qqwh.cpcbbo8ggvx6.us-east-1.rds.amazonaws.com,1433;Initial Catalog=RoomMagnet;Persist Security Info=True;User ID=fahrenheit;Password=cis484fall"))
@@ -341,4 +341,55 @@ public partial class SignUp : System.Web.UI.Page
 
         return error;
     }
+
+    protected void btnHostPopulate_Click(object sender, EventArgs e)
+    {
+        tbFirstName.Text = "Example";
+        tbLastName.Text = "Host";
+        tbPassWord.Text = "Password123!";
+        tbConfirmPassword.Text = "Password123!";
+        tbPhoneNumber.Text = "5402564839";
+        tbDOB.Text = "12/03/1997";
+        tbAddress.Text = "100 Example Lane";
+        tbCity.Text = "Kingsport";
+        ddState.SelectedValue = "TN";
+        tbZip.Text = "34377";
+
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+        sc.ConnectionString = ConfigurationManager.ConnectionStrings["RoomMagnet"].ConnectionString;
+        sc.Open();
+
+        System.Data.SqlClient.SqlCommand maxID = new SqlCommand();
+        maxID.Connection = sc;
+        maxID.CommandText = "select max(UserID) from RMUser";
+        int max = Convert.ToInt32(maxID.ExecuteScalar());
+
+        tbEmail.Text = "examplehost" + max + "@gmail.com";
+      
     }
+
+    protected void btnTenantPopulate_Click(object sender, EventArgs e)
+    {
+        tbTenantFirstName.Text = "Example";
+        tbTenantLastName.Text = "Tenant";
+        tbTenantPassword.Text = "Password123!";
+        tbTenantPasswordConfirm.Text = "Password123!";
+        tbTenantPhoneNumber.Text = "5402564839";
+        tbTenantDOB.Text = "12/03/1997";
+        tbTenantAddress.Text = "100 Example Lane";
+        tbTenantCity.Text = "Kingsport";
+        tbTenantZip.Text = "34377";
+        ddTenantStates.SelectedValue = "TN";
+
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+        sc.ConnectionString = ConfigurationManager.ConnectionStrings["RoomMagnet"].ConnectionString;
+        sc.Open();
+
+        System.Data.SqlClient.SqlCommand maxID = new SqlCommand();
+        maxID.Connection = sc;
+        maxID.CommandText = "select max(UserID) from RMUser";
+        int max = Convert.ToInt32(maxID.ExecuteScalar());
+
+        tbTenantEmailAddress.Text = "exampletenant" + max + "@gmail.com";
+    }
+}

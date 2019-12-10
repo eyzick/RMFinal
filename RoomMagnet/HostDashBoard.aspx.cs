@@ -51,6 +51,18 @@ public partial class HostDashBoard : System.Web.UI.Page
         {
             ClientScript.RegisterStartupScript(this.GetType(), "script", "document.querySelector('#" + Session["tabState"].ToString()+"').click()", true);
         }
+
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+        sc.ConnectionString = ConfigurationManager.ConnectionStrings["RoomMagnet"].ConnectionString;
+        sc.Open();
+
+        SqlCommand populate = new SqlCommand();
+        populate.Connection = sc;
+
+        populate.CommandText = "select FirstName from RMUser where userID = " + Session["USERID"];
+        tbName.Text = Convert.ToString(populate.ExecuteScalar());
+
+
     }
 
     protected void propetybind()

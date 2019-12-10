@@ -114,6 +114,18 @@ public partial class AdminDashboard : System.Web.UI.Page
                 Label lblstat = (Label)item.FindControl("lblstatus");
                 lblstat.Text = "Pending";
             }
+            else if (status == 2)
+            {
+                var test = ((Label)item.FindControl("lbltenantid")).Text;
+                int number = int.Parse(test);
+                update.CommandText = "update tenant set backgroundcheckstatus=2 where tenantid = " + number;
+                update.ExecuteNonQuery();
+                update.CommandText = "update tenantPassword set email = UserDisabled";
+                update.ExecuteNonQuery();
+
+                Label lblstat = (Label)item.FindControl("lblstatus");
+                lblstat.Text = "Account Disabled";
+            }
         }
     }
 
@@ -221,6 +233,18 @@ public partial class AdminDashboard : System.Web.UI.Page
 
                 Label lblstat = (Label)item.FindControl("lblstatus");
                 lblstat.Text = "Pending";
+            }
+            else if (status == 2)
+            {
+                var test = ((Label)item.FindControl("lblhostid")).Text;
+                int number = int.Parse(test);
+                update.CommandText = "update host set backgroundcheckstatus=2 where hostid = " + number;
+                update.ExecuteNonQuery();
+                update.CommandText = "update hostPassword set email = 'UserDisabled' where hostid = " + number;
+                update.ExecuteNonQuery();
+
+                Label lblstat = (Label)item.FindControl("lblstatus");
+                lblstat.Text = "Account Disabled";
             }
         }
     }
