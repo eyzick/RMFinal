@@ -163,6 +163,7 @@ public partial class PropertyDescription : System.Web.UI.Page
         apply.Parameters.Add(new SqlParameter("@Status", "0"));
 
         apply.ExecuteNonQuery();
+        ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Successfully applied! Check the message center for updates!');", true);
 
         dbConnection.Close();
 

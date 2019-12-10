@@ -496,4 +496,16 @@ public partial class HostDashBoard : System.Web.UI.Page
 
         
     }
+
+    protected void populate_click(object sender, EventArgs e)
+    {
+        tbPropertyAddress.Text = "100 Example Street";
+        tbPropertyCapacity.Text = "1";
+        tbPropertyCity.Text = "Harrisonburg";
+        tbPropertyDescription.Text = "Great place to live!";
+        tbPropertyZip.Text = "22801";
+        ddState.SelectedValue = "VA";
+        tbPropertyPrice.Text = "1000";
+        tbPropertyRoomType.Text = "Basement";
+    }
 }
