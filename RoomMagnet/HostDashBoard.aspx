@@ -155,13 +155,13 @@
                                     <div class="form-row">
                                         <div class="col">
                                             <div class="form-group">
-                                                <label for="ContentPlaceHolder1_tbEmail">Email address</label>
+                                               <%-- <label for="ContentPlaceHolder1_tbEmail">Email address</label>
                                                 <asp:TextBox ID="tbEmail" runat="server" Class="form-control" aria-describedby="emailHelp" placeholder="Enter email" TextMode="Email"></asp:TextBox>
-                                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>--%>
                                             </div>
                                         </div>
 
-                                        <div class="col">
+                                        <div class="col col-md-12">
                                             <div class="form-group">
                                                 <label for="ContentPlaceHolder1_tbPhone">Phone Number</label>
                                                 <asp:TextBox ID="tbPhone" runat="server" Class="form-control" aria-describedby="phoneHelp" placeholder="Phone Number" TextMode="Number"></asp:TextBox>
@@ -172,17 +172,17 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="inputAddress">Address</label>
-                                        <input type="text" class="form-control" id="tbAddress" placeholder="1234 Main St">
+                                        <label for="inputAddress">House Number</label>
+                                         <asp:TextBox ID="tbHouseNumber" runat="server" Class="form-control" aria-describedby="phoneHelp" placeholder="House Number" TextMode="Number"></asp:TextBox>
                                     </div>
-                                    <%-- <div class="form-group">
-                                        <label for="inputAddress2">Address 2</label>
-                                        <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-                                    </div>--%>
+                                     <div class="form-group">
+                                        <label for="inputAddress2">Address</label>
+                                         <asp:TextBox ID="tbAddress" runat="server" Class="form-control" aria-describedby="phoneHelp" placeholder="Address" ></asp:TextBox>
+                                    </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label for="inputCity">City</label>
-                                            <input type="text" class="form-control" id="inputCity">
+                                             <asp:TextBox ID="tbCity" runat="server" Class="form-control" aria-describedby="phoneHelp" placeholder="City" ></asp:TextBox>
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="inputState">State</label>
@@ -247,11 +247,13 @@
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="inputZip">Zip</label>
-                                            <input type="text" class="form-control" id="inputZip">
+                                             <asp:TextBox ID="tbZip" runat="server" Class="form-control" aria-describedby="phoneHelp" placeholder="Zip"></asp:TextBox>
                                         </div>
                                     </div>
 
                                     <asp:Button runat="server" ID="UpdateProfile" OnClick="UpdateProfile_Click" CssClass="btn btn-primary" Text="Update"></asp:Button>
+
+                                    <asp:Button ID="btnPopulate" runat="server" Text="Populate" CssClass="btn btn-primary" OnClick="btnPopulate_Click" />
 
                                 </div>
                             </div>
@@ -274,11 +276,11 @@
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="tbPropertyAddress" Display="Dynamic" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ValidationGroup="addProperty">Please enter your address</asp:RequiredFieldValidator>
                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ValidationGroup="addProperty" Display="Dynamic" ControlToValidate="tbPropertyAddress" ForeColor="Red" Text="Invalid address" ValidationExpression="^\w+\s\w+\s\w+$"></asp:RegularExpressionValidator>
                                     </div>
-                                    <%--<div class="form-group">
+                                    <div class="form-group">
                                         <label for="inputAddress2">Address 2</label>
 
                                         <asp:TextBox ID="tbPropertyAddress2" CssClass="form-control" runat="server" placeholder="Apartment, studio, or floor"></asp:TextBox>
-                                    </div>--%>
+                                    </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label for="inputCity">City</label>
@@ -493,14 +495,14 @@
                                                 <th>Last Name</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
-                                                <%--<th>id</th>--%>
+                                                <th>id</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                 </HeaderTemplate>
                                 <ItemTemplate>
                                     <tr>
-                                      <%-- <td> <asp:Label ID="lbladdress" runat="server" Text='<%# String.Concat(Eval("HouseNumber"), " ", Eval("Street")) %>' /> <td>--%>
+                                       <td> <asp:Label ID="lbladdress" runat="server" Text='<%# String.Concat(Eval("HouseNumber"), " ", Eval("Street")) %>' /> <td>
                                         <td><%# String.Concat(Eval("HouseNumber"), " ", Eval("Street")) %></td>
                                         <td>
                                             <asp:Label ID="lblfirstname" runat="server" Text='<%# Eval("firstname") %>' /></td>
@@ -527,7 +529,7 @@
                                 <FooterTemplate>
                                     </tbody>
             </table>
-<%--               <asp:Label ID="Label1" runat="server" Text='<%# Eval("userid") %>' Visible="False"/>--%>
+           <asp:Label ID="Label1" runat="server" Text='<%# Eval("userid") %>' Visible="False"/>
                                 </FooterTemplate>
                             </asp:Repeater>
 

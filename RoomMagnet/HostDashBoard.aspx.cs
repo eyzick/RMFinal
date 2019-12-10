@@ -11,6 +11,7 @@ using System.Web.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+
 public partial class HostDashBoard : System.Web.UI.Page
 {
     string ConnectionString = WebConfigurationManager.ConnectionStrings["RoomMagnet"].ConnectionString; // connection string
@@ -32,6 +33,7 @@ public partial class HostDashBoard : System.Web.UI.Page
     }
     protected void Page_Load(object sender, EventArgs e)
     {
+        
         if (Session["USERNAME"] == null)
         {
             Response.Redirect("index.aspx");
@@ -52,15 +54,13 @@ public partial class HostDashBoard : System.Web.UI.Page
             ClientScript.RegisterStartupScript(this.GetType(), "script", "document.querySelector('#" + Session["tabState"].ToString()+"').click()", true);
         }
 
-        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = ConfigurationManager.ConnectionStrings["RoomMagnet"].ConnectionString;
-        sc.Open();
-
-        SqlCommand populate = new SqlCommand();
-        populate.Connection = sc;
-
-        populate.CommandText = "select FirstName from RMUser where userID = " + Session["USERID"];
-        tbName.Text = Convert.ToString(populate.ExecuteScalar());
+      
+        
+           
+           
+        
+        
+        
 
 
     }
@@ -433,6 +433,67 @@ public partial class HostDashBoard : System.Web.UI.Page
 
     protected void UpdateProfile_Click(object sender, EventArgs e)
     {
-        Session["tabState"] = "nav-home-tab";
+        try
+        {
+            System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+            sc.ConnectionString = ConfigurationManager.ConnectionStrings["RoomMagnet"].ConnectionString;
+
+            sc.Open();
+
+            SqlCommand update = new SqlCommand();
+            update.Connection = sc;
+            update.CommandText = "update RMUser set FirstName = @FirstName, " +
+                "LastName = @LastName, " +
+                "Email = @Email, " +
+                "PhoneNumber = @PhoneNumber," +
+                "HouseNumber = @HouseNumber," +
+                "Street = @Street," +
+                "City = @City," +
+                "Zip = @Zip where UserID = " + Session["USERID"];
+            update.Parameters.Add(new SqlParameter("@FirstName", HttpUtility.HtmlEncode(tbName.Text)));
+            update.Parameters.Add(new SqlParameter("@LastName", HttpUtility.HtmlEncode(tbName1.Text)));
+            update.Parameters.Add(new SqlParameter("@PhoneNumber", HttpUtility.HtmlEncode(tbPhone.Text)));
+            update.Parameters.Add(new SqlParameter("@Email", HttpUtility.HtmlEncode(tbUname.Text)));
+            update.Parameters.Add(new SqlParameter("@HouseNumber", HttpUtility.HtmlEncode(tbHouseNumber.Text)));
+            update.Parameters.Add(new SqlParameter("@Street", HttpUtility.HtmlEncode(tbAddress.Text)));
+            update.Parameters.Add(new SqlParameter("@City", HttpUtility.HtmlEncode(tbCity.Text)));
+            update.Parameters.Add(new SqlParameter("@Zip", HttpUtility.HtmlEncode(tbZip.Text)));
+
+            update.ExecuteNonQuery();
+        }
+        catch
+        {
+            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Failed to update');", true);
+        }
+
+    }
+
+    protected void btnPopulate_Click(object sender, EventArgs e)
+    {
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+        sc.ConnectionString = ConfigurationManager.ConnectionStrings["RoomMagnet"].ConnectionString;
+        sc.Open();
+
+        SqlCommand populate = new SqlCommand();
+        populate.Connection = sc;
+
+        populate.CommandText = "select FirstName from RMUser where userID = " + Session["USERID"];
+        tbName.Text = Convert.ToString(populate.ExecuteScalar());
+        populate.CommandText = "select LastName from RMUser where userID = " + Session["USERID"];
+        tbName1.Text = Convert.ToString(populate.ExecuteScalar());
+        populate.CommandText = "select PhoneNumber from RMUser where userID = " + Session["USERID"];
+        tbPhone.Text = Convert.ToString(populate.ExecuteScalar());
+        populate.CommandText = "select Email from RMUser where userID = " + Session["USERID"];
+        tbUname.Text = Convert.ToString(populate.ExecuteScalar());
+        populate.CommandText = "select HouseNumber from RMUser where userID = " + Session["USERID"];
+        tbHouseNumber.Text = Convert.ToString(populate.ExecuteScalar());
+        populate.CommandText = "select street from RMUser where userID = " + Session["USERID"];
+        tbAddress.Text = Convert.ToString(populate.ExecuteScalar());
+        populate.CommandText = "select city from RMUser where userID = " + Session["USERID"];
+        tbCity.Text = Convert.ToString(populate.ExecuteScalar());
+        populate.CommandText = "select zip from RMUser where userID = " + Session["USERID"];
+        tbZip.Text = Convert.ToString(populate.ExecuteScalar());
+
+        
     }
 }

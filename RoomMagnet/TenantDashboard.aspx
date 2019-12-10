@@ -139,7 +139,7 @@
                                 <div class="form-group">
                                     <label for="ContentPlaceHolder1_tbUname">Email</label>
 
-                                    <asp:TextBox ID="tbtbEmail" runat="server" Class="form-control" placeholder="Username"></asp:TextBox>
+                                    <asp:TextBox ID="tbUname" runat="server" Class="form-control" placeholder="Email"></asp:TextBox>
 
                                 </div>
                           <div class="form-row">
@@ -179,17 +179,17 @@
                             </div>
 
                                    <div class="form-group">
-    <label for="inputAddress">Address</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+    <label for="inputAddress">House Number</label>
+     <asp:TextBox ID="tbHouseNumber" runat="server" Class="form-control" aria-describedby="phoneHelp" placeholder="House Number" ></asp:TextBox>
   </div>
                           <div class="form-group">
-    <label for="inputAddress2">Address 2</label>
-    <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+    <label for="inputAddress2">Street</label>
+      <asp:TextBox ID="tbAddress" runat="server" Class="form-control" aria-describedby="phoneHelp" placeholder="Street" ></asp:TextBox>
   </div>
                           <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputCity">City</label>
-      <input type="text" class="form-control" id="inputCity">
+        <asp:TextBox ID="tbCity" runat="server" Class="form-control" aria-describedby="phoneHelp" placeholder="City" ></asp:TextBox>
     </div>
     <div class="form-group col-md-3">
       <label for="inputState">State</label>
@@ -254,11 +254,13 @@
     </div>
     <div class="form-group col-md-3">
       <label for="inputZip">Zip</label>
-      <input type="text" class="form-control" id="inputZip">
+        <asp:TextBox ID="tbZip" runat="server" Class="form-control" aria-describedby="phoneHelp" placeholder="Zip" ></asp:TextBox>
     </div>
   </div>
                         
-                         <button type="submit" class="btn btn-primary">Update </button>
+                         
+                               <asp:Button ID="btnUpdate" runat="server" Text="Update" CssClass ="btn btn-primary" OnClick="btnUpdate_Click" />
+                               <asp:Button ID="btnPopulate" runat="server" Text="Populate" CssClass ="btn btn-primary" OnClick="btnPopulate_Click" />
 
                                </div>
                                 </div>
