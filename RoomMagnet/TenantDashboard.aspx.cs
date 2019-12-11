@@ -127,7 +127,13 @@ public partial class TenantDashboard : System.Web.UI.Page
             sda.Fill(dt);
             tbName.Text = dt.Rows[0]["FirstName"].ToString();
             tbName1.Text = dt.Rows[0]["LastName"].ToString();
-            // continue
+            tbUname.Text = dt.Rows[0]["Email"].ToString();
+            tbPhone.Text = dt.Rows[0]["PhoneNumber"].ToString();
+            tbHouseNumber.Text = dt.Rows[0]["HouseNumber"].ToString();
+            tbAddress.Text = dt.Rows[0]["Street"].ToString();
+            tbCity.Text = dt.Rows[0]["City"].ToString();
+            ddlState.Text = dt.Rows[0]["State"].ToString();
+            tbZip.Text = dt.Rows[0]["Zip"].ToString();
         }
 
          
