@@ -256,8 +256,8 @@
                             <li>
                                 <a href="PropertySearch.aspx">Properties Details</a>
                             </li>
-                            <li>
-                                <a href="AdminSignUp.aspx">Administration</a>
+                            <li id="adminLink" runat="server" visible="false">
+                                <a  href="AdminSignUp.aspx">Administration</a>
                             </li>
                         </ul>
                     </div>

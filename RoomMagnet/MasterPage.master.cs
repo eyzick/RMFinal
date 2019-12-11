@@ -18,6 +18,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
             btnSignin.Visible = false;
             btnSignOut.Visible = true;
             MyAccount.Visible = true;
+            adminLink.Visible = false;
 
             //string ConnectionString = WebConfigurationManager.ConnectionStrings["RoomMagnet"].ConnectionString; // connection string
             //System.Data.SqlClient.SqlConnection dbConnection;http://localhost:50503/PropertyDescription.aspx
@@ -41,6 +42,8 @@ public partial class MasterPage : System.Web.UI.MasterPage
                     tenantDashboard.Visible = true;
                     houseOwnerDashboard.Visible = false;
                     adminDashboard.Visible = false;
+                    adminLink.Visible = false;
+
 
                     //addProperties.Visible = false;
                     //myFavorites.Visible = true;
@@ -53,6 +56,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
                     houseOwnerDashboard.Visible = true;
                     tenantDashboard.Visible = false;
                     adminDashboard.Visible = false;
+                    adminLink.Visible = false;
 
                     //addProperties.Visible = true;
                     //myFavorites.Visible = true;
@@ -65,6 +69,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
                     houseOwnerDashboard.Visible = false;
                     tenantDashboard.Visible = false;
                     adminDashboard.Visible = true;
+                    adminLink.Visible = true;
 
                     //addProperties.Visible = false;
                     //myProperties.Visible = false;

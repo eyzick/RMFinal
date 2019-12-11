@@ -216,7 +216,7 @@ public partial class Massenger : System.Web.UI.Page
             int msgID = Convert.ToInt32(dt.Rows[0]["MsgID"]);
             try
             {
-                SqlCommand cmd2 = new SqlCommand("select * from Messages where MsgID =@MsgID ORDER BY time", con);
+                SqlCommand cmd2 = new SqlCommand("select * from db_owner.Messages where MsgID =@MsgID ORDER BY time", con);
                 cmd2.Parameters.AddWithValue("@MsgID", msgID);
 
                 DataTable dt2 = new DataTable();
@@ -369,7 +369,7 @@ public partial class Massenger : System.Web.UI.Page
             int msgID = Convert.ToInt32(dt.Rows[0]["MsgID"]);
             try
             {
-                SqlCommand cmd2 = new SqlCommand("insert into Messages values(@MsgID,@MsgSender,@Message,@time)", con);
+                SqlCommand cmd2 = new SqlCommand("insert into db_owner.Messages values(@MsgID,@MsgSender,@Message,@time)", con);
                 cmd2.Parameters.AddWithValue("@MsgID", msgID);
                 cmd2.Parameters.AddWithValue("@MsgSender", usertype);
                 cmd2.Parameters.AddWithValue("@Message", msg);

@@ -54,13 +54,35 @@ public partial class HostDashBoard : System.Web.UI.Page
             ClientScript.RegisterStartupScript(this.GetType(), "script", "document.querySelector('#" + Session["tabState"].ToString()+"').click()", true);
         }
 
-      
-        
-           
-           
-        
-        
-        
+
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+        sc.ConnectionString = ConfigurationManager.ConnectionStrings["RoomMagnet"].ConnectionString;
+        sc.Open();
+
+        SqlCommand populate = new SqlCommand();
+        populate.Connection = sc;
+
+        populate.CommandText = "select FirstName from RMUser where userID = " + Session["USERID"];
+        tbName.Text = Convert.ToString(populate.ExecuteScalar());
+        populate.CommandText = "select LastName from RMUser where userID = " + Session["USERID"];
+        tbName1.Text = Convert.ToString(populate.ExecuteScalar());
+        populate.CommandText = "select PhoneNumber from RMUser where userID = " + Session["USERID"];
+        tbPhone.Text = Convert.ToString(populate.ExecuteScalar());
+        populate.CommandText = "select Email from RMUser where userID = " + Session["USERID"];
+        tbUname.Text = Convert.ToString(populate.ExecuteScalar());
+        populate.CommandText = "select HouseNumber from RMUser where userID = " + Session["USERID"];
+        tbHouseNumber.Text = Convert.ToString(populate.ExecuteScalar());
+        populate.CommandText = "select street from RMUser where userID = " + Session["USERID"];
+        tbAddress.Text = Convert.ToString(populate.ExecuteScalar());
+        populate.CommandText = "select city from RMUser where userID = " + Session["USERID"];
+        tbCity.Text = Convert.ToString(populate.ExecuteScalar());
+        populate.CommandText = "select zip from RMUser where userID = " + Session["USERID"];
+        tbZip.Text = Convert.ToString(populate.ExecuteScalar());
+
+
+
+
+
 
 
     }
@@ -510,34 +532,44 @@ public partial class HostDashBoard : System.Web.UI.Page
     }
     protected void btnChangePassword_Click(object sender, EventArgs e)
     {
-        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = ConfigurationManager.ConnectionStrings["RoomMagnet"].ConnectionString;
-        sc.Open();
-        System.Data.SqlClient.SqlCommand match = new System.Data.SqlClient.SqlCommand();
-        match.Connection = sc;
-        match.CommandText = "select passwordhash from HostPassword where HostID = @HostID ";
-        match.Parameters.Add(new System.Data.SqlClient.SqlParameter("@HostID",Session["USERID"]));
-        System.Data.SqlClient.SqlDataReader reader = match.ExecuteReader(); // create a reader
-        SqlCommand update = new SqlCommand();
-        update.Connection = sc;
-        if (reader.HasRows)
+
+        try
         {
-            while (reader.Read()) // this will read the single record that matches the entered password
+            System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+            sc.ConnectionString = ConfigurationManager.ConnectionStrings["RoomMagnet"].ConnectionString;
+            sc.Open();
+            System.Data.SqlClient.SqlCommand match = new System.Data.SqlClient.SqlCommand();
+            match.Connection = sc;
+            match.CommandText = "select passwordhash from HostPassword where HostID = @HostID ";
+            match.Parameters.Add(new System.Data.SqlClient.SqlParameter("@HostID", Session["USERID"]));
+            System.Data.SqlClient.SqlDataReader reader = match.ExecuteReader(); // create a reader
+            SqlCommand update = new SqlCommand();
+            update.Connection = sc;
+            if (reader.HasRows)
             {
-                string storedHash = reader["PasswordHash"].ToString(); // store the database password into this varable
-                if (PasswordHash.ValidatePassword(hostCurrentPassword.Text, storedHash)) // if the entered password matches what is stored, it will show success
-                {                                 
-                    update.CommandText = "update HostPassword set PasswordHash = @PasswordHash where HostID = @HostID";
-                    update.Parameters.Add(new System.Data.SqlClient.SqlParameter("@HostID", Session["USERID"]));
-                    update.Parameters.Add(new SqlParameter("@PasswordHash", PasswordHash.HashPassword(hostNewpassword.Text)));
-                }
-                else
+                while (reader.Read()) // this will read the single record that matches the entered password
                 {
-                    ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Please enter the correct password" + "');", true);
-                }               
+                    string storedHash = reader["PasswordHash"].ToString(); // store the database password into this varable
+                    if (PasswordHash.ValidatePassword(hostCurrentPassword.Text, storedHash)) // if the entered password matches what is stored, it will show success
+                    {
+                        update.CommandText = "update HostPassword set PasswordHash = @PasswordHash where HostID = @HostID";
+                        update.Parameters.Add(new System.Data.SqlClient.SqlParameter("@HostID", Session["USERID"]));
+                        update.Parameters.Add(new SqlParameter("@PasswordHash", PasswordHash.HashPassword(hostNewpassword.Text)));
+                    }
+                    else
+                    {
+                        ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Please enter the correct password" + "');", true);
+                    }
+                }
+                reader.Close();
             }
-            reader.Close();
+            update.ExecuteNonQuery();
         }
-        update.ExecuteNonQuery();
+
+        catch
+        {
+            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Failed to update Password');", true);
+        }
+       
     }
 }
