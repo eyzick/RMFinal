@@ -41,11 +41,13 @@ public partial class TenantDashboard : System.Web.UI.Page
             if (Session["USERTYPE"].ToString() == "t")
             {
 
-
-                loadProfile(Session["USERID"].ToString());
-
-               
-                propetybind();
+                if (!IsPostBack)
+                {
+                    loadProfile(Session["USERID"].ToString());
+                }
+              
+                    propetybind();
+                
                 if (Session["tabState"] != null)
                 {
                     ClientScript.RegisterStartupScript(this.GetType(), "script", "document.querySelector('#" + Session["tabState"].ToString() + "').click()", true);
@@ -133,7 +135,7 @@ public partial class TenantDashboard : System.Web.UI.Page
             tbAddress.Text = dt.Rows[0]["Street"].ToString();
             tbCity.Text = dt.Rows[0]["City"].ToString();
             ddlState.Text = dt.Rows[0]["State"].ToString();
-            tbZip.Text = dt.Rows[0]["Zip"].ToString();
+            tbZip.Text =dt.Rows[0]["Zip"].ToString();
         }
 
          
@@ -210,6 +212,7 @@ public partial class TenantDashboard : System.Web.UI.Page
                 "HouseNumber = @HouseNumber," +
                 "Street = @Street," +
                 "City = @City," +
+                   "State = @State," +
                 "Zip = @Zip where UserID = " + Session["USERID"];
             update.Parameters.Add(new SqlParameter("@FirstName", HttpUtility.HtmlEncode(tbName.Text)));
             update.Parameters.Add(new SqlParameter("@LastName", HttpUtility.HtmlEncode(tbName1.Text)));
@@ -219,14 +222,17 @@ public partial class TenantDashboard : System.Web.UI.Page
             update.Parameters.Add(new SqlParameter("@Street", HttpUtility.HtmlEncode(tbAddress.Text)));
             update.Parameters.Add(new SqlParameter("@City", HttpUtility.HtmlEncode(tbCity.Text)));
             update.Parameters.Add(new SqlParameter("@Zip", HttpUtility.HtmlEncode(tbZip.Text)));
+            update.Parameters.Add(new SqlParameter("@State", HttpUtility.HtmlEncode(ddlState.SelectedValue)));
 
             update.ExecuteNonQuery();
+            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Update Successful!');", true);
         }
         catch
         {
        
             ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Failed to update');", true);
         }
+
         
     }
 

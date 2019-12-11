@@ -242,7 +242,7 @@
                               </div>
                               <div class="form-group col-md-3">
                                   <label for="inputZip">Zip</label>
-                                  <asp:TextBox ID="tbZip" runat="server" Class="form-control" aria-describedby="phoneHelp" placeholder="Zip" MaxLength="5"></asp:TextBox>
+                                  <asp:TextBox ID="tbZip" runat="server" Class="form-control" aria-describedby="phoneHelp" placeholder="Zip" MaxLength="5" TextMode="Number"></asp:TextBox>
                                   <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ControlToValidate="tbZip" Display="Dynamic" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ValidationGroup="tenantUpdate">Please enter your Zip code</asp:RequiredFieldValidator>
                                   <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ControlToValidate="tbZip" Display="Dynamic" ErrorMessage="RegularExpressionValidator" ForeColor="Red" ValidationExpression="\d{5}(-\d{4})?" ValidationGroup="tenantUpdate">Invalid ZIP</asp:RegularExpressionValidator>
                               </div>

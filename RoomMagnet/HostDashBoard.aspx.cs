@@ -47,6 +47,30 @@ public partial class HostDashBoard : System.Web.UI.Page
 
             appStatus();
 
+            System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+            sc.ConnectionString = ConfigurationManager.ConnectionStrings["RoomMagnet"].ConnectionString;
+            sc.Open();
+
+            SqlCommand populate = new SqlCommand();
+            populate.Connection = sc;
+
+            populate.CommandText = "select FirstName from RMUser where userID = " + Session["USERID"];
+            tbName.Text = Convert.ToString(populate.ExecuteScalar());
+            populate.CommandText = "select LastName from RMUser where userID = " + Session["USERID"];
+            tbName1.Text = Convert.ToString(populate.ExecuteScalar());
+            populate.CommandText = "select PhoneNumber from RMUser where userID = " + Session["USERID"];
+            tbPhone.Text = Convert.ToString(populate.ExecuteScalar());
+            populate.CommandText = "select Email from RMUser where userID = " + Session["USERID"];
+            tbUname.Text = Convert.ToString(populate.ExecuteScalar());
+            populate.CommandText = "select HouseNumber from RMUser where userID = " + Session["USERID"];
+            tbHouseNumber.Text = Convert.ToString(populate.ExecuteScalar());
+            populate.CommandText = "select street from RMUser where userID = " + Session["USERID"];
+            tbAddress.Text = Convert.ToString(populate.ExecuteScalar());
+            populate.CommandText = "select city from RMUser where userID = " + Session["USERID"];
+            tbCity.Text = Convert.ToString(populate.ExecuteScalar());
+            populate.CommandText = "select zip from RMUser where userID = " + Session["USERID"];
+            tbZip.Text = Convert.ToString(populate.ExecuteScalar());
+
 
         }
         if (Session["tabState"] != null)
@@ -55,29 +79,7 @@ public partial class HostDashBoard : System.Web.UI.Page
         }
 
 
-        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = ConfigurationManager.ConnectionStrings["RoomMagnet"].ConnectionString;
-        sc.Open();
-
-        SqlCommand populate = new SqlCommand();
-        populate.Connection = sc;
-
-        populate.CommandText = "select FirstName from RMUser where userID = " + Session["USERID"];
-        tbName.Text = Convert.ToString(populate.ExecuteScalar());
-        populate.CommandText = "select LastName from RMUser where userID = " + Session["USERID"];
-        tbName1.Text = Convert.ToString(populate.ExecuteScalar());
-        populate.CommandText = "select PhoneNumber from RMUser where userID = " + Session["USERID"];
-        tbPhone.Text = Convert.ToString(populate.ExecuteScalar());
-        populate.CommandText = "select Email from RMUser where userID = " + Session["USERID"];
-        tbUname.Text = Convert.ToString(populate.ExecuteScalar());
-        populate.CommandText = "select HouseNumber from RMUser where userID = " + Session["USERID"];
-        tbHouseNumber.Text = Convert.ToString(populate.ExecuteScalar());
-        populate.CommandText = "select street from RMUser where userID = " + Session["USERID"];
-        tbAddress.Text = Convert.ToString(populate.ExecuteScalar());
-        populate.CommandText = "select city from RMUser where userID = " + Session["USERID"];
-        tbCity.Text = Convert.ToString(populate.ExecuteScalar());
-        populate.CommandText = "select zip from RMUser where userID = " + Session["USERID"];
-        tbZip.Text = Convert.ToString(populate.ExecuteScalar());
+      
 
 
 
@@ -457,6 +459,7 @@ public partial class HostDashBoard : System.Web.UI.Page
     {
         try
         {
+       
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
             sc.ConnectionString = ConfigurationManager.ConnectionStrings["RoomMagnet"].ConnectionString;
 
@@ -471,6 +474,7 @@ public partial class HostDashBoard : System.Web.UI.Page
                 "HouseNumber = @HouseNumber," +
                 "Street = @Street," +
                 "City = @City," +
+                  "State = @State," +
                 "Zip = @Zip where UserID = " + Session["USERID"];
             update.Parameters.Add(new SqlParameter("@FirstName", HttpUtility.HtmlEncode(tbName.Text)));
             update.Parameters.Add(new SqlParameter("@LastName", HttpUtility.HtmlEncode(tbName1.Text)));
@@ -480,8 +484,13 @@ public partial class HostDashBoard : System.Web.UI.Page
             update.Parameters.Add(new SqlParameter("@Street", HttpUtility.HtmlEncode(tbAddress.Text)));
             update.Parameters.Add(new SqlParameter("@City", HttpUtility.HtmlEncode(tbCity.Text)));
             update.Parameters.Add(new SqlParameter("@Zip", HttpUtility.HtmlEncode(tbZip.Text)));
+            update.Parameters.Add(new SqlParameter("@State", HttpUtility.HtmlEncode(ddlState.SelectedValue)));
+
+
+            
 
             update.ExecuteNonQuery();
+            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Update Successful!');", true);
         }
         catch
         {

@@ -107,7 +107,7 @@ public partial class PropertyDescription : System.Web.UI.Page
 
                                                         ". " + properydata2.Rows[0]["City"].ToString();
                                         HostPhone.InnerText = properydata2.Rows[0]["PhoneNumber"].ToString();
-                                        MessageHost.NavigateUrl = "Messenger.aspx?id=" + properydata2.Rows[0]["UserID"].ToString();
+                                        MessageHost.NavigateUrl = "Messenger.aspx";
                                         skypeHost.NavigateUrl = "http://www.skype.com";
 
                                     }
