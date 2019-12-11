@@ -234,7 +234,7 @@
                                         </div>
                                     </div>
 
-                                    <asp:Button runat="server" ID="UpdateProfile" OnClick="UpdateProfile_Click" CssClass="btn btn-primary" Text="Update"></asp:Button>
+                                    <asp:Button runat="server" ID="UpdateProfile" OnClick="UpdateProfile_Click" CssClass="btn btn-primary" ValidationGroup="hostUpdate" Text="Update"></asp:Button>
 
                                     <asp:Button ID="btnPopulate" runat="server" Text="Populate" CssClass="btn btn-primary" OnClick="btnPopulate_Click" />
 
