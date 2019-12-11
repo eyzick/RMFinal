@@ -178,11 +178,11 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="ContentPlaceHolder1_tbPhone">Phone Number</label>
-                                            <asp:TextBox ID="tbPhoneNumber" runat="server" Class="form-control" aria-describedby="phoneHelp" placeholder="Phone Number" MaxLength="10" TextMode="Number"></asp:TextBox>
+                                            <asp:TextBox ID="tbPhoneNumber" runat="server" Class="form-control" aria-describedby="phoneHelp" placeholder="Phone Number" MaxLength="10" TextMode="SingleLine"></asp:TextBox>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator19" runat="server" ControlToValidate="tbPhoneNumber" Display="Dynamic" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ValidationGroup="HouseOwner">Please enter your phone number</asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator15" runat="server" ErrorMessage="RegularExpressionValidator" ControlToValidate="tbPhoneNumber" ForeColor="Red" ValidationGroup="HouseOwner" ValidationExpression="^([0-9]){10,}$" Text="Please enter valid phone number" Display="Dynamic"></asp:RegularExpressionValidator>
 
 
-
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator14" runat="server" ControlToValidate="tbPhoneNumber" Display="Dynamic" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ValidationGroup="HouseOwner">Please enter your phone number</asp:RequiredFieldValidator>
 
 
 
@@ -344,8 +344,9 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="ContentPlaceHolder1_tbPhone">Phone Number</label>
-                                            <asp:TextBox ID="tbTenantPhoneNumber" runat="server" Class="form-control" aria-describedby="phoneHelp" placeholder="Phone Number" MaxLength="10" TextMode="Number"></asp:TextBox>
-                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator15" runat="server" ControlToValidate="tbTenantPhoneNumber" Display="Dynamic" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ValidationGroup="Tenant">Please enter your phone number</asp:RequiredFieldValidator>
+                                            <asp:TextBox ID="tbTenantPhoneNumber" runat="server" Class="form-control" aria-describedby="phoneHelp" placeholder="Phone Number" MaxLength="10" TextMode="SingleLine"></asp:TextBox>
+                                           <asp:RequiredFieldValidator ID="RequiredFieldValidator15" runat="server" ControlToValidate="tbTenantPhoneNumber" Display="Dynamic" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ValidationGroup="Tenant">Please enter your phone number</asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator16" runat="server" ErrorMessage="RegularExpressionValidator" ControlToValidate="tbTenantPhoneNumber" ForeColor="Red" ValidationGroup="Tenant" ValidationExpression="^([0-9]){10,}$" Text="Please enter valid phone number" Display="Dynamic"></asp:RegularExpressionValidator>
 
 
 

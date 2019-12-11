@@ -250,4 +250,39 @@ public partial class TenantDashboard : System.Web.UI.Page
         populate.CommandText = "select zip from RMUser where userID = " + Session["USERID"];
         tbZip.Text = Convert.ToString(populate.ExecuteScalar());
     }
+    protected void btnChangePassword_Click(object sender, EventArgs e)
+    {
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+        sc.ConnectionString = ConfigurationManager.ConnectionStrings["RoomMagnet"].ConnectionString;
+        sc.Open();
+        System.Data.SqlClient.SqlCommand match = new System.Data.SqlClient.SqlCommand();
+        match.Connection = sc;
+        match.CommandText = "select passwordhash from TenantPassword where TenantID = @TenantID ";
+        match.Parameters.Add(new System.Data.SqlClient.SqlParameter("@TenantID", Session["USERID"]));
+        System.Data.SqlClient.SqlDataReader reader = match.ExecuteReader(); // create a reader
+        SqlCommand update = new SqlCommand();
+        update.Connection = sc;
+        if (reader.HasRows)
+        {
+            while (reader.Read()) // this will read the single record that matches the entered password
+            {
+                string storedHash = reader["PasswordHash"].ToString(); // store the database password into this varable
+                if (PasswordHash.ValidatePassword(tenantCurrentPassword.Text, storedHash)) // if the entered password matches what is stored, it will show success
+                {
+                    update.CommandText = "update TenantPassword set PasswordHash = @PasswordHash where TenantID = @TenantID";
+                    update.Parameters.Add(new System.Data.SqlClient.SqlParameter("@TenantID", Session["USERID"]));
+                    update.Parameters.Add(new SqlParameter("@PasswordHash", PasswordHash.HashPassword(tenantNewpassword.Text)));
+
+                }
+                else
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Please enter the correct password" + "');", true);
+                }
+            }
+            reader.Close();
+            update.ExecuteNonQuery();
+        }
+    }
+    
 }
+    

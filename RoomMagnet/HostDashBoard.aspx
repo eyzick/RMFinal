@@ -6,21 +6,17 @@
         .sub-banner {
             height: 130px;
         }
-
         .project-tab {
             padding: 10%;
             margin-top: -8%;
         }
-
             .project-tab #tabs {
                 background: #007b5e;
                 color: #eee;
             }
-
                 .project-tab #tabs h6.section-title {
                     color: #eee;
                 }
-
                 .project-tab #tabs .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
                     color: #0062cc;
                     background-color: transparent;
@@ -29,7 +25,6 @@
                     font-size: 16px;
                     font-weight: bold;
                 }
-
             .project-tab .nav-link {
                 border: 1px solid transparent;
                 border-top-left-radius: .25rem;
@@ -38,26 +33,21 @@
                 font-size: 16px;
                 font-weight: 600;
             }
-
                 .project-tab .nav-link:hover {
                     border: none;
                 }
-
             .project-tab thead {
                 background: #f3f3f3;
                 color: #333;
             }
-
             .project-tab a {
                 text-decoration: none;
                 color: #333;
                 font-weight: 600;
             }
-
         .tabbing-box .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link:hover {
             background-color: #17a2b8;
         }
-
         .propertybox {
             width: 80%;
             padding-top: 0px;
@@ -69,7 +59,6 @@
             text-align: justify;
             border-radius: 5px;
         }
-
             .propertybox .btn {
                 width: 110px;
                 font-size: 12px;
@@ -104,7 +93,10 @@
                             <a class="nav-item nav-link " id="nav-addproperty-tab" data-toggle="tab" href="#nav-addproperty" role="tab" aria-controls="nav-addproperty" aria-selected="false">Add Property</a>
                             <a class="nav-item nav-link " id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">My Properties
                             </a>
+
                             <a class="nav-item nav-link " id="nav-fav-tab" data-toggle="tab" href="#nav-fav" role="tab" aria-controls="nav-fav" aria-selected="false">Applicants</a>
+                            <a class="nav-item nav-link " id="nav-changepassword-tab" data-toggle="tab" href="#nav-changepassword" role="tab" aria-controls="nav-changepassword" aria-selected="false">
+                                Change Password</a>
                         </div>
                     </nav>
                     <br>
@@ -119,39 +111,23 @@
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="ContentPlaceHolder1_tbName">First Name</label>
-                                                <asp:TextBox ID="tbName" runat="server" Class="form-control" placeholder="Name"></asp:TextBox>
+                                                <asp:TextBox ID="tbName" runat="server" Class="form-control" placeholder="Name" ReadOnly="True"></asp:TextBox>
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="ContentPlaceHolder1_tbName1">Last Name</label>
-                                                <asp:TextBox ID="tbName1" runat="server" Class="form-control" placeholder="Last Name"></asp:TextBox>
+                                                <asp:TextBox ID="tbName1" runat="server" Class="form-control" placeholder="Last Name" ReadOnly="True"></asp:TextBox>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="ContentPlaceHolder1_tbUname">Email</label>
 
-                                        <asp:TextBox ID="tbUname" runat="server" Class="form-control" placeholder="Usename"></asp:TextBox>
+                                        <asp:TextBox ID="tbUname" runat="server" Class="form-control" placeholder="Usename" ReadOnly="True"></asp:TextBox>
 
                                     </div>
-                                    <div class="form-row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="ContentPlaceHolder1_tbPass">Password</label>
-
-                                                <asp:TextBox ID="tbPass" runat="server" Class="form-control" placeholder="Password" TextMode="Password"></asp:TextBox>
-
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="ContentPlaceHolder1_tbCPass">Confirm Password</label>
-
-                                                <asp:TextBox ID="tbCPass" runat="server" Class="form-control" placeholder="Confirm Password" TextMode="Password"></asp:TextBox>
-                                            </div>
-                                        </div>
-                                    </div>
+                                  
                                     <div class="form-row">
                                         <div class="col">
                                             <div class="form-group">
@@ -164,8 +140,9 @@
                                         <div class="col col-md-12">
                                             <div class="form-group">
                                                 <label for="ContentPlaceHolder1_tbPhone">Phone Number</label>
-                                                <asp:TextBox ID="tbPhone" runat="server" Class="form-control" aria-describedby="phoneHelp" placeholder="Phone Number" TextMode="Number"></asp:TextBox>
-
+                                                <asp:TextBox ID="tbPhone" runat="server" Class="form-control" aria-describedby="phoneHelp" placeholder="Phone Number" TextMode="SingleLine" MaxLength="10"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator14" runat="server" ControlToValidate="tbPhone" Display="Dynamic" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ValidationGroup="hostUpdate">Please enter your phone number</asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="RegularExpressionValidator" ControlToValidate="tbPhone" ForeColor="Red" ValidationGroup="hostUpdate" ValidationExpression="^([0-9]){10,}$" Text="Please enter valid phone number" Display="Dynamic"></asp:RegularExpressionValidator>
                                             </div>
                                         </div>
 
@@ -173,16 +150,20 @@
 
                                     <div class="form-group">
                                         <label for="inputAddress">House Number</label>
-                                         <asp:TextBox ID="tbHouseNumber" runat="server" Class="form-control" aria-describedby="phoneHelp" placeholder="House Number" TextMode="Number"></asp:TextBox>
+                                         <asp:TextBox ID="tbHouseNumber" runat="server" Class="form-control" aria-describedby="phoneHelp" placeholder="House Number" MaxLength="10"></asp:TextBox>
+                                   <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ControlToValidate="tbHouseNumber" ValidationGroup="hostUpdate" Text="Please enter your house number" Display="Dynamic"></asp:RequiredFieldValidator>
+                                   <asp:RegularExpressionValidator ID="RegularExpressionValidator6" runat="server" ErrorMessage="RegularExpressionValidator" ForeColor="Red" ValidationExpression="^[0-9]*$" ControlToValidate="tbHouseNumber" ValidationGroup="hostUpdate" Text="Invalid house number" Display="Dynamic"></asp:RegularExpressionValidator>
                                     </div>
                                      <div class="form-group">
-                                        <label for="inputAddress2">Address</label>
+                                        <label for="inputAddress2">street</label>
                                          <asp:TextBox ID="tbAddress" runat="server" Class="form-control" aria-describedby="phoneHelp" placeholder="Address" ></asp:TextBox>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label for="inputCity">City</label>
-                                             <asp:TextBox ID="tbCity" runat="server" Class="form-control" aria-describedby="phoneHelp" placeholder="City" ></asp:TextBox>
+                                          <asp:TextBox ID="tbCity" runat="server" Class="form-control" aria-describedby="phoneHelp" placeholder="City"></asp:TextBox>
+                                  <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" ControlToValidate="tbCity" Display="Dynamic" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ValidationGroup="hostUpdate">Please enter your city name</asp:RequiredFieldValidator>
+                                  <asp:RegularExpressionValidator ID="RegularExpressionValidator7" runat="server" ControlToValidate="tbCity" Display="Dynamic" ErrorMessage="RegularExpressionValidator" ForeColor="Red" ValidationExpression="^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$" ValidationGroup="hostUpdate">Invalid city name</asp:RegularExpressionValidator>
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="inputState">State</label>
@@ -247,7 +228,9 @@
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="inputZip">Zip</label>
-                                             <asp:TextBox ID="tbZip" runat="server" Class="form-control" aria-describedby="phoneHelp" placeholder="Zip"></asp:TextBox>
+                                              <asp:TextBox ID="tbZip" runat="server" Class="form-control" aria-describedby="phoneHelp" placeholder="Zip" MaxLength="5"></asp:TextBox>
+                                  <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" ControlToValidate="tbZip" Display="Dynamic" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ValidationGroup="hostUpdate">Please enter your Zip code</asp:RequiredFieldValidator>
+                                  <asp:RegularExpressionValidator ID="RegularExpressionValidator8" runat="server" ControlToValidate="tbZip" Display="Dynamic" ErrorMessage="RegularExpressionValidator" ForeColor="Red" ValidationExpression="\d{5}(-\d{4})?" ValidationGroup="hostUpdate">Invalid ZIP</asp:RegularExpressionValidator>
                                         </div>
                                     </div>
 
@@ -278,7 +261,6 @@
                                     </div>
                                    <%-- <div class="form-group">
                                         <label for="inputAddress2">Address 2</label>
-
                                         <asp:TextBox ID="tbPropertyAddress2" CssClass="form-control" runat="server" placeholder="Apartment, studio, or floor"></asp:TextBox>
                                     </div>--%>
                                     <div class="form-row">
@@ -534,6 +516,41 @@
                             </asp:Repeater>
 
                         </div>
+                          <div class="tab-pane fade" id="nav-changepassword" role="tabpanel" aria-labelledby="nav-fav-tab">
+                             Use the form below to change the password for your RoomMagnet account
+                              <div class="col-md-2">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="hostchangepassword">
+
+
+
+                                    <div class="form-group">
+                                        <label for="inputCurrentPassword">Current Password</label>
+
+                                        <asp:TextBox ID="hostCurrentPassword" CssClass="form-control" runat="server" ></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ControlToValidate="hostCurrentPassword" Display="Dynamic" ErrorMessage="RequiredFieldValidator" ValidationGroup="changePassword" ForeColor="Red">Please enter your current password</asp:RequiredFieldValidator>
+                                        <br/>
+                                     <label for="inputNewPassword">New Password</label>
+                                     <asp:TextBox ID="hostNewpassword" CssClass="form-control" runat="server" ></asp:TextBox>
+                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ControlToValidate="hostNewpassword" Display="Dynamic" ErrorMessage="RequiredFieldValidator" ValidationGroup="changePassword" ForeColor="Red">Please enter your new password</asp:RequiredFieldValidator>
+                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="hostNewpassword" Display="Dynamic" ErrorMessage="RegularExpressionValidator" ForeColor="Red" ValidationExpression="^(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,30}$" ValidationGroup="changePassword">Passwords must be at least 8 characters, and least contains 1 lower case, 1 upper case, 1 numeric, 1 non-word and no whitespace</asp:RegularExpressionValidator>
+
+                                        <br/>
+                                        <label for="inputReenterPassword">Reenter new password</label>
+                                     <asp:TextBox ID="hostReenterPassword" CssClass="form-control" runat="server" ></asp:TextBox>
+                                            <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToCompare="hostNewpassword" ControlToValidate="hostReenterPassword" Display="Dynamic" ErrorMessage="CompareValidator" ForeColor="Red" ValidationGroup="changePassword">Passwords must match</asp:CompareValidator>
+                                        <br/>
+                                     <asp:Button ID="changepassword" OnClick="btnChangePassword_Click" class="btn btn-primary" runat="server" ValidationGroup="changePassword" Text="Save Changes"></asp:Button>
+
+
+                             </div>
+
+
+                    </div>
+                                </div>
+
+                </div>
 
                     </div>
 
