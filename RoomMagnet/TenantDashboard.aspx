@@ -322,17 +322,17 @@
                                     <div class="form-group">
                                         <label for="inputCurrentPassword">Current Password</label>
 
-                                        <asp:TextBox ID="tenantCurrentPassword" CssClass="form-control" runat="server" ></asp:TextBox>
+                                        <asp:TextBox ID="tenantCurrentPassword" CssClass="form-control" runat="server" TextMode="Password"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ControlToValidate="tenantCurrentPassword" Display="Dynamic" ErrorMessage="RequiredFieldValidator" ValidationGroup="changePassword" ForeColor="Red">Please enter your current password</asp:RequiredFieldValidator>
                                         <br/>
                                      <label for="inputNewPassword">New Password</label>
-                                     <asp:TextBox ID="tenantNewpassword" CssClass="form-control" runat="server" ></asp:TextBox>
+                                     <asp:TextBox ID="tenantNewpassword" CssClass="form-control" runat="server" TextMode="Password"></asp:TextBox>
                                      <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ControlToValidate="tenantNewpassword" Display="Dynamic" ErrorMessage="RequiredFieldValidator" ValidationGroup="changePassword" ForeColor="Red">Please enter your new password</asp:RequiredFieldValidator>
                                      <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="tenantNewpassword" Display="Dynamic" ErrorMessage="RegularExpressionValidator" ForeColor="Red" ValidationExpression="^(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,30}$" ValidationGroup="changePassword">Passwords must be at least 8 characters, and least contains 1 lower case, 1 upper case, 1 numeric, 1 non-word and no whitespace</asp:RegularExpressionValidator>
 
                                         <br/>
                                         <label for="inputReenterPassword">Reenter new password</label>
-                                     <asp:TextBox ID="tenantReenterPassword" CssClass="form-control" runat="server" ></asp:TextBox>
+                                     <asp:TextBox ID="tenantReenterPassword" CssClass="form-control" runat="server" TextMode="Password"></asp:TextBox>
                                             <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToCompare="tenantNewpassword" ControlToValidate="tenantReenterPassword" Display="Dynamic" ErrorMessage="CompareValidator" ForeColor="Red" ValidationGroup="changePassword">Passwords must match</asp:CompareValidator>
                                         <br/>
                                      <asp:Button ID="changepassword" OnClick="btnChangePassword_Click" class="btn btn-primary" runat="server" ValidationGroup="changePassword" Text="Save Changes"></asp:Button>
